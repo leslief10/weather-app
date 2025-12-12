@@ -1,0 +1,96 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--main-font);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+
+  --main-font: 'DM Sans', system-ui, sans-serif;
+  --secondary-font: 'Bricolage Grotesque', system-ui, sans-serif;
+
+  /* Color variables */
+  --neutral-0: #ffffff;
+  --neutral-200: #d4d3d9;
+  --neutral-300: #acacb7;
+  --neutral-600: #3c3b5e;
+  --neutral-700: #302f4a;
+  --neutral-800: #262540;
+  --neutral-900: #02012c;
+  --orange-500: #ff820a;
+  --blue-500: #4658d9;
+  --blue-700: #2b1b9c;
+
+  /* Spacing variables */
+  --spacing-0125: 0.125rem;
+  --spacing-0250: 0.25rem;
+  --spacing-0375: 0.375rem;
+  --spacing-0500: 0.5rem;
+  --spacing-0625: 0.625rem;
+  --spacing-0750: 0.75rem;
+  --spacing-1000: 1rem;
+  --spacing-1250: 1.25rem;
+  --spacing-1500: 1.5rem;
+  --spacing-2000: 2rem;
+  --spacing-2500: 2.5rem;
+  --spacing-3000: 3rem;
+  --spacing-4000: 4rem;
+  --spacing-5000: 5rem;
+  --spacing-6000: 6rem;
+  --spacing-7000: 7rem;
+  --spacing-8000: 8rem;
+  --spacing-8750: 8.75rem;
+}
+
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../src/assets/fonts/Bricolage_Grotesque/BricolageGrotesque-Bold.ttf')
+    format('truetype');
+}
+
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../src/assets/fonts/DM_Sans/DMSans-Light.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('../src/assets/fonts/DM_Sans/DMSans-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../src/assets/fonts/DM_Sans/DMSans-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'DM Sans';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../src/assets/fonts/DM_Sans/DMSans-SemiBoldItalic.ttf')
+    format('truetype');
+}
+
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../src/assets/fonts/DM_Sans/DMSans-Bold.ttf') format('truetype');
+}
