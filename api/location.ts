@@ -3,6 +3,15 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 export default async function handler( request: VercelRequest, response: VercelResponse ) {
   const API_KEY = process.env.GEOLOCALIZATION_API_KEY;
 
+  response.setHeader('Access-Control-Allow-Origin', '*');
+  response.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  response.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  if (request.method === 'OPTIONS') {
+    response.status(200).end();
+    return;
+  }
+
   try {
     const apiResponse = await fetch(`https://api.ipgeolocation.io/v2/ipgeo?apiKey=${API_KEY}`);
     if (!apiResponse.ok) {
