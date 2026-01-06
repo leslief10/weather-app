@@ -4,7 +4,7 @@ export const getUserLocation = async (): Promise<LocationData> => {
   try {
         const apiUrl = import.meta.env.PROD 
       ? 'https://leslies-weather-app.vercel.app/api/location'
-      : '/api/location';
+      : 'http://localhost:3000/api/location';
 
     const response = await fetch(apiUrl);
 
