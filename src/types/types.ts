@@ -5,7 +5,7 @@ export interface LocationData {
   longitude: number,
 }
 
-export   interface OpenMeteoSearchResult {
+export interface OpenMeteoSearchResult {
   name: string;
   country: string;
   latitude: number;
