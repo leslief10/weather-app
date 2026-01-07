@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest';
 import { getWeather } from './weatherService';
-import type { LocationData } from '../types/types';
+import type { LocationData } from '@/types';
 
 describe('weatherService', () => {
   const mockLocation: LocationData = {

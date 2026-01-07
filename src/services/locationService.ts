@@ -1,4 +1,4 @@
-import type { LocationData, OpenMeteoSearchResult } from "../types/types"
+import type { LocationData, OpenMeteoSearchResult } from "@/types"
 
 export const getUserLocation = async (): Promise<LocationData> => {
   try {

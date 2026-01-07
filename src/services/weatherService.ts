@@ -1,4 +1,4 @@
-import type { LocationData, WeatherData } from '../types/types';
+import type { LocationData, WeatherData } from '@/types';
 
 export const getWeather = async (location: LocationData): Promise<WeatherData> => {
   try {
