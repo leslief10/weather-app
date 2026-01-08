@@ -12,6 +12,11 @@ export interface ButtonProps {
   dataTestid?: string;
 }
 
+export interface IconButtonProps extends ButtonProps {
+  iconLeft?: string;
+  iconRight?: string;
+}
+
 export interface InputProps {
   modelValue?: string | number;
   type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url';
