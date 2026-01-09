@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { mount } from '@vue/test-utils';
 import IconButton from '@/components/ui/Button/IconButton.vue';
-import SVGIcon from '@/components/ui/SVGIcon/SVGIcon.vue';
+import { SVGIcon } from '@/components/ui/Icons';
 
 describe('IconButton.vue', () => {
   it('renders with default props', () => {

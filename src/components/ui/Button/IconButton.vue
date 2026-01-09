@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { IconButtonProps } from '@/types';
 import Button from '@/components/ui/Button/Button.vue';
-import SVGIcon from '@/components/ui/SVGIcon/SVGIcon.vue';
+import { SVGIcon } from '@/components/ui/Icons';
 
 withDefaults(defineProps<IconButtonProps>(), {
   type: 'button',

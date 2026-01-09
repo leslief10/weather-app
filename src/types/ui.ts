@@ -33,3 +33,18 @@ export interface InputProps {
   dataTestid?: string;
   autocomplete?: string;
 }
+
+export interface CardProps {
+  id?: string;
+  variant?: 'elevated' | 'outlined' | 'flat';
+  size?: 'sm' | 'md' | 'lg';
+  className?: string;
+  ariaLabel?: string;
+  dataTestid?: string;
+}
+
+export interface HourlyCardProps {
+  hour: string;
+  temperature: number;
+  weatherCode: number;
+}

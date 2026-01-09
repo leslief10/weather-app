@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { InputProps } from '@/types';
 import Input from '@/components/ui/Input/Input.vue';
-import SVGIcon from '@/components/ui/SVGIcon/SVGIcon.vue';
+import { SVGIcon } from '@/components/ui/Icons';
 
 withDefaults(defineProps<InputProps>(), {
   type: 'text',
