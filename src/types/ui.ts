@@ -48,3 +48,16 @@ export interface HourlyCardProps {
   temperature: number;
   weatherCode: number;
 }
+
+export interface DailyCardProps {
+  time: string;
+  maxTemp: number;
+  minTemp: number;
+  weatherCode: number;
+}
+
+export interface CurrentCardProps {
+  label: string;
+  temperature: number;
+  unit: string;
+}

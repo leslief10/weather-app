@@ -24,21 +24,28 @@ export const getWeather = async (location: LocationData): Promise<WeatherData> =
     return {
       current: {
         temperature: data.current.temperature_2m,
+        temperatureUnit: data.current_units.temperature_2m,
         apparentTemperature: data.current.apparent_temperature,
+        apparentTemperatureUnit: data.current_units.apparent_temperature,
         relativeHumidity: data.current.relative_humidity_2m,
         weatherCode: data.current.weather_code,
         windSpeed: data.current.wind_speed_10m,
+        windSpeedUnit: data.current_units.wind_speed_10m,
         precipitation: data.current.precipitation,
+        precipitationUnit: data.current_units.precipitation,
       },
       daily: {
         time: data.daily.time,
         maxTemp: data.daily.temperature_2m_max,
+        maxTempUnit: data.daily_units.temperature_2m_max,
         minTemp: data.daily.temperature_2m_min,
+        minTempUnit: data.daily_units.temperature_2m_min,
         weatherCode: data.daily.weather_code,
       },
       hourly: {
         time: data.hourly.time,
         temperature: data.hourly.temperature_2m,
+        temperatureUnit: data.hourly_units.temperature_2m,
         weatherCode: data.hourly.weather_code,
       },
     };

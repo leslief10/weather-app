@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { mount } from '@vue/test-utils';
-import SVGIcon from '@/components/ui/SVGIcon/SVGIcon.vue';
+import SVGIcon from '@/components/ui/Icons/SVGIcon.vue';
 
 describe('SVGIcon.vue', () => {
   it('renders successfully', () => {
