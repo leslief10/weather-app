@@ -1,19 +1,20 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useWeatherIcon } from '@/composables/useWeatherIcon';
+import { useWeatherIconAlt } from '@/composables/useWeatherIconAlt';
 
 interface Props {
   weatherCode: number;
   size?: 'sm' | 'md' | 'lg';
-  alt?: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   size: 'md',
-  alt: 'Weather condition icon',
 });
 
 const iconName = computed(() => useWeatherIcon(props.weatherCode));
+
+const altLabel = computed(() => useWeatherIconAlt(props.weatherCode));
 
 const iconPath = computed(() => `/src/assets/img/${iconName.value}.webp`);
 
@@ -23,7 +24,7 @@ const sizeClass = computed(() => `weather-icon--${props.size}`);
 <template>
   <img
     :src="iconPath"
-    :alt="alt"
+    :alt="altLabel"
     :class="['weather-icon', sizeClass]"
   />
 </template>

@@ -11,25 +11,38 @@ describe('weatherService', () => {
   };
 
   const mockOpenMeteoResponse = {
-    current: {
-      temperature_2m: 22.5,
-      apparent_temperature: 21.0,
-      relative_humidity_2m: 65,
-      weather_code: 2,
-      wind_speed_10m: 10,
-      precipitation: 0,
-    },
-    daily: {
-      time: ['2026-01-06', '2026-01-07', '2026-01-08'],
-      temperature_2m_max: [25, 26, 24],
-      temperature_2m_min: [18, 19, 17],
-      weather_code: [2, 1, 3],
-    },
-    hourly: {
-      time: ['2026-01-06T00:00', '2026-01-06T01:00', '2026-01-06T02:00'],
-      temperature_2m: [20, 19.5, 19],
-      weather_code: [2, 2, 2],
-    },
+  current: {
+    temperature_2m: 22.5,
+    apparent_temperature: 21.0,
+    relative_humidity_2m: 65,
+    weather_code: 2,
+    wind_speed_10m: 10,
+    precipitation: 0,
+  },
+  current_units: {
+    temperature_2m: '°C',
+    apparent_temperature: '°C',
+    wind_speed_10m: 'km/h',
+    precipitation: 'mm',
+  },
+  daily: {
+    time: ['2026-01-06', '2026-01-07', '2026-01-08'],
+    temperature_2m_max: [25, 26, 24],
+    temperature_2m_min: [18, 19, 17],
+    weather_code: [2, 1, 3],
+  },
+  daily_units: {
+    temperature_2m_max: '°C',
+    temperature_2m_min: '°C',
+  },
+  hourly: {
+    time: ['2026-01-06T00:00', '2026-01-06T01:00', '2026-01-06T02:00'],
+    temperature_2m: [20, 19.5, 19],
+    weather_code: [2, 2, 2],
+  },
+  hourly_units: {
+    temperature_2m: '°C',
+  },
   };
 
   beforeEach(() => {
@@ -80,11 +93,15 @@ describe('weatherService', () => {
     const result = await getWeather(mockLocation);
 
     expect(result.current.temperature).toBe(22.5);
+    expect(result.current.temperatureUnit).toBe('°C');
     expect(result.current.apparentTemperature).toBe(21.0);
+    expect(result.current.apparentTemperatureUnit).toBe('°C');
     expect(result.current.relativeHumidity).toBe(65);
     expect(result.current.weatherCode).toBe(2);
     expect(result.current.windSpeed).toBe(10);
+    expect(result.current.windSpeedUnit).toBe('km/h');
     expect(result.current.precipitation).toBe(0);
+    expect(result.current.precipitationUnit).toBe('mm');
   });
 
   it('should transform daily weather data correctly', async () => {
@@ -97,7 +114,9 @@ describe('weatherService', () => {
 
     expect(result.daily.time).toEqual(['2026-01-06', '2026-01-07', '2026-01-08']);
     expect(result.daily.maxTemp).toEqual([25, 26, 24]);
+    expect(result.daily.maxTempUnit).toBe('°C');
     expect(result.daily.minTemp).toEqual([18, 19, 17]);
+    expect(result.daily.minTempUnit).toBe('°C');
     expect(result.daily.weatherCode).toEqual([2, 1, 3]);
   });
 
@@ -111,6 +130,7 @@ describe('weatherService', () => {
 
     expect(result.hourly.time).toEqual(['2026-01-06T00:00', '2026-01-06T01:00', '2026-01-06T02:00']);
     expect(result.hourly.temperature).toEqual([20, 19.5, 19]);
+    expect(result.hourly.temperatureUnit).toBe('°C');
     expect(result.hourly.weatherCode).toEqual([2, 2, 2]);
   });
 
