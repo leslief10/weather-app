@@ -18,7 +18,7 @@ defineProps<DailyCardProps>();
         :weather-code="weatherCode"
         size="md"
       />
-      <div class="daily-card__temperature-container">
+      <div class="daily-card-temperature-container">
         <p class="daily-card-temperature">{{ maxTemp }}°</p>
         <p class="daily-card-temperature">{{ minTemp }}°</p>
       </div>
@@ -47,7 +47,7 @@ defineProps<DailyCardProps>();
   color: var(--neutral-0);
 }
 
-.daily-card__temperature-container {
+.daily-card-temperature-container {
   display: flex;
   flex-direction: row;
   align-items: center;

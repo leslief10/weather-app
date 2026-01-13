@@ -14,10 +14,10 @@ defineProps<CurrentCardProps>();
     <div class="current-card-content">
       <p class="current-card-label">{{ label }}</p>
       <div
-        class="current-card-temperature-container"
+        class="current-card-value-container"
         :class="[unit.length > 2 ? 'container--spacing' : '']"
       >
-        <p class="current-card-temperature">{{ temperature }}</p>
+        <p class="current-card-value">{{ value }}</p>
         <p class="current-card-unit">{{ unit }}</p>
       </div>
     </div>
@@ -43,7 +43,7 @@ defineProps<CurrentCardProps>();
   color: var(--neutral-200);
 }
 
-.current-card-temperature-container {
+.current-card-value-container {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -53,7 +53,7 @@ defineProps<CurrentCardProps>();
   gap: var(--spacing-0500);
 }
 
-.current-card-temperature,
+.current-card-value,
 .current-card-unit {
   font-size: var(--spacing-2000);
   text-align: center;

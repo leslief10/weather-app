@@ -13,7 +13,7 @@ defineProps<HourlyCardProps>();
     class="hourly-card"
   >
     <div class="hourly-card-content">
-      <div class="hourly-card__hour-container">
+      <div class="hourly-card-hour-container">
         <WeatherIcon
           :weather-code="weatherCode"
           size="sm"
@@ -38,7 +38,7 @@ defineProps<HourlyCardProps>();
   justify-content: space-between;
 }
 
-.hourly-card__hour-container {
+.hourly-card-hour-container {
   display: flex;
   flex-direction: row;
   align-items: center;

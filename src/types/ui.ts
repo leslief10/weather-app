@@ -58,6 +58,6 @@ export interface DailyCardProps {
 
 export interface CurrentCardProps {
   label: string;
-  temperature: number;
+  value: number;
   unit: string;
 }
