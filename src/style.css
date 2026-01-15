@@ -48,6 +48,10 @@ html {
   --spacing-8750: 8.75rem;
 }
 
+body {
+  background-color: var(--neutral-900);
+}
+
 @font-face {
   font-family: 'Bricolage Grotesque';
   font-style: normal;

@@ -61,3 +61,26 @@ export interface CurrentCardProps {
   value: number;
   unit: string;
 }
+
+export interface ListItemProps {
+  id?: string;
+  interactive?: boolean;
+  selected?: boolean;
+  disabled?: boolean;
+  size?: 'sm' | 'md' | 'lg';
+  className?: string;
+  ariaLabel?: string;
+  ariaSelected?: boolean;
+  dataTestid?: string;
+}
+
+export interface ListProps {
+  id?: string;
+  variant?: 'unordered' | 'ordered' | 'description' | 'unstyled';
+  size?: 'sm' | 'md' | 'lg';
+  orientation?: 'vertical' | 'horizontal';
+  divided?: boolean;
+  className?: string;
+  ariaLabel?: string;
+  dataTestid?: string;
+}
