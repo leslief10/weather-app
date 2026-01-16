@@ -9,7 +9,7 @@ describe('HourlyCard.vue', () => {
     it('should render the Card component', () => {
       const wrapper = mount(HourlyCard, {
         props: {
-          hour: '12 PM',
+          hour: '2026-01-16T12:00:00',
           weatherCode: 0,
           temperature: 72,
         },
@@ -21,7 +21,7 @@ describe('HourlyCard.vue', () => {
     it('should render hour text', () => {
       const wrapper = mount(HourlyCard, {
         props: {
-          hour: '3 PM',
+          hour: '2026-01-16T15:00:00',
           weatherCode: 1,
           temperature: 75,
         },
@@ -33,7 +33,7 @@ describe('HourlyCard.vue', () => {
     it('should render WeatherIcon component', () => {
       const wrapper = mount(HourlyCard, {
         props: {
-          hour: '6 PM',
+          hour: '2026-01-16T18:00:00',
           weatherCode: 2,
           temperature: 68,
         },
@@ -45,7 +45,7 @@ describe('HourlyCard.vue', () => {
     it('should render temperature with degree symbol', () => {
       const wrapper = mount(HourlyCard, {
         props: {
-          hour: '9 PM',
+          hour: '2026-01-16T21:00:00',
           weatherCode: 3,
           temperature: 65,
         },
@@ -59,7 +59,7 @@ describe('HourlyCard.vue', () => {
     it('should pass variant="outlined" to Card component', () => {
       const wrapper = mount(HourlyCard, {
         props: {
-          hour: '12 AM',
+          hour: '2026-01-16T00:00:00',
           weatherCode: 45,
           temperature: 58,
         },
@@ -72,7 +72,7 @@ describe('HourlyCard.vue', () => {
     it('should pass size="sm" to Card component', () => {
       const wrapper = mount(HourlyCard, {
         props: {
-          hour: '3 AM',
+          hour: '2026-01-16T03:00:00',
           weatherCode: 48,
           temperature: 55,
         },
@@ -85,7 +85,7 @@ describe('HourlyCard.vue', () => {
     it('should apply hourly-card class to Card component', () => {
       const wrapper = mount(HourlyCard, {
         props: {
-          hour: '6 AM',
+          hour: '2026-01-16T06:00:00',
           weatherCode: 51,
           temperature: 52,
         },
@@ -99,7 +99,7 @@ describe('HourlyCard.vue', () => {
     it('should pass weatherCode prop to WeatherIcon', () => {
       const wrapper = mount(HourlyCard, {
         props: {
-          hour: '9 AM',
+          hour: '2026-01-16T09:00:00',
           weatherCode: 61,
           temperature: 60,
         },
@@ -112,7 +112,7 @@ describe('HourlyCard.vue', () => {
     it('should pass size="sm" to WeatherIcon', () => {
       const wrapper = mount(HourlyCard, {
         props: {
-          hour: '12 PM',
+          hour: '2026-01-16T12:00:00',
           weatherCode: 71,
           temperature: 70,
         },
@@ -128,7 +128,7 @@ describe('HourlyCard.vue', () => {
       weatherCodes.forEach((code) => {
         const wrapper = mount(HourlyCard, {
           props: {
-            hour: '1 PM',
+            hour: '2026-01-16T13:00:00',
             weatherCode: code,
             temperature: 72,
           },
@@ -144,7 +144,7 @@ describe('HourlyCard.vue', () => {
     it('should render content container', () => {
       const wrapper = mount(HourlyCard, {
         props: {
-          hour: '2 PM',
+          hour: '2026-01-16T14:00:00',
           weatherCode: 0,
           temperature: 73,
         },
@@ -156,7 +156,7 @@ describe('HourlyCard.vue', () => {
     it('should render hour container', () => {
       const wrapper = mount(HourlyCard, {
         props: {
-          hour: '4 PM',
+          hour: '2026-01-16T16:00:00',
           weatherCode: 1,
           temperature: 74,
         },
@@ -168,7 +168,7 @@ describe('HourlyCard.vue', () => {
     it('should render WeatherIcon and hour in the same container', () => {
       const wrapper = mount(HourlyCard, {
         props: {
-          hour: '5 PM',
+          hour: '2026-01-16T17:00:00',
           weatherCode: 2,
           temperature: 76,
         },
@@ -184,7 +184,7 @@ describe('HourlyCard.vue', () => {
     it('should handle positive temperatures', () => {
       const wrapper = mount(HourlyCard, {
         props: {
-          hour: '1 PM',
+          hour: '2026-01-16T13:00:00',
           weatherCode: 0,
           temperature: 85,
         },
@@ -196,7 +196,7 @@ describe('HourlyCard.vue', () => {
     it('should handle negative temperatures', () => {
       const wrapper = mount(HourlyCard, {
         props: {
-          hour: '2 AM',
+          hour: '2026-01-16T02:00:00',
           weatherCode: 71,
           temperature: -5,
         },
@@ -208,7 +208,7 @@ describe('HourlyCard.vue', () => {
     it('should handle zero temperature', () => {
       const wrapper = mount(HourlyCard, {
         props: {
-          hour: '3 AM',
+          hour: '2026-01-16T03:00:00',
           weatherCode: 61,
           temperature: 0,
         },
@@ -220,7 +220,7 @@ describe('HourlyCard.vue', () => {
     it('should handle three-digit temperatures', () => {
       const wrapper = mount(HourlyCard, {
         props: {
-          hour: '2 PM',
+          hour: '2026-01-16T14:00:00',
           weatherCode: 0,
           temperature: 105,
         },
@@ -232,7 +232,7 @@ describe('HourlyCard.vue', () => {
     it('should handle single-digit temperatures', () => {
       const wrapper = mount(HourlyCard, {
         props: {
-          hour: '5 AM',
+          hour: '2026-01-16T05:00:00',
           weatherCode: 2,
           temperature: 8,
         },
@@ -246,7 +246,7 @@ describe('HourlyCard.vue', () => {
     it('should render WeatherIcon before hour text', () => {
       const wrapper = mount(HourlyCard, {
         props: {
-          hour: '7 PM',
+          hour: '2026-01-16T19:00:00',
           weatherCode: 45,
           temperature: 70,
         },
@@ -263,7 +263,7 @@ describe('HourlyCard.vue', () => {
     it('should render hour container before temperature', () => {
       const wrapper = mount(HourlyCard, {
         props: {
-          hour: '10 AM',
+          hour: '2026-01-16T10:00:00',
           weatherCode: 51,
           temperature: 68,
         },
@@ -281,7 +281,7 @@ describe('HourlyCard.vue', () => {
     it('should render all props correctly together', () => {
       const wrapper = mount(HourlyCard, {
         props: {
-          hour: '4 PM',
+          hour: '2026-01-16T16:00:00',
           weatherCode: 80,
           temperature: 82,
         },

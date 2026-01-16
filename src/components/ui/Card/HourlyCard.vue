@@ -1,9 +1,18 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 import Card from '@/components/ui/Card/Card.vue';
 import { WeatherIcon } from '@/components/ui/Icons';
 import type { HourlyCardProps } from '@/types';
 
-defineProps<HourlyCardProps>();
+const props = defineProps<HourlyCardProps>();
+
+const formatHour = computed((): string => {
+  const date = new Date(props.hour);
+  return date.toLocaleString('en-US', {
+    hour: 'numeric',
+    hour12: true,
+  });
+});
 </script>
 
 <template>
@@ -18,7 +27,12 @@ defineProps<HourlyCardProps>();
           :weather-code="weatherCode"
           size="sm"
         />
-        <p class="hourly-card-hour">{{ hour }}</p>
+        <time
+          itemprop="hour"
+          :datetime="hour"
+          class="hourly-card-hour"
+          >{{ formatHour }}</time
+        >
       </div>
       <p class="hourly-card-temperature">{{ temperature }}°</p>
     </div>

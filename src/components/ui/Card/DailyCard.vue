@@ -1,9 +1,19 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 import Card from '@/components/ui/Card/Card.vue';
 import { WeatherIcon } from '@/components/ui/Icons';
 import type { DailyCardProps } from '@/types';
 
-defineProps<DailyCardProps>();
+const props = defineProps<DailyCardProps>();
+
+const formatDay = computed((): string => {
+  // API returns date-only strings (YYYY-MM-DD). Append noon time to avoid timezone issues.
+  const dateString = `${props.time}T12:00:00`;
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-US', {
+    weekday: 'short',
+  });
+});
 </script>
 
 <template>
@@ -13,7 +23,12 @@ defineProps<DailyCardProps>();
     class="daily-card"
   >
     <div class="daily-card-content">
-      <p class="daily-card-time">{{ time }}</p>
+      <time
+        itemprop="day"
+        :datetime="time"
+        class="daily-card-time"
+        >{{ formatDay }}</time
+      >
       <WeatherIcon
         :weather-code="weatherCode"
         size="md"
