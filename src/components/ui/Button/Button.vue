@@ -57,6 +57,7 @@ defineEmits<{
 
 .btn--primary:focus-visible {
   outline: var(--spacing-0125) solid var(--blue-500);
+  outline-offset: var(--spacing-0125);
 }
 
 .btn--secondary {
@@ -66,7 +67,8 @@ defineEmits<{
 }
 
 .btn--secondary:focus-visible {
-  outline: var(--spacing-0125) solid var(--neutral-800);
+  outline: var(--spacing-0125) solid var(--neutral-0);
+  outline-offset: var(--spacing-0125);
 }
 
 .btn--tertiary {
@@ -76,11 +78,12 @@ defineEmits<{
 }
 
 .btn--tertiary:focus-visible {
-  outline: var(--spacing-0125) solid var(--neutral-600);
+  outline: var(--spacing-0125) solid var(--neutral-0);
+  outline-offset: var(--spacing-0125);
 }
 
 .btn--sm {
-  padding: var(--spacing-0750) var(--spacing-1000);
+  padding: var(--spacing-0500) var(--spacing-0625);
   font-size: var(--spacing-0750);
 }
 
@@ -105,6 +108,13 @@ defineEmits<{
 
   .btn--tertiary:hover {
     background-color: var(--neutral-700);
+  }
+}
+
+@media (min-width: 768px) {
+  .btn--sm {
+    padding: var(--spacing-0750) var(--spacing-1000);
+    font-size: var(--spacing-01000);
   }
 }
 </style>
