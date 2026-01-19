@@ -56,6 +56,7 @@ defineEmits<{
 
 .input:focus-visible {
   outline: var(--spacing-0125) solid var(--neutral-200);
+  outline-offset: var(--spacing-0125);
 }
 
 .input:disabled {

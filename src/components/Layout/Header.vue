@@ -38,6 +38,7 @@ const toggleDropdown = (): void => {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  max-width: 76rem;
   padding: var(--spacing-1000) var(--spacing-1000) 0;
 }
 
@@ -49,6 +50,19 @@ const toggleDropdown = (): void => {
 @media (min-width: 768px) {
   .header {
     padding: var(--spacing-1500) var(--spacing-1500) 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .header {
+    padding: var(--spacing-3000) var(--spacing-1500) 0;
+  }
+}
+
+@media (min-width: 1280px) {
+  .header {
+    padding: var(--spacing-3000) 0 0;
+    margin: 0 auto;
   }
 }
 </style>

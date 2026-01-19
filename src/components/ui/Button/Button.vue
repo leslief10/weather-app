@@ -37,7 +37,6 @@ defineEmits<{
   justify-content: center;
   align-items: center;
   gap: var(--spacing-0625);
-  /* width: 100%; */
   font-weight: 500;
   background-color: transparent;
   border: none;
@@ -114,7 +113,7 @@ defineEmits<{
 @media (min-width: 768px) {
   .btn--sm {
     padding: var(--spacing-0750) var(--spacing-1000);
-    font-size: var(--spacing-01000);
+    font-size: var(--spacing-1000);
   }
 }
 </style>

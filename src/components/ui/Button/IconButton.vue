@@ -55,8 +55,6 @@ defineEmits<{
 }
 
 .icon {
-  /* width: var(--spacing-1000);
-  height: var(--spacing-1000); */
   display: flex;
   align-items: center;
   justify-content: center;
