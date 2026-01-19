@@ -35,9 +35,18 @@ describe('Location API Handler', () => {
 
     await handler(mockRequest, mockResponse);
 
-    expect(mockResponse.setHeader).toHaveBeenCalledWith('Access-Control-Allow-Origin', '*');
-    expect(mockResponse.setHeader).toHaveBeenCalledWith('Access-Control-Allow-Methods', 'GET, OPTIONS');
-    expect(mockResponse.setHeader).toHaveBeenCalledWith('Access-Control-Allow-Headers', 'Content-Type');
+    expect(mockResponse.setHeader).toHaveBeenCalledWith(
+      'Access-Control-Allow-Origin',
+      '*',
+    );
+    expect(mockResponse.setHeader).toHaveBeenCalledWith(
+      'Access-Control-Allow-Methods',
+      'GET, OPTIONS',
+    );
+    expect(mockResponse.setHeader).toHaveBeenCalledWith(
+      'Access-Control-Allow-Headers',
+      'Content-Type',
+    );
   });
 
   it('should handle OPTIONS request and return 200', async () => {
@@ -115,7 +124,7 @@ describe('Location API Handler', () => {
     await handler(mockRequest, mockResponse);
 
     expect(global.fetch).toHaveBeenCalledWith(
-      'https://api.ipgeolocation.io/v2/ipgeo?apiKey=test-api-key'
+      'https://api.ipgeolocation.io/v2/ipgeo?apiKey=test-api-key',
     );
   });
 });

@@ -1,8 +1,8 @@
 export interface LocationData {
-  city: string,
-  country: string,
-  latitude: number,
-  longitude: number,
+  city: string;
+  country: string;
+  latitude: number;
+  longitude: number;
 }
 
 export interface OpenMeteoSearchResult {

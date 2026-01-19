@@ -34,7 +34,7 @@ describe('locationService', () => {
       city: 'New York',
       country: 'United States',
       latitude: 40.7128,
-      longitude: -74.0060,
+      longitude: -74.006,
     };
 
     vi.mocked(fetch).mockResolvedValue({
@@ -47,7 +47,7 @@ describe('locationService', () => {
     expect(result.city).toBe('New York');
     expect(result.country).toBe('United States');
     expect(result.latitude).toBe(40.7128);
-    expect(result.longitude).toBe(-74.0060);
+    expect(result.longitude).toBe(-74.006);
   });
 
   it('should throw an error when response is not ok', async () => {
@@ -67,13 +67,12 @@ describe('locationService', () => {
 
   it('should log error to console when request fails', async () => {
     const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
-    
+
     vi.mocked(fetch).mockRejectedValue(new Error('API Error'));
 
     try {
       await getUserLocation();
-    } catch (e) {
-    }
+    } catch (e) {}
 
     expect(consoleSpy).toHaveBeenCalledWith('Error:', expect.any(Error));
     consoleSpy.mockRestore();
@@ -102,8 +101,8 @@ describe('locationService', () => {
       const mockData = {
         city: 'Berlin',
         country: 'Germany',
-        latitude: 52.5200,
-        longitude: 13.4050,
+        latitude: 52.52,
+        longitude: 13.405,
       };
 
       vi.stubGlobal('fetch', vi.fn());
@@ -113,12 +112,13 @@ describe('locationService', () => {
       } as Response);
 
       vi.stubEnv('PROD', true);
-      const { getUserLocation: getUserLocationProd } = await import('./locationService');
+      const { getUserLocation: getUserLocationProd } =
+        await import('./locationService');
 
       const result = await getUserLocationProd();
 
       expect(fetch).toHaveBeenCalledWith(
-        'https://leslies-weather-app.vercel.app/api/location'
+        'https://leslies-weather-app.vercel.app/api/location',
       );
       expect(result).toEqual(mockData);
 
@@ -131,7 +131,8 @@ describe('locationService', () => {
       vi.mocked(fetch).mockRejectedValue(new Error('Production error'));
 
       vi.stubEnv('PROD', true);
-      const { getUserLocation: getUserLocationProd } = await import('./locationService');
+      const { getUserLocation: getUserLocationProd } =
+        await import('./locationService');
 
       await expect(getUserLocationProd()).rejects.toThrow('Production error');
 

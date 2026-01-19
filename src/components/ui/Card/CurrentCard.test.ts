@@ -13,7 +13,7 @@ describe('CurrentCard.vue', () => {
           unit: '°F',
         },
       });
-      
+
       expect(wrapper.findComponent(Card).exists()).toBe(true);
     });
 
@@ -25,7 +25,7 @@ describe('CurrentCard.vue', () => {
           unit: '°F',
         },
       });
-      
+
       expect(wrapper.find('.current-card-label').text()).toBe('Feels Like');
     });
 
@@ -37,7 +37,7 @@ describe('CurrentCard.vue', () => {
           unit: '°F',
         },
       });
-      
+
       expect(wrapper.find('.current-card-value').text()).toBe('75');
     });
 
@@ -49,7 +49,7 @@ describe('CurrentCard.vue', () => {
           unit: '°C',
         },
       });
-      
+
       expect(wrapper.find('.current-card-unit').text()).toBe('°C');
     });
   });
@@ -63,7 +63,7 @@ describe('CurrentCard.vue', () => {
           unit: '°F',
         },
       });
-      
+
       const card = wrapper.findComponent(Card);
       expect(card.props('variant')).toBe('outlined');
     });
@@ -76,7 +76,7 @@ describe('CurrentCard.vue', () => {
           unit: '°F',
         },
       });
-      
+
       const card = wrapper.findComponent(Card);
       expect(card.props('size')).toBe('lg');
     });
@@ -89,7 +89,7 @@ describe('CurrentCard.vue', () => {
           unit: '°F',
         },
       });
-      
+
       expect(wrapper.find('.current-card').exists()).toBe(true);
     });
   });
@@ -103,7 +103,7 @@ describe('CurrentCard.vue', () => {
           unit: '%',
         },
       });
-      
+
       expect(wrapper.find('.current-card-content').exists()).toBe(true);
     });
 
@@ -115,7 +115,7 @@ describe('CurrentCard.vue', () => {
           unit: '°F',
         },
       });
-      
+
       expect(wrapper.find('.current-card-value-container').exists()).toBe(true);
     });
   });
@@ -129,7 +129,7 @@ describe('CurrentCard.vue', () => {
           unit: 'mph',
         },
       });
-      
+
       const container = wrapper.find('.current-card-value-container');
       expect(container.classes()).toContain('container--spacing');
     });
@@ -142,7 +142,7 @@ describe('CurrentCard.vue', () => {
           unit: '°F',
         },
       });
-      
+
       const container = wrapper.find('.current-card-value-container');
       expect(container.classes()).not.toContain('container--spacing');
     });
@@ -155,7 +155,7 @@ describe('CurrentCard.vue', () => {
           unit: '%',
         },
       });
-      
+
       const container = wrapper.find('.current-card-value-container');
       expect(container.classes()).not.toContain('container--spacing');
     });
@@ -170,7 +170,7 @@ describe('CurrentCard.vue', () => {
           unit: '°F',
         },
       });
-      
+
       expect(wrapper.find('.current-card-value').text()).toBe('0');
     });
 
@@ -182,7 +182,7 @@ describe('CurrentCard.vue', () => {
           unit: '°C',
         },
       });
-      
+
       expect(wrapper.find('.current-card-value').text()).toBe('-5');
     });
 
@@ -194,7 +194,7 @@ describe('CurrentCard.vue', () => {
           unit: 'miles',
         },
       });
-      
+
       expect(wrapper.find('.current-card-unit').text()).toBe('miles');
       const container = wrapper.find('.current-card-value-container');
       expect(container.classes()).toContain('container--spacing');
@@ -210,7 +210,7 @@ describe('CurrentCard.vue', () => {
           unit: 'mph',
         },
       });
-      
+
       expect(wrapper.find('.current-card-label').text()).toBe('Wind Speed');
       expect(wrapper.find('.current-card-value').text()).toBe('12');
       expect(wrapper.find('.current-card-unit').text()).toBe('mph');

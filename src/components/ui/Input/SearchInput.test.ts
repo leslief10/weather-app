@@ -254,7 +254,9 @@ describe('SearchInput.vue', () => {
     const input = wrapper.findComponent(Input);
     await input.vm.$emit('update:model-value', 'new search term');
     expect(wrapper.emitted('update:modelValue')).toBeTruthy();
-    expect(wrapper.emitted('update:modelValue')?.[0]).toEqual(['new search term']);
+    expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([
+      'new search term',
+    ]);
   });
 
   it('applies search-input class to Input', () => {

@@ -31,7 +31,12 @@ describe('SVGIcon.vue', () => {
   });
 
   it('handles different icon names', () => {
-    const iconNames = ['icon-search', 'icon-units', 'icon-retry', 'icon-loading'];
+    const iconNames = [
+      'icon-search',
+      'icon-units',
+      'icon-retry',
+      'icon-loading',
+    ];
 
     iconNames.forEach((iconName) => {
       const wrapper = mount(SVGIcon, {

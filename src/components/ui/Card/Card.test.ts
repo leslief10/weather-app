@@ -6,7 +6,7 @@ describe('Card.vue', () => {
   describe('Rendering', () => {
     it('should render with default props', () => {
       const wrapper = mount(Card);
-      
+
       expect(wrapper.find('article').exists()).toBe(true);
       expect(wrapper.classes()).toContain('card');
       expect(wrapper.classes()).toContain('card--outlined');
@@ -19,7 +19,7 @@ describe('Card.vue', () => {
           default: '<div class="test-content">Test Content</div>',
         },
       });
-      
+
       expect(wrapper.find('.test-content').exists()).toBe(true);
       expect(wrapper.text()).toBe('Test Content');
     });
@@ -32,7 +32,7 @@ describe('Card.vue', () => {
           variant: 'elevated',
         },
       });
-      
+
       expect(wrapper.classes()).toContain('card--elevated');
       expect(wrapper.classes()).not.toContain('card--outlined');
     });
@@ -43,7 +43,7 @@ describe('Card.vue', () => {
           variant: 'outlined',
         },
       });
-      
+
       expect(wrapper.classes()).toContain('card--outlined');
     });
 
@@ -53,7 +53,7 @@ describe('Card.vue', () => {
           variant: 'flat',
         },
       });
-      
+
       expect(wrapper.classes()).toContain('card--flat');
     });
   });
@@ -65,7 +65,7 @@ describe('Card.vue', () => {
           size: 'sm',
         },
       });
-      
+
       expect(wrapper.classes()).toContain('card--sm');
     });
 
@@ -75,7 +75,7 @@ describe('Card.vue', () => {
           size: 'md',
         },
       });
-      
+
       expect(wrapper.classes()).toContain('card--md');
     });
 
@@ -85,7 +85,7 @@ describe('Card.vue', () => {
           size: 'lg',
         },
       });
-      
+
       expect(wrapper.classes()).toContain('card--lg');
     });
   });
@@ -97,7 +97,7 @@ describe('Card.vue', () => {
           id: 'test-card-id',
         },
       });
-      
+
       expect(wrapper.attributes('id')).toBe('test-card-id');
     });
 
@@ -107,7 +107,7 @@ describe('Card.vue', () => {
           dataTestid: 'test-card',
         },
       });
-      
+
       expect(wrapper.attributes('data-testid')).toBe('test-card');
     });
 
@@ -117,7 +117,7 @@ describe('Card.vue', () => {
           ariaLabel: 'Weather information card',
         },
       });
-      
+
       expect(wrapper.attributes('aria-label')).toBe('Weather information card');
     });
 
@@ -127,7 +127,7 @@ describe('Card.vue', () => {
           className: 'custom-card-class',
         },
       });
-      
+
       expect(wrapper.classes()).toContain('custom-card-class');
     });
   });
@@ -147,7 +147,7 @@ describe('Card.vue', () => {
           default: '<p>Weather content</p>',
         },
       });
-      
+
       expect(wrapper.attributes('id')).toBe('weather-card');
       expect(wrapper.attributes('data-testid')).toBe('weather-card-test');
       expect(wrapper.attributes('aria-label')).toBe('Current weather card');
@@ -161,7 +161,7 @@ describe('Card.vue', () => {
   describe('Accessibility', () => {
     it('should use semantic article element', () => {
       const wrapper = mount(Card);
-      
+
       expect(wrapper.element.tagName).toBe('ARTICLE');
     });
 
@@ -171,7 +171,7 @@ describe('Card.vue', () => {
           ariaLabel: 'Weather forecast card',
         },
       });
-      
+
       expect(wrapper.attributes('aria-label')).toBe('Weather forecast card');
     });
   });

@@ -61,7 +61,9 @@ describe('Input.vue', () => {
     const wrapper = mount(Input, {
       props: { modelValue: '', placeholder: 'Enter text...' },
     });
-    expect(wrapper.find('input').attributes('placeholder')).toBe('Enter text...');
+    expect(wrapper.find('input').attributes('placeholder')).toBe(
+      'Enter text...',
+    );
   });
 
   it('applies correct size class', () => {
@@ -93,7 +95,9 @@ describe('Input.vue', () => {
         errorMessage: 'This field is required',
       },
     });
-    expect(wrapper.find('.input--error-message').text()).toBe('This field is required');
+    expect(wrapper.find('.input--error-message').text()).toBe(
+      'This field is required',
+    );
   });
 
   it('does not display error message when error is false', () => {
@@ -118,7 +122,9 @@ describe('Input.vue', () => {
     const wrapper = mount(Input, {
       props: { modelValue: '', ariaDescribedby: 'help-text' },
     });
-    expect(wrapper.find('input').attributes('aria-describedby')).toBe('help-text');
+    expect(wrapper.find('input').attributes('aria-describedby')).toBe(
+      'help-text',
+    );
   });
 
   it('passes aria-invalid to input element', () => {

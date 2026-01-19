@@ -1,6 +1,9 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
-export default async function handler( request: VercelRequest, response: VercelResponse ) {
+export default async function handler(
+  request: VercelRequest,
+  response: VercelResponse,
+) {
   const API_KEY = process.env.GEOLOCALIZATION_API_KEY;
 
   response.setHeader('Access-Control-Allow-Origin', '*');
@@ -13,7 +16,9 @@ export default async function handler( request: VercelRequest, response: VercelR
   }
 
   try {
-    const apiResponse = await fetch(`https://api.ipgeolocation.io/v2/ipgeo?apiKey=${API_KEY}`);
+    const apiResponse = await fetch(
+      `https://api.ipgeolocation.io/v2/ipgeo?apiKey=${API_KEY}`,
+    );
     if (!apiResponse.ok) {
       throw new Error(`Error when calling the Geolocalization API`);
     }

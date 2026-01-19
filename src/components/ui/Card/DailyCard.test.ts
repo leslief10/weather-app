@@ -15,7 +15,7 @@ describe('DailyCard.vue', () => {
           minTemp: 60,
         },
       });
-      
+
       expect(wrapper.findComponent(Card).exists()).toBe(true);
     });
 
@@ -28,7 +28,7 @@ describe('DailyCard.vue', () => {
           minTemp: 58,
         },
       });
-      
+
       expect(wrapper.find('.daily-card-time').text()).toBe('Fri');
     });
 
@@ -41,7 +41,7 @@ describe('DailyCard.vue', () => {
           minTemp: 55,
         },
       });
-      
+
       expect(wrapper.findComponent(WeatherIcon).exists()).toBe(true);
     });
 
@@ -54,7 +54,7 @@ describe('DailyCard.vue', () => {
           minTemp: 65,
         },
       });
-      
+
       const temps = wrapper.findAll('.daily-card-temperature');
       expect(temps[0]?.text()).toBe('80°');
     });
@@ -68,7 +68,7 @@ describe('DailyCard.vue', () => {
           minTemp: 62,
         },
       });
-      
+
       const temps = wrapper.findAll('.daily-card-temperature');
       expect(temps[1]?.text()).toBe('62°');
     });
@@ -84,7 +84,7 @@ describe('DailyCard.vue', () => {
           minTemp: 55,
         },
       });
-      
+
       const card = wrapper.findComponent(Card);
       expect(card.props('variant')).toBe('outlined');
     });
@@ -98,7 +98,7 @@ describe('DailyCard.vue', () => {
           minTemp: 59,
         },
       });
-      
+
       const card = wrapper.findComponent(Card);
       expect(card.props('size')).toBe('md');
     });
@@ -112,7 +112,7 @@ describe('DailyCard.vue', () => {
           minTemp: 54,
         },
       });
-      
+
       expect(wrapper.find('.daily-card').exists()).toBe(true);
     });
   });
@@ -127,7 +127,7 @@ describe('DailyCard.vue', () => {
           minTemp: 52,
         },
       });
-      
+
       const weatherIcon = wrapper.findComponent(WeatherIcon);
       expect(weatherIcon.props('weatherCode')).toBe(51);
     });
@@ -141,14 +141,14 @@ describe('DailyCard.vue', () => {
           minTemp: 50,
         },
       });
-      
+
       const weatherIcon = wrapper.findComponent(WeatherIcon);
       expect(weatherIcon.props('size')).toBe('md');
     });
 
     it('should render WeatherIcon with different weather codes', () => {
       const weatherCodes = [0, 1, 2, 3, 45, 48, 51, 61, 71, 80, 95];
-      
+
       weatherCodes.forEach((code) => {
         const wrapper = mount(DailyCard, {
           props: {
@@ -158,7 +158,7 @@ describe('DailyCard.vue', () => {
             minTemp: 55,
           },
         });
-        
+
         const weatherIcon = wrapper.findComponent(WeatherIcon);
         expect(weatherIcon.props('weatherCode')).toBe(code);
       });
@@ -175,7 +175,7 @@ describe('DailyCard.vue', () => {
           minTemp: 60,
         },
       });
-      
+
       expect(wrapper.find('.daily-card-content').exists()).toBe(true);
     });
 
@@ -188,8 +188,10 @@ describe('DailyCard.vue', () => {
           minTemp: 58,
         },
       });
-      
-      expect(wrapper.find('.daily-card-temperature-container').exists()).toBe(true);
+
+      expect(wrapper.find('.daily-card-temperature-container').exists()).toBe(
+        true,
+      );
     });
 
     it('should render both temperatures in temperature container', () => {
@@ -201,7 +203,7 @@ describe('DailyCard.vue', () => {
           minTemp: 63,
         },
       });
-      
+
       const tempContainer = wrapper.find('.daily-card-temperature-container');
       const temps = tempContainer.findAll('.daily-card-temperature');
       expect(temps).toHaveLength(2);
@@ -218,7 +220,7 @@ describe('DailyCard.vue', () => {
           minTemp: 70,
         },
       });
-      
+
       const temps = wrapper.findAll('.daily-card-temperature');
       expect(temps[0]?.text()).toBe('85°');
       expect(temps[1]?.text()).toBe('70°');
@@ -233,7 +235,7 @@ describe('DailyCard.vue', () => {
           minTemp: -10,
         },
       });
-      
+
       const temps = wrapper.findAll('.daily-card-temperature');
       expect(temps[0]?.text()).toBe('5°');
       expect(temps[1]?.text()).toBe('-10°');
@@ -248,7 +250,7 @@ describe('DailyCard.vue', () => {
           minTemp: 0,
         },
       });
-      
+
       const temps = wrapper.findAll('.daily-card-temperature');
       expect(temps[0]?.text()).toBe('0°');
       expect(temps[1]?.text()).toBe('0°');
@@ -263,7 +265,7 @@ describe('DailyCard.vue', () => {
           minTemp: 85,
         },
       });
-      
+
       const temps = wrapper.findAll('.daily-card-temperature');
       expect(temps[0]?.text()).toBe('105°');
       expect(temps[1]?.text()).toBe('85°');
@@ -280,10 +282,10 @@ describe('DailyCard.vue', () => {
           minTemp: 67,
         },
       });
-      
+
       expect(wrapper.find('.daily-card-time').text()).toBe('Fri');
       expect(wrapper.findComponent(WeatherIcon).props('weatherCode')).toBe(61);
-      
+
       const temps = wrapper.findAll('.daily-card-temperature');
       expect(temps[0]?.text()).toBe('82°');
       expect(temps[1]?.text()).toBe('67°');

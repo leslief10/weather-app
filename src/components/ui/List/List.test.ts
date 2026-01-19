@@ -221,7 +221,7 @@ describe('List.vue', () => {
           id: 'my-list',
         },
       });
-      
+
       expect(wrapper.element.tagName).toBe('UL');
       expect(wrapper.classes()).toContain('list--unordered');
       expect(wrapper.classes()).toContain('list--lg');
@@ -239,7 +239,7 @@ describe('List.vue', () => {
           size: 'sm',
         },
       });
-      
+
       expect(wrapper.element.tagName).toBe('OL');
       expect(wrapper.classes()).toContain('list--ordered');
       expect(wrapper.classes()).toContain('list--vertical');
@@ -254,7 +254,7 @@ describe('List.vue', () => {
           className: 'metadata-list',
         },
       });
-      
+
       expect(wrapper.element.tagName).toBe('DL');
       expect(wrapper.classes()).toContain('list--description');
       expect(wrapper.classes()).toContain('list--md');
@@ -273,7 +273,7 @@ describe('List.vue', () => {
           `,
         },
       });
-      
+
       expect(wrapper.findAll('li')).toHaveLength(3);
       expect(wrapper.text()).toContain('First item');
       expect(wrapper.text()).toContain('Second item');
@@ -294,7 +294,7 @@ describe('List.vue', () => {
           `,
         },
       });
-      
+
       expect(wrapper.findAll('dt')).toHaveLength(2);
       expect(wrapper.findAll('dd')).toHaveLength(2);
       expect(wrapper.text()).toContain('Term 1');
@@ -309,13 +309,10 @@ describe('List.vue', () => {
     });
 
     it('includes base list class with all variants', () => {
-      const variants: Array<'unstyled' | 'unordered' | 'ordered' | 'description'> = [
-        'unstyled',
-        'unordered',
-        'ordered',
-        'description',
-      ];
-      
+      const variants: Array<
+        'unstyled' | 'unordered' | 'ordered' | 'description'
+      > = ['unstyled', 'unordered', 'ordered', 'description'];
+
       variants.forEach((variant) => {
         const wrapper = mount(List, {
           props: { variant },

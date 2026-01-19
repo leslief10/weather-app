@@ -14,7 +14,7 @@ describe('HourlyCard.vue', () => {
           temperature: 72,
         },
       });
-      
+
       expect(wrapper.findComponent(Card).exists()).toBe(true);
     });
 
@@ -26,7 +26,7 @@ describe('HourlyCard.vue', () => {
           temperature: 75,
         },
       });
-      
+
       expect(wrapper.find('.hourly-card-hour').text()).toBe('3 PM');
     });
 
@@ -38,7 +38,7 @@ describe('HourlyCard.vue', () => {
           temperature: 68,
         },
       });
-      
+
       expect(wrapper.findComponent(WeatherIcon).exists()).toBe(true);
     });
 
@@ -50,7 +50,7 @@ describe('HourlyCard.vue', () => {
           temperature: 65,
         },
       });
-      
+
       expect(wrapper.find('.hourly-card-temperature').text()).toBe('65°');
     });
   });
@@ -64,7 +64,7 @@ describe('HourlyCard.vue', () => {
           temperature: 58,
         },
       });
-      
+
       const card = wrapper.findComponent(Card);
       expect(card.props('variant')).toBe('outlined');
     });
@@ -77,7 +77,7 @@ describe('HourlyCard.vue', () => {
           temperature: 55,
         },
       });
-      
+
       const card = wrapper.findComponent(Card);
       expect(card.props('size')).toBe('sm');
     });
@@ -90,7 +90,7 @@ describe('HourlyCard.vue', () => {
           temperature: 52,
         },
       });
-      
+
       expect(wrapper.find('.hourly-card').exists()).toBe(true);
     });
   });
@@ -104,7 +104,7 @@ describe('HourlyCard.vue', () => {
           temperature: 60,
         },
       });
-      
+
       const weatherIcon = wrapper.findComponent(WeatherIcon);
       expect(weatherIcon.props('weatherCode')).toBe(61);
     });
@@ -117,14 +117,17 @@ describe('HourlyCard.vue', () => {
           temperature: 70,
         },
       });
-      
+
       const weatherIcon = wrapper.findComponent(WeatherIcon);
       expect(weatherIcon.props('size')).toBe('sm');
     });
 
     it('should render WeatherIcon with different weather codes', () => {
-      const weatherCodes = [0, 1, 2, 3, 45, 48, 51, 53, 55, 61, 63, 65, 71, 73, 75, 80, 81, 82, 85, 86, 95, 96, 99];
-      
+      const weatherCodes = [
+        0, 1, 2, 3, 45, 48, 51, 53, 55, 61, 63, 65, 71, 73, 75, 80, 81, 82, 85,
+        86, 95, 96, 99,
+      ];
+
       weatherCodes.forEach((code) => {
         const wrapper = mount(HourlyCard, {
           props: {
@@ -133,7 +136,7 @@ describe('HourlyCard.vue', () => {
             temperature: 72,
           },
         });
-        
+
         const weatherIcon = wrapper.findComponent(WeatherIcon);
         expect(weatherIcon.props('weatherCode')).toBe(code);
       });
@@ -149,7 +152,7 @@ describe('HourlyCard.vue', () => {
           temperature: 73,
         },
       });
-      
+
       expect(wrapper.find('.hourly-card-content').exists()).toBe(true);
     });
 
@@ -161,7 +164,7 @@ describe('HourlyCard.vue', () => {
           temperature: 74,
         },
       });
-      
+
       expect(wrapper.find('.hourly-card-hour-container').exists()).toBe(true);
     });
 
@@ -173,7 +176,7 @@ describe('HourlyCard.vue', () => {
           temperature: 76,
         },
       });
-      
+
       const hourContainer = wrapper.find('.hourly-card-hour-container');
       expect(hourContainer.findComponent(WeatherIcon).exists()).toBe(true);
       expect(hourContainer.find('.hourly-card-hour').exists()).toBe(true);
@@ -189,7 +192,7 @@ describe('HourlyCard.vue', () => {
           temperature: 85,
         },
       });
-      
+
       expect(wrapper.find('.hourly-card-temperature').text()).toBe('85°');
     });
 
@@ -201,7 +204,7 @@ describe('HourlyCard.vue', () => {
           temperature: -5,
         },
       });
-      
+
       expect(wrapper.find('.hourly-card-temperature').text()).toBe('-5°');
     });
 
@@ -213,7 +216,7 @@ describe('HourlyCard.vue', () => {
           temperature: 0,
         },
       });
-      
+
       expect(wrapper.find('.hourly-card-temperature').text()).toBe('0°');
     });
 
@@ -225,7 +228,7 @@ describe('HourlyCard.vue', () => {
           temperature: 105,
         },
       });
-      
+
       expect(wrapper.find('.hourly-card-temperature').text()).toBe('105°');
     });
 
@@ -237,7 +240,7 @@ describe('HourlyCard.vue', () => {
           temperature: 8,
         },
       });
-      
+
       expect(wrapper.find('.hourly-card-temperature').text()).toBe('8°');
     });
   });
@@ -251,10 +254,10 @@ describe('HourlyCard.vue', () => {
           temperature: 70,
         },
       });
-      
+
       const hourContainer = wrapper.find('.hourly-card-hour-container');
       const children = hourContainer.element.children;
-      
+
       console.log('hourContainer', children[0]);
       expect(children[0]?.className).toContain('weather-icon');
       expect(children[1]?.className).toContain('hourly-card-hour');
@@ -268,10 +271,10 @@ describe('HourlyCard.vue', () => {
           temperature: 68,
         },
       });
-      
+
       const content = wrapper.find('.hourly-card-content');
       const children = content.element.children;
-      
+
       expect(children[0]?.className).toContain('hourly-card-hour-container');
       expect(children[1]?.className).toContain('hourly-card-temperature');
     });
@@ -286,7 +289,7 @@ describe('HourlyCard.vue', () => {
           temperature: 82,
         },
       });
-      
+
       expect(wrapper.find('.hourly-card-hour').text()).toBe('4 PM');
       expect(wrapper.findComponent(WeatherIcon).props('weatherCode')).toBe(80);
       expect(wrapper.find('.hourly-card-temperature').text()).toBe('82°');
