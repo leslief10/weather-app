@@ -9,7 +9,7 @@ describe('DailyCard.vue', () => {
     it('should render the Card component', () => {
       const wrapper = mount(DailyCard, {
         props: {
-          time: '2026-01-19',
+          date: '2026-01-19',
           weatherCode: 0,
           maxTemp: 75,
           minTemp: 60,
@@ -19,23 +19,23 @@ describe('DailyCard.vue', () => {
       expect(wrapper.findComponent(Card).exists()).toBe(true);
     });
 
-    it('should render time text', () => {
+    it('should render date text', () => {
       const wrapper = mount(DailyCard, {
         props: {
-          time: '2026-01-16',
+          date: '2026-01-16',
           weatherCode: 1,
           maxTemp: 72,
           minTemp: 58,
         },
       });
 
-      expect(wrapper.find('.daily-card-time').text()).toBe('Fri');
+      expect(wrapper.find('.daily-card-date').text()).toBe('Fri');
     });
 
     it('should render WeatherIcon component', () => {
       const wrapper = mount(DailyCard, {
         props: {
-          time: '2026-01-14',
+          date: '2026-01-14',
           weatherCode: 2,
           maxTemp: 68,
           minTemp: 55,
@@ -48,7 +48,7 @@ describe('DailyCard.vue', () => {
     it('should render max temperature with degree symbol', () => {
       const wrapper = mount(DailyCard, {
         props: {
-          time: '2026-01-15',
+          date: '2026-01-15',
           weatherCode: 3,
           maxTemp: 80,
           minTemp: 65,
@@ -62,7 +62,7 @@ describe('DailyCard.vue', () => {
     it('should render min temperature with degree symbol', () => {
       const wrapper = mount(DailyCard, {
         props: {
-          time: '2026-01-16',
+          date: '2026-01-16',
           weatherCode: 45,
           maxTemp: 77,
           minTemp: 62,
@@ -78,7 +78,7 @@ describe('DailyCard.vue', () => {
     it('should pass variant="outlined" to Card component', () => {
       const wrapper = mount(DailyCard, {
         props: {
-          time: '2026-01-17',
+          date: '2026-01-17',
           weatherCode: 61,
           maxTemp: 70,
           minTemp: 55,
@@ -92,7 +92,7 @@ describe('DailyCard.vue', () => {
     it('should pass size="md" to Card component', () => {
       const wrapper = mount(DailyCard, {
         props: {
-          time: '2026-01-18',
+          date: '2026-01-18',
           weatherCode: 80,
           maxTemp: 73,
           minTemp: 59,
@@ -106,7 +106,7 @@ describe('DailyCard.vue', () => {
     it('should apply daily-card class to Card component', () => {
       const wrapper = mount(DailyCard, {
         props: {
-          time: '2026-01-19',
+          date: '2026-01-19',
           weatherCode: 95,
           maxTemp: 68,
           minTemp: 54,
@@ -121,7 +121,7 @@ describe('DailyCard.vue', () => {
     it('should pass weatherCode prop to WeatherIcon', () => {
       const wrapper = mount(DailyCard, {
         props: {
-          time: '2026-01-20',
+          date: '2026-01-20',
           weatherCode: 51,
           maxTemp: 66,
           minTemp: 52,
@@ -135,7 +135,7 @@ describe('DailyCard.vue', () => {
     it('should pass size="md" to WeatherIcon', () => {
       const wrapper = mount(DailyCard, {
         props: {
-          time: '2026-01-21',
+          date: '2026-01-21',
           weatherCode: 71,
           maxTemp: 65,
           minTemp: 50,
@@ -152,7 +152,7 @@ describe('DailyCard.vue', () => {
       weatherCodes.forEach((code) => {
         const wrapper = mount(DailyCard, {
           props: {
-            time: '2026-01-15',
+            date: '2026-01-15',
             weatherCode: code,
             maxTemp: 70,
             minTemp: 55,
@@ -169,7 +169,7 @@ describe('DailyCard.vue', () => {
     it('should render content container', () => {
       const wrapper = mount(DailyCard, {
         props: {
-          time: '2026-01-16',
+          date: '2026-01-16',
           weatherCode: 0,
           maxTemp: 75,
           minTemp: 60,
@@ -182,7 +182,7 @@ describe('DailyCard.vue', () => {
     it('should render temperature container', () => {
       const wrapper = mount(DailyCard, {
         props: {
-          time: '2026-01-17',
+          date: '2026-01-17',
           weatherCode: 1,
           maxTemp: 72,
           minTemp: 58,
@@ -197,7 +197,7 @@ describe('DailyCard.vue', () => {
     it('should render both temperatures in temperature container', () => {
       const wrapper = mount(DailyCard, {
         props: {
-          time: '2026-01-18',
+          date: '2026-01-18',
           weatherCode: 2,
           maxTemp: 78,
           minTemp: 63,
@@ -214,7 +214,7 @@ describe('DailyCard.vue', () => {
     it('should display max temperature before min temperature', () => {
       const wrapper = mount(DailyCard, {
         props: {
-          time: '2026-01-19',
+          date: '2026-01-19',
           weatherCode: 3,
           maxTemp: 85,
           minTemp: 70,
@@ -229,7 +229,7 @@ describe('DailyCard.vue', () => {
     it('should handle negative temperatures', () => {
       const wrapper = mount(DailyCard, {
         props: {
-          time: '2026-01-20',
+          date: '2026-01-20',
           weatherCode: 71,
           maxTemp: 5,
           minTemp: -10,
@@ -244,7 +244,7 @@ describe('DailyCard.vue', () => {
     it('should handle zero temperatures', () => {
       const wrapper = mount(DailyCard, {
         props: {
-          time: '2026-01-14',
+          date: '2026-01-14',
           weatherCode: 61,
           maxTemp: 0,
           minTemp: 0,
@@ -259,7 +259,7 @@ describe('DailyCard.vue', () => {
     it('should handle three-digit temperatures', () => {
       const wrapper = mount(DailyCard, {
         props: {
-          time: '2026-01-15',
+          date: '2026-01-15',
           weatherCode: 0,
           maxTemp: 105,
           minTemp: 85,
@@ -276,14 +276,14 @@ describe('DailyCard.vue', () => {
     it('should render all props correctly together', () => {
       const wrapper = mount(DailyCard, {
         props: {
-          time: '2026-01-16',
+          date: '2026-01-16',
           weatherCode: 61,
           maxTemp: 82,
           minTemp: 67,
         },
       });
 
-      expect(wrapper.find('.daily-card-time').text()).toBe('Fri');
+      expect(wrapper.find('.daily-card-date').text()).toBe('Fri');
       expect(wrapper.findComponent(WeatherIcon).props('weatherCode')).toBe(61);
 
       const temps = wrapper.findAll('.daily-card-temperature');

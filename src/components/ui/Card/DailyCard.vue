@@ -8,7 +8,7 @@ const props = defineProps<DailyCardProps>();
 
 const formatDay = computed((): string => {
   // API returns date-only strings (YYYY-MM-DD). Append noon time to avoid timezone issues.
-  const dateString = `${props.time}T12:00:00`;
+  const dateString = `${props.date}T12:00:00`;
   const date = new Date(dateString);
   return date.toLocaleDateString('en-US', {
     weekday: 'short',
@@ -25,8 +25,8 @@ const formatDay = computed((): string => {
     <div class="daily-card-content">
       <time
         itemprop="day"
-        :datetime="time"
-        class="daily-card-time"
+        :datetime="date"
+        class="daily-card-date"
         >{{ formatDay }}</time
       >
       <WeatherIcon
@@ -56,7 +56,7 @@ const formatDay = computed((): string => {
   gap: var(--spacing-1000);
 }
 
-.daily-card-time {
+.daily-card-date {
   font-size: var(--spacing-1125);
   text-align: center;
   color: var(--neutral-0);

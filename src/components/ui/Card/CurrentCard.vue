@@ -15,7 +15,7 @@ defineProps<CurrentCardProps>();
       <p class="current-card-label">{{ label }}</p>
       <div
         class="current-card-value-container"
-        :class="[unit.length > 2 ? 'container--spacing' : '']"
+        :class="[unit.length >= 2 ? 'container--spacing' : '']"
       >
         <p class="current-card-value">{{ value }}</p>
         <p class="current-card-unit">{{ unit }}</p>
@@ -26,7 +26,8 @@ defineProps<CurrentCardProps>();
 
 <style scoped>
 .current-card {
-  max-width: 10.25rem;
+  max-width: 10.2rem;
+  width: 100%;
   padding: var(--spacing-1250);
 }
 
@@ -58,5 +59,17 @@ defineProps<CurrentCardProps>();
   font-size: var(--spacing-2000);
   text-align: center;
   color: var(--neutral-0);
+}
+
+@media (min-width: 768px) {
+  .current-card {
+    max-width: 10.32rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .current-card {
+    max-width: 11.375rem;
+  }
 }
 </style>

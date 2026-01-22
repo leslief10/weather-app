@@ -50,7 +50,7 @@ export interface HourlyCardProps {
 }
 
 export interface DailyCardProps {
-  time: string;
+  date: string;
   maxTemp: number;
   minTemp: number;
   weatherCode: number;
@@ -58,7 +58,7 @@ export interface DailyCardProps {
 
 export interface CurrentCardProps {
   label: string;
-  value: number;
+  value: number | string;
   unit: string;
 }
 

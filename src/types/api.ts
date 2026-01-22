@@ -13,6 +13,7 @@ export interface OpenMeteoSearchResult {
 }
 
 export interface CurrentWeather {
+  time: string;
   temperature: number;
   temperatureUnit: string;
   apparentTemperature: number;

@@ -121,7 +121,7 @@ describe('CurrentCard.vue', () => {
   });
 
   describe('Conditional Spacing', () => {
-    it('should apply container--spacing class when unit length > 2', () => {
+    it('should apply container--spacing class when unit length >= 2', () => {
       const wrapper = mount(CurrentCard, {
         props: {
           label: 'Wind Speed',
@@ -134,12 +134,12 @@ describe('CurrentCard.vue', () => {
       expect(container.classes()).toContain('container--spacing');
     });
 
-    it('should not apply container--spacing class when unit length <= 2', () => {
+    it('should not apply container--spacing class when unit length < 2', () => {
       const wrapper = mount(CurrentCard, {
         props: {
           label: 'Temperature',
           value: 72,
-          unit: '°F',
+          unit: '°',
         },
       });
 

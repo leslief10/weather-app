@@ -31,6 +31,7 @@ export const getWeather = async (
 
     return {
       current: {
+        time: data.current.time,
         temperature: data.current.temperature_2m,
         temperatureUnit: data.current_units.temperature_2m,
         apparentTemperature: data.current.apparent_temperature,
