@@ -10,7 +10,7 @@ const skeletonCards = [
 </script>
 
 <template>
-  <div class="current-weather-section__cards-skeleton">
+  <div class="current-weather-section__metrics-skeleton">
     <CurrentCard
       v-for="card in skeletonCards"
       :key="card.label"
@@ -22,7 +22,7 @@ const skeletonCards = [
 </template>
 
 <style scoped>
-.current-weather-section__cards-skeleton {
+.current-weather-section__metrics-skeleton {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -30,8 +30,14 @@ const skeletonCards = [
   width: 100%;
 }
 
+@media (min-width: 768px) {
+  .current-weather-section__metrics-skeleton {
+    flex-wrap: nowrap;
+  }
+}
+
 @media (min-width: 1024px) {
-  .current-weather-section__cards-skeleton {
+  .current-weather-section__metrics-skeleton {
     gap: var(--spacing-1500);
   }
 }

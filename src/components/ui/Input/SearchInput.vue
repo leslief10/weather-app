@@ -14,7 +14,7 @@ defineEmits<{
 </script>
 
 <template>
-  <div class="search-input">
+  <div class="search-input__wrapper">
     <SVGIcon
       name="icon-search"
       class="search-input__icon"
@@ -41,7 +41,7 @@ defineEmits<{
 </template>
 
 <style scoped>
-.search-input {
+.search-input__wrapper {
   position: relative;
   display: flex;
   align-items: center;
@@ -59,7 +59,7 @@ defineEmits<{
   width: 100%;
 }
 
-.search-input :deep(.input) {
+.search-input__wrapper :deep(.input) {
   padding-left: var(--spacing-3750);
 }
 </style>

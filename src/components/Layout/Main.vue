@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Search from '@/components/Search/Search.vue';
 import { CurrentWeatherSection } from '@/components/CurrentWeatherSection';
+import { DailyWeatherSection } from '@/components/DailyWeatherSection';
 </script>
 
 <template>
@@ -8,6 +9,7 @@ import { CurrentWeatherSection } from '@/components/CurrentWeatherSection';
     <h1 class="main--text">How's the sky looking today?</h1>
     <Search />
     <CurrentWeatherSection />
+    <DailyWeatherSection />
   </main>
 </template>
 

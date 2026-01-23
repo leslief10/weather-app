@@ -4,6 +4,7 @@ import { storeToRefs } from 'pinia';
 import { CurrentCard } from '@/components/ui/Card';
 import { CurrentWeatherMetricsSkeleton } from '@/components/CurrentWeatherSection';
 import { useWeatherStore } from '@/stores/weatherStore';
+import type { CurrentCardProps } from '@/types';
 
 const weatherStore = useWeatherStore();
 const { weatherData, loading } = storeToRefs(weatherStore);
@@ -15,7 +16,7 @@ const formatCardValue = (value: number | undefined): string | number => {
   return Math.round(value);
 };
 
-const weatherCards = computed(() => {
+const weatherCards = computed((): CurrentCardProps[] => {
   if (!weatherData?.value?.current) {
     return [];
   }
@@ -49,7 +50,7 @@ const weatherCards = computed(() => {
   <CurrentWeatherMetricsSkeleton v-if="loading || !weatherData" />
   <div
     v-else
-    class="current-weather-section__cards"
+    class="current-weather-section__metrics"
   >
     <CurrentCard
       v-for="card in weatherCards"
@@ -62,7 +63,7 @@ const weatherCards = computed(() => {
 </template>
 
 <style scoped>
-.current-weather-section__cards {
+.current-weather-section__metrics {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -70,8 +71,14 @@ const weatherCards = computed(() => {
   width: 100%;
 }
 
+@media (min-width: 768px) {
+  .current-weather-section__metrics {
+    flex-wrap: nowrap;
+  }
+}
+
 @media (min-width: 1024px) {
-  .current-weather-section__cards {
+  .current-weather-section__metrics {
     gap: var(--spacing-1500);
   }
 }
