@@ -21,8 +21,8 @@ const formatHour = computed((): string => {
     size="sm"
     class="hourly-card"
   >
-    <div class="hourly-card-content">
-      <div class="hourly-card-hour-container">
+    <div class="hourly-card__content">
+      <div class="hourly-card__hour-container">
         <WeatherIcon
           :weather-code="weatherCode"
           size="sm"
@@ -30,11 +30,11 @@ const formatHour = computed((): string => {
         <time
           itemprop="hour"
           :datetime="hour"
-          class="hourly-card-hour"
+          class="hourly-card__hour"
           >{{ formatHour }}</time
         >
       </div>
-      <p class="hourly-card-temperature">{{ temperature }}°</p>
+      <p class="hourly-card__temperature">{{ temperature }}°</p>
     </div>
   </Card>
 </template>
@@ -45,27 +45,27 @@ const formatHour = computed((): string => {
     var(--spacing-0750);
 }
 
-.hourly-card-content {
+.hourly-card__content {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
 }
 
-.hourly-card-hour-container {
+.hourly-card__hour-container {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: var(--spacing-0500);
 }
 
-.hourly-card-hour {
+.hourly-card__hour {
   font-size: var(--spacing-1250);
   text-align: left;
   color: var(--neutral-0);
 }
 
-.hourly-card-temperature {
+.hourly-card__temperature {
   font-size: var(--spacing-1000);
   text-align: center;
   color: var(--neutral-0);

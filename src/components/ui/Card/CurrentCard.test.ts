@@ -26,7 +26,7 @@ describe('CurrentCard.vue', () => {
         },
       });
 
-      expect(wrapper.find('.current-card-label').text()).toBe('Feels Like');
+      expect(wrapper.find('.current-card__label').text()).toBe('Feels Like');
     });
 
     it('should render value', () => {
@@ -38,7 +38,7 @@ describe('CurrentCard.vue', () => {
         },
       });
 
-      expect(wrapper.find('.current-card-value').text()).toBe('75');
+      expect(wrapper.find('.current-card__value').text()).toBe('75');
     });
 
     it('should render unit', () => {
@@ -50,7 +50,7 @@ describe('CurrentCard.vue', () => {
         },
       });
 
-      expect(wrapper.find('.current-card-unit').text()).toBe('°C');
+      expect(wrapper.find('.current-card__unit').text()).toBe('°C');
     });
   });
 
@@ -104,7 +104,7 @@ describe('CurrentCard.vue', () => {
         },
       });
 
-      expect(wrapper.find('.current-card-content').exists()).toBe(true);
+      expect(wrapper.find('.current-card__content').exists()).toBe(true);
     });
 
     it('should render value container', () => {
@@ -116,12 +116,12 @@ describe('CurrentCard.vue', () => {
         },
       });
 
-      expect(wrapper.find('.current-card-value-container').exists()).toBe(true);
+      expect(wrapper.find('.current-card__value-container').exists()).toBe(true);
     });
   });
 
   describe('Conditional Spacing', () => {
-    it('should apply container--spacing class when unit length >= 2', () => {
+    it('should apply current-card__value-container--spacing class when unit length >= 2', () => {
       const wrapper = mount(CurrentCard, {
         props: {
           label: 'Wind Speed',
@@ -130,11 +130,11 @@ describe('CurrentCard.vue', () => {
         },
       });
 
-      const container = wrapper.find('.current-card-value-container');
-      expect(container.classes()).toContain('container--spacing');
+      const container = wrapper.find('.current-card__value-container');
+      expect(container.classes()).toContain('current-card__value-container--spacing');
     });
 
-    it('should not apply container--spacing class when unit length < 2', () => {
+    it('should not apply current-card__value-container--spacing class when unit length < 2', () => {
       const wrapper = mount(CurrentCard, {
         props: {
           label: 'Temperature',
@@ -143,11 +143,11 @@ describe('CurrentCard.vue', () => {
         },
       });
 
-      const container = wrapper.find('.current-card-value-container');
-      expect(container.classes()).not.toContain('container--spacing');
+      const container = wrapper.find('.current-card__value-container');
+      expect(container.classes()).not.toContain('current-card__value-container--spacing');
     });
 
-    it('should not apply container--spacing class for single character unit', () => {
+    it('should not apply current-card__value-container--spacing class for single character unit', () => {
       const wrapper = mount(CurrentCard, {
         props: {
           label: 'Humidity',
@@ -156,8 +156,8 @@ describe('CurrentCard.vue', () => {
         },
       });
 
-      const container = wrapper.find('.current-card-value-container');
-      expect(container.classes()).not.toContain('container--spacing');
+      const container = wrapper.find('.current-card__value-container');
+      expect(container.classes()).not.toContain('current-card__value-container--spacing');
     });
   });
 
@@ -171,7 +171,7 @@ describe('CurrentCard.vue', () => {
         },
       });
 
-      expect(wrapper.find('.current-card-value').text()).toBe('0');
+      expect(wrapper.find('.current-card__value').text()).toBe('0');
     });
 
     it('should render with negative value', () => {
@@ -183,7 +183,7 @@ describe('CurrentCard.vue', () => {
         },
       });
 
-      expect(wrapper.find('.current-card-value').text()).toBe('-5');
+      expect(wrapper.find('.current-card__value').text()).toBe('-5');
     });
 
     it('should render with long unit text', () => {
@@ -195,9 +195,9 @@ describe('CurrentCard.vue', () => {
         },
       });
 
-      expect(wrapper.find('.current-card-unit').text()).toBe('miles');
-      const container = wrapper.find('.current-card-value-container');
-      expect(container.classes()).toContain('container--spacing');
+      expect(wrapper.find('.current-card__unit').text()).toBe('miles');
+      const container = wrapper.find('.current-card__value-container');
+      expect(container.classes()).toContain('current-card__value-container--spacing');
     });
   });
 
@@ -211,9 +211,9 @@ describe('CurrentCard.vue', () => {
         },
       });
 
-      expect(wrapper.find('.current-card-label').text()).toBe('Wind Speed');
-      expect(wrapper.find('.current-card-value').text()).toBe('12');
-      expect(wrapper.find('.current-card-unit').text()).toBe('mph');
+      expect(wrapper.find('.current-card__label').text()).toBe('Wind Speed');
+      expect(wrapper.find('.current-card__value').text()).toBe('12');
+      expect(wrapper.find('.current-card__unit').text()).toBe('mph');
     });
   });
 });

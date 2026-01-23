@@ -29,7 +29,7 @@ describe('DailyCard.vue', () => {
         },
       });
 
-      expect(wrapper.find('.daily-card-date').text()).toBe('Fri');
+      expect(wrapper.find('.daily-card__date').text()).toBe('Fri');
     });
 
     it('should render WeatherIcon component', () => {
@@ -55,7 +55,7 @@ describe('DailyCard.vue', () => {
         },
       });
 
-      const temps = wrapper.findAll('.daily-card-temperature');
+      const temps = wrapper.findAll('.daily-card__temperature');
       expect(temps[0]?.text()).toBe('80°');
     });
 
@@ -69,7 +69,7 @@ describe('DailyCard.vue', () => {
         },
       });
 
-      const temps = wrapper.findAll('.daily-card-temperature');
+      const temps = wrapper.findAll('.daily-card__temperature');
       expect(temps[1]?.text()).toBe('62°');
     });
   });
@@ -176,7 +176,7 @@ describe('DailyCard.vue', () => {
         },
       });
 
-      expect(wrapper.find('.daily-card-content').exists()).toBe(true);
+      expect(wrapper.find('.daily-card__content').exists()).toBe(true);
     });
 
     it('should render temperature container', () => {
@@ -189,7 +189,7 @@ describe('DailyCard.vue', () => {
         },
       });
 
-      expect(wrapper.find('.daily-card-temperature-container').exists()).toBe(
+      expect(wrapper.find('.daily-card__temperature-container').exists()).toBe(
         true,
       );
     });
@@ -204,8 +204,8 @@ describe('DailyCard.vue', () => {
         },
       });
 
-      const tempContainer = wrapper.find('.daily-card-temperature-container');
-      const temps = tempContainer.findAll('.daily-card-temperature');
+      const tempContainer = wrapper.find('.daily-card__temperature-container');
+      const temps = tempContainer.findAll('.daily-card__temperature');
       expect(temps).toHaveLength(2);
     });
   });
@@ -221,7 +221,7 @@ describe('DailyCard.vue', () => {
         },
       });
 
-      const temps = wrapper.findAll('.daily-card-temperature');
+      const temps = wrapper.findAll('.daily-card__temperature');
       expect(temps[0]?.text()).toBe('85°');
       expect(temps[1]?.text()).toBe('70°');
     });
@@ -236,7 +236,7 @@ describe('DailyCard.vue', () => {
         },
       });
 
-      const temps = wrapper.findAll('.daily-card-temperature');
+      const temps = wrapper.findAll('.daily-card__temperature');
       expect(temps[0]?.text()).toBe('5°');
       expect(temps[1]?.text()).toBe('-10°');
     });
@@ -251,7 +251,7 @@ describe('DailyCard.vue', () => {
         },
       });
 
-      const temps = wrapper.findAll('.daily-card-temperature');
+      const temps = wrapper.findAll('.daily-card__temperature');
       expect(temps[0]?.text()).toBe('0°');
       expect(temps[1]?.text()).toBe('0°');
     });
@@ -266,7 +266,7 @@ describe('DailyCard.vue', () => {
         },
       });
 
-      const temps = wrapper.findAll('.daily-card-temperature');
+      const temps = wrapper.findAll('.daily-card__temperature');
       expect(temps[0]?.text()).toBe('105°');
       expect(temps[1]?.text()).toBe('85°');
     });
@@ -283,10 +283,10 @@ describe('DailyCard.vue', () => {
         },
       });
 
-      expect(wrapper.find('.daily-card-date').text()).toBe('Fri');
+      expect(wrapper.find('.daily-card__date').text()).toBe('Fri');
       expect(wrapper.findComponent(WeatherIcon).props('weatherCode')).toBe(61);
 
-      const temps = wrapper.findAll('.daily-card-temperature');
+      const temps = wrapper.findAll('.daily-card__temperature');
       expect(temps[0]?.text()).toBe('82°');
       expect(temps[1]?.text()).toBe('67°');
     });

@@ -31,7 +31,7 @@ defineEmits<{
     />
     <span
       v-if="error && errorMessage"
-      class="input--error-message"
+      class="input__error-message"
     >
       {{ errorMessage }}
     </span>
@@ -68,7 +68,7 @@ defineEmits<{
   border: var(--spacing-0125) solid var(--orange-500);
 }
 
-.input--error-message {
+.input__error-message {
   align-self: center;
   font-size: var(--spacing-0750);
   color: var(--orange-500);

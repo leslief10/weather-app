@@ -36,8 +36,8 @@ describe('IconButton.vue', () => {
 
   it('does not render icons when props are not provided', () => {
     const wrapper = mount(IconButton);
-    expect(wrapper.find('.icon--left').exists()).toBe(false);
-    expect(wrapper.find('.icon--right').exists()).toBe(false);
+    expect(wrapper.find('.icon-button__icon--left').exists()).toBe(false);
+    expect(wrapper.find('.icon-button__icon--right').exists()).toBe(false);
   });
 
   it('renders slot content', () => {

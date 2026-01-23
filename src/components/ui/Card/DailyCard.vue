@@ -22,20 +22,20 @@ const formatDay = computed((): string => {
     size="md"
     class="daily-card"
   >
-    <div class="daily-card-content">
+    <div class="daily-card__content">
       <time
         itemprop="day"
         :datetime="date"
-        class="daily-card-date"
+        class="daily-card__date"
         >{{ formatDay }}</time
       >
       <WeatherIcon
         :weather-code="weatherCode"
         size="md"
       />
-      <div class="daily-card-temperature-container">
-        <p class="daily-card-temperature">{{ maxTemp }}°</p>
-        <p class="daily-card-temperature">{{ minTemp }}°</p>
+      <div class="daily-card__temperature-container">
+        <p class="daily-card__temperature">{{ maxTemp }}°</p>
+        <p class="daily-card__temperature">{{ minTemp }}°</p>
       </div>
     </div>
   </Card>
@@ -48,7 +48,7 @@ const formatDay = computed((): string => {
   padding: var(--spacing-1000) var(--spacing-0625);
 }
 
-.daily-card-content {
+.daily-card__content {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -56,13 +56,13 @@ const formatDay = computed((): string => {
   gap: var(--spacing-1000);
 }
 
-.daily-card-date {
+.daily-card__date {
   font-size: var(--spacing-1125);
   text-align: center;
   color: var(--neutral-0);
 }
 
-.daily-card-temperature-container {
+.daily-card__temperature-container {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -70,7 +70,7 @@ const formatDay = computed((): string => {
   width: 100%;
 }
 
-.daily-card-temperature {
+.daily-card__temperature {
   font-size: var(--spacing-1000);
   text-align: center;
   color: var(--neutral-0);

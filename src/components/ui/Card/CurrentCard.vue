@@ -11,14 +11,14 @@ defineProps<CurrentCardProps>();
     size="lg"
     class="current-card"
   >
-    <div class="current-card-content">
-      <p class="current-card-label">{{ label }}</p>
+    <div class="current-card__content">
+      <p class="current-card__label">{{ label }}</p>
       <div
-        class="current-card-value-container"
-        :class="[unit.length >= 2 ? 'container--spacing' : '']"
+        class="current-card__value-container"
+        :class="[unit.length >= 2 ? 'current-card__value-container--spacing' : '']"
       >
-        <p class="current-card-value">{{ value }}</p>
-        <p class="current-card-unit">{{ unit }}</p>
+        <p class="current-card__value">{{ value }}</p>
+        <p class="current-card__unit">{{ unit }}</p>
       </div>
     </div>
   </Card>
@@ -31,31 +31,31 @@ defineProps<CurrentCardProps>();
   padding: var(--spacing-1250);
 }
 
-.current-card-content {
+.current-card__content {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-1500);
 }
 
-.current-card-label {
+.current-card__label {
   font-size: var(--spacing-1125);
   font-weight: 500;
   text-align: left;
   color: var(--neutral-200);
 }
 
-.current-card-value-container {
+.current-card__value-container {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
 }
 
-.container--spacing {
+.current-card__value-container--spacing {
   gap: var(--spacing-0500);
 }
 
-.current-card-value,
-.current-card-unit {
+.current-card__value,
+.current-card__unit {
   font-size: var(--spacing-2000);
   text-align: center;
   color: var(--neutral-0);

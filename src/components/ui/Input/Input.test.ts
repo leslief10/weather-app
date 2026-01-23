@@ -95,7 +95,7 @@ describe('Input.vue', () => {
         errorMessage: 'This field is required',
       },
     });
-    expect(wrapper.find('.input--error-message').text()).toBe(
+    expect(wrapper.find('.input__error-message').text()).toBe(
       'This field is required',
     );
   });
@@ -108,7 +108,7 @@ describe('Input.vue', () => {
         errorMessage: 'This field is required',
       },
     });
-    expect(wrapper.find('.input--error-message').exists()).toBe(false);
+    expect(wrapper.find('.input__error-message').exists()).toBe(false);
   });
 
   it('passes aria-label to input element', () => {

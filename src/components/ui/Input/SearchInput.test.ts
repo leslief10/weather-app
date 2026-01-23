@@ -32,7 +32,7 @@ describe('SearchInput.vue', () => {
     expect(svgIcon.props('name')).toBe('icon-search');
   });
 
-  it('applies search-icon class to SVGIcon', () => {
+  it('applies search-input__icon class to SVGIcon', () => {
     const wrapper = mount(SearchInput, {
       props: { modelValue: '' },
       global: {
@@ -43,7 +43,7 @@ describe('SearchInput.vue', () => {
       },
     });
     const svgIcon = wrapper.findComponent({ name: 'SVGIcon' });
-    expect(svgIcon.classes()).toContain('search-icon');
+    expect(svgIcon.classes()).toContain('search-input__icon');
   });
 
   it('renders Input component with default size', () => {
@@ -272,7 +272,7 @@ describe('SearchInput.vue', () => {
     expect(input.classes()).toContain('search-input');
   });
 
-  it('renders search-input-container wrapper', () => {
+  it('renders search-input wrapper', () => {
     const wrapper = mount(SearchInput, {
       props: { modelValue: '' },
       global: {
@@ -282,6 +282,6 @@ describe('SearchInput.vue', () => {
         },
       },
     });
-    expect(wrapper.find('.search-input-container').exists()).toBe(true);
+    expect(wrapper.find('.search-input').exists()).toBe(true);
   });
 });

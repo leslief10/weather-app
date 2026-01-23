@@ -31,41 +31,41 @@ defineEmits<{
     class="icon-button"
     @click="$emit('click', $event)"
   >
-    <div class="icon-button-content">
+    <div class="icon-button__content">
       <SVGIcon
         v-if="iconLeft"
         :name="iconLeft"
-        class="icon icon--left"
+        class="icon icon-button__icon--left"
       />
       <slot />
       <SVGIcon
         v-if="iconRight"
         :name="iconRight"
-        class="icon icon--right"
+        class="icon-button__icon icon-button__icon--right"
       />
     </div>
   </Button>
 </template>
 
 <style scoped>
-.icon-button-content {
+.icon-button__content {
   display: flex;
   align-items: center;
   gap: var(--spacing-0625);
 }
 
-.icon {
+.icon-button__icon {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
 
-.icon--left {
+.icon-button__icon--left {
   order: -1;
 }
 
-.icon--right {
+.icon-button__icon--right {
   order: 1;
 }
 </style>

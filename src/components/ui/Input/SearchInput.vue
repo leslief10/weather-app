@@ -14,10 +14,10 @@ defineEmits<{
 </script>
 
 <template>
-  <div class="search-input-container">
+  <div class="search-input">
     <SVGIcon
       name="icon-search"
-      class="search-icon"
+      class="search-input__icon"
     />
     <Input
       :id="id"
@@ -41,13 +41,13 @@ defineEmits<{
 </template>
 
 <style scoped>
-.search-input-container {
+.search-input {
   position: relative;
   display: flex;
   align-items: center;
 }
 
-.search-icon {
+.search-input__icon {
   position: absolute;
   left: var(--spacing-1500);
   width: var(--spacing-1250);
