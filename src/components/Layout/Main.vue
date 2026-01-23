@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import Search from '../Search/Search.vue';
+import Search from '@/components/Search/Search.vue';
+import { CurrentWeatherSection } from '@/components/CurrentWeatherSection';
 </script>
 
 <template>
   <main class="main">
     <h1 class="main--text">How's the sky looking today?</h1>
     <Search />
+    <CurrentWeatherSection />
   </main>
 </template>
 
