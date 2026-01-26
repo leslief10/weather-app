@@ -9,9 +9,9 @@ const { dailyData, loading } = storeToRefs(weatherStore);
 </script>
 
 <template>
-  <section class="daily-weather-section">
+  <section class="section daily-weather-section">
     <h2 class="daily-weather-section__title">Daily forecast</h2>
-    <DailyWeatherCardsSkeleton v-if="loading" />
+    <DailyWeatherCardsSkeleton v-if="loading || !dailyData" />
     <div
       v-else
       class="daily-weather-section__cards"
@@ -29,15 +29,6 @@ const { dailyData, loading } = storeToRefs(weatherStore);
 </template>
 
 <style scoped>
-.daily-weather-section {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-1250);
-  max-width: 50rem;
-  width: 100%;
-  padding-top: var(--spacing-2000);
-}
-
 .daily-weather-section__title {
   font-size: var(--spacing-1250);
   line-height: 120%;

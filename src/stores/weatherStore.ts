@@ -51,6 +51,21 @@ export const useWeatherStore = defineStore('weather', () => {
       }));
     });
 
+    const formattedDays = computed((): string[] => {
+      if (!weatherData.value?.daily) return [];
+
+      const { time } = weatherData.value.daily;
+
+      return time.map((date) => {
+        const dateString = `${date}T12:00:00`;
+        const newDate = new Date(dateString);
+
+        return newDate.toLocaleDateString('en-US', {
+          weekday: 'long',
+        });
+      });
+    });
+
     return {
       currentLocation,
       weatherData,
@@ -58,6 +73,7 @@ export const useWeatherStore = defineStore('weather', () => {
       error,
       fetchWeather,
       hourlyData,
-      dailyData
+      dailyData,
+      formattedDays
     }
 });

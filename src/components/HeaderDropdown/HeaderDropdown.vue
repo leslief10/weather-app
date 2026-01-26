@@ -75,14 +75,16 @@ import { SVGIcon } from '@/components/ui/Icons';
 
 <style scoped>
 .header-dropdown {
-  padding: var(--spacing-0375) var(--spacing-0500);
+  position: absolute;
+  right: var(--spacing-1000);
+  top: 3.625rem;
   max-width: 13.375rem;
+  padding: var(--spacing-0375) var(--spacing-0500);
   background-color: var(--neutral-800);
   border: 1px solid var(--neutral-600);
   border-radius: var(--spacing-0750);
-  position: absolute;
-  right: var(--spacing-1000);
-  top: 4.375rem;
+  box-shadow: 0px 8px 16px 0px rgba(2, 1, 44, 0.32);
+  z-index: 1;
 }
 
 .dropdown--btn {
@@ -118,6 +120,18 @@ import { SVGIcon } from '@/components/ui/Icons';
   .header-dropdown {
     right: var(--spacing-1500);
     top: 4.75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .header-dropdown {
+    top: 6.375rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .header-dropdown {
+    right: 0;
   }
 }
 </style>
