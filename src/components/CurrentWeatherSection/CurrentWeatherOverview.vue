@@ -9,7 +9,7 @@ const weatherStore = useWeatherStore();
 const { currentLocation, weatherData, loading } = storeToRefs(weatherStore);
 
 const formatLocation = computed((): string => {
-  if (!currentLocation) {
+  if (!currentLocation.value) {
     return 'N/A';
   }
 
@@ -39,7 +39,7 @@ const weatherCode = computed((): number => {
 });
 
 const formatTemperature = computed((): string => {
-  if (!weatherData?.value?.current?.temperature) {
+  if (weatherData?.value?.current?.temperature === undefined) {
     return 'N/A';
   }
 

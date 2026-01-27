@@ -2,7 +2,7 @@ import { ref, computed } from 'vue';
 import type { Ref } from 'vue';
 import { defineStore } from 'pinia';
 import { getWeather } from '@/services/weatherService';
-import type { WeatherData, LocationData } from '@/types';
+import type { DailyCardProps, HourlyCardProps, LocationData, WeatherData } from '@/types';
 
 export const useWeatherStore = defineStore('weather', () => {
   const currentLocation: Ref<LocationData | null> = ref(null);
@@ -26,7 +26,7 @@ export const useWeatherStore = defineStore('weather', () => {
       }
     };
 
-    const hourlyData = computed(() => {
+    const hourlyData = computed((): HourlyCardProps[] => {
       if (!weatherData.value?.hourly) return [];
 
       const { time, temperature, weatherCode } = weatherData.value.hourly;
@@ -38,7 +38,7 @@ export const useWeatherStore = defineStore('weather', () => {
       }));
     });
 
-    const dailyData = computed(() => {
+    const dailyData = computed((): DailyCardProps[] => {
       if (!weatherData.value?.daily) return [];
 
       const {time, maxTemp, minTemp, weatherCode} = weatherData.value.daily;

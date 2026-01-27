@@ -25,12 +25,12 @@ const weatherCards = computed((): CurrentCardProps[] => {
     {
       label: 'Feels Like',
       value: formatCardValue(weatherData?.value?.current.apparentTemperature),
-      unit: weatherData?.value?.current.apparentTemperature ? '°' : '',
+      unit: weatherData?.value?.current.apparentTemperature != null ? '°' : '',
     },
     {
       label: 'Humidity',
       value: formatCardValue(weatherData?.value?.current.relativeHumidity),
-      unit: weatherData?.value?.current.relativeHumidity ? '%' : '',
+      unit: weatherData?.value?.current.relativeHumidity != null ? '%' : '',
     },
     {
       label: 'Wind',

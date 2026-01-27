@@ -3,19 +3,19 @@ import { Card } from '@/components/ui/Card';
 </script>
 
 <template>
-  <div class="hourly-weather-section__data">
+  <div class="hourly-weather-section__data-skeleton">
     <Card
       v-for="i in 24"
       :key="i"
       variant="outlined"
-      size="md"
+      size="sm"
       class="skeleton-card"
     />
   </div>
 </template>
 
 <style scoped>
-.hourly-weather-section__data {
+.hourly-weather-section__data-skeleton {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-1000);
