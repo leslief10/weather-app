@@ -22,14 +22,14 @@ export const getUserLocation = async (): Promise<LocationData> => {
 export const searchCities = async (query: string): Promise<LocationData[]> => {
   const url = new URL('https://geocoding-api.open-meteo.com/v1/search');
   url.searchParams.append('name', query);
-  url.searchParams.append('count', '10');
+  url.searchParams.append('count', '6');
   url.searchParams.append('language', 'en');
 
   const response = await fetch(url.toString());
 
   const data: { results: OpenMeteoSearchResult[] } = await response.json();
 
-  return data.results.map((result) => ({
+  return data?.results?.map((result) => ({
     city: result.name,
     country: result.country,
     latitude: result.latitude,

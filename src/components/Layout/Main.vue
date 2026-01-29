@@ -1,15 +1,31 @@
 <script setup lang="ts">
-import Search from '@/components/Search/Search.vue';
+import { ref } from 'vue';
+import { Search } from '@/components/Search';
 import { CurrentWeatherSection } from '@/components/CurrentWeatherSection';
 import { DailyWeatherSection } from '@/components/DailyWeatherSection';
 import { HourlyWeatherSection } from '@/components/HourlyWeatherSection';
+
+const errorMessage = ref('');
+
+const handleMessage = (message: string) => {
+  errorMessage.value = message;
+};
 </script>
 
 <template>
   <main class="main">
     <h1 class="main__title">How's the sky looking today?</h1>
-    <Search />
-    <div class="main__sections-container">
+    <Search @message="handleMessage" />
+    <div
+      v-if="errorMessage"
+      class="main__error-message"
+    >
+      {{ errorMessage }}
+    </div>
+    <div
+      v-else
+      class="main__sections-container"
+    >
       <CurrentWeatherSection class="main__sections-current" />
       <DailyWeatherSection class="main__sections-daily" />
       <HourlyWeatherSection class="main__sections-hourly" />
@@ -30,6 +46,15 @@ import { HourlyWeatherSection } from '@/components/HourlyWeatherSection';
   max-width: 30rem;
   font-family: var(--secondary-font);
   font-size: 3.25rem;
+  line-height: 120%;
+  text-align: center;
+  color: var(--neutral-0);
+}
+
+.main__error-message {
+  margin-top: var(--spacing-3000);
+  font-size: 1.75rem;
+  font-weight: 700;
   line-height: 120%;
   text-align: center;
   color: var(--neutral-0);

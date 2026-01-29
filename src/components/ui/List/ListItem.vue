@@ -63,7 +63,6 @@ defineEmits<{
   display: flex;
   align-items: center;
   color: var(--neutral-0);
-  transition: all 0.2s ease;
 }
 
 .list-item__content {
@@ -104,7 +103,7 @@ defineEmits<{
 }
 
 .list-item--interactive:focus-visible {
-  outline: var(--spacing-0125) solid var(--neutral-800);
+  outline: var(--spacing-0125) solid var(--neutral-0);
 }
 
 .list-item--selected {

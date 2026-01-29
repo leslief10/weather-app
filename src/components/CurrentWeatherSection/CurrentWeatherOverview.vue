@@ -92,6 +92,7 @@ const formatTemperature = computed((): string => {
   font-size: 1.75rem;
   font-weight: 700;
   line-height: 120%;
+  text-align: center;
   color: var(--neutral-0);
 }
 
@@ -106,7 +107,7 @@ const formatTemperature = computed((): string => {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
 }
 
 .current-weather__temperature {
