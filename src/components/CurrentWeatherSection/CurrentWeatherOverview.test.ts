@@ -5,7 +5,7 @@ import { ref } from 'vue';
 import CurrentWeatherOverview from './CurrentWeatherOverview.vue';
 
 vi.mock('@/stores/weatherStore', () => ({
-  useWeatherStore: vi.fn()
+  useWeatherStore: vi.fn(),
 }));
 
 import { useWeatherStore } from '@/stores/weatherStore';
@@ -13,7 +13,8 @@ import { useWeatherStore } from '@/stores/weatherStore';
 vi.mock('@/components/ui/Icons', () => ({
   WeatherIcon: {
     name: 'WeatherIcon',
-    template: '<div class="weather-icon" :data-weather-code="weatherCode" :data-size="size">Icon</div>',
+    template:
+      '<div class="weather-icon" :data-weather-code="weatherCode" :data-size="size">Icon</div>',
     props: ['weatherCode', 'size'],
   },
 }));

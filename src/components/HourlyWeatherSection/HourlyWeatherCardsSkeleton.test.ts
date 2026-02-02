@@ -7,7 +7,9 @@ describe('HourlyWeatherCardsSkeleton.vue', () => {
   it('renders the skeleton container', () => {
     const wrapper = mount(HourlyWeatherCardsSkeleton);
 
-    expect(wrapper.find('.hourly-weather-section__data-skeleton').exists()).toBe(true);
+    expect(
+      wrapper.find('.hourly-weather-section__data-skeleton').exists(),
+    ).toBe(true);
   });
 
   it('renders exactly 24 Card components', () => {
@@ -19,9 +21,9 @@ describe('HourlyWeatherCardsSkeleton.vue', () => {
 
   it('passes correct props to each Card component', () => {
     const wrapper = mount(HourlyWeatherCardsSkeleton);
-    
+
     const cards = wrapper.findAllComponents(Card);
-    
+
     cards.forEach((card) => {
       expect(card.props('variant')).toBe('outlined');
       expect(card.props('size')).toBe('sm');
@@ -32,8 +34,8 @@ describe('HourlyWeatherCardsSkeleton.vue', () => {
     const wrapper = mount(HourlyWeatherCardsSkeleton);
 
     const cards = wrapper.findAllComponents(Card);
-    
-    cards.forEach(card => {
+
+    cards.forEach((card) => {
       expect(card.classes()).toContain('skeleton-card');
     });
   });
@@ -57,7 +59,7 @@ describe('HourlyWeatherCardsSkeleton.vue', () => {
 
     const container = wrapper.find('.hourly-weather-section__data-skeleton');
     const cards = container.findAllComponents(Card);
-    
+
     expect(cards).toHaveLength(24);
   });
 
@@ -73,8 +75,8 @@ describe('HourlyWeatherCardsSkeleton.vue', () => {
 
     const cards = wrapper.findAllComponents(Card);
     const firstCardProps = cards[0]?.props();
-    
-    cards.forEach(card => {
+
+    cards.forEach((card) => {
       expect(card.props()).toEqual(firstCardProps);
     });
   });

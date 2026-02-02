@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue';
-import type { Ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useWeatherStore } from '@/stores/weatherStore';
 import { IconButton } from '@/components/ui/Button';
@@ -15,8 +14,8 @@ const weatherStore = useWeatherStore();
 const { weatherData, hourlyData, formattedDays, loading } =
   storeToRefs(weatherStore);
 
-const selectedDay: Ref<string> = ref('');
-const isHourlyDropdownVisible: Ref<boolean> = ref(false);
+const selectedDay = ref('');
+const isHourlyDropdownVisible = ref(false);
 
 const toggleHourlyDropdown = (): void => {
   isHourlyDropdownVisible.value = !isHourlyDropdownVisible.value;

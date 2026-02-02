@@ -47,7 +47,7 @@ describe('CurrentWeatherOverviewSkeleton.vue', () => {
 
   it('should have proper structure hierarchy', () => {
     const wrapper = mount(CurrentWeatherOverviewSkeleton);
-    
+
     const skeleton = wrapper.find('.current-weather-skeleton');
     const loadingContainer = skeleton.find('.loading-container');
     const loadingDots = loadingContainer.find('.loading-dots');
@@ -63,7 +63,9 @@ describe('CurrentWeatherOverviewSkeleton.vue', () => {
     const wrapper = mount(CurrentWeatherOverviewSkeleton);
 
     expect(wrapper.classes()).toContain('current-weather-skeleton');
-    expect(wrapper.find('.loading-container').classes()).toContain('loading-container');
+    expect(wrapper.find('.loading-container').classes()).toContain(
+      'loading-container',
+    );
     expect(wrapper.find('.loading-dots').classes()).toContain('loading-dots');
     expect(wrapper.find('.loading-text').classes()).toContain('loading-text');
   });

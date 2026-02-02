@@ -6,7 +6,7 @@ import HourlyDropdown from './HourlyDropdown.vue';
 import { List, ListItem } from '@/components/ui/List';
 
 vi.mock('@/stores/weatherStore', () => ({
-  useWeatherStore: vi.fn()
+  useWeatherStore: vi.fn(),
 }));
 
 import { useWeatherStore } from '@/stores/weatherStore';
@@ -75,7 +75,13 @@ describe('HourlyDropdown.vue', () => {
 
   it('renders ListItem for each day in formattedDays', () => {
     vi.mocked(useWeatherStore).mockReturnValue({
-      formattedDays: ref(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']),
+      formattedDays: ref([
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+      ]),
     } as any);
 
     const wrapper = mount(HourlyDropdown, {
@@ -100,7 +106,7 @@ describe('HourlyDropdown.vue', () => {
     });
 
     const listItems = wrapper.findAllComponents(ListItem);
-    
+
     listItems.forEach((item, index) => {
       expect(item.text()).toBe(days[index]);
     });
@@ -118,8 +124,8 @@ describe('HourlyDropdown.vue', () => {
     });
 
     const listItems = wrapper.findAllComponents(ListItem);
-    
-    listItems.forEach(item => {
+
+    listItems.forEach((item) => {
       expect(item.props('interactive')).toBe(true);
     });
   });
@@ -171,7 +177,7 @@ describe('HourlyDropdown.vue', () => {
     });
 
     const listItems = wrapper.findAllComponents(ListItem);
-    
+
     for (let i = 0; i < listItems.length; i++) {
       await listItems[i]?.trigger('click');
     }
@@ -195,7 +201,7 @@ describe('HourlyDropdown.vue', () => {
     });
 
     const listItems = wrapper.findAllComponents(ListItem);
-    
+
     await listItems[0]?.trigger('click');
     await listItems[1]?.trigger('click');
     await listItems[0]?.trigger('click');
@@ -225,7 +231,7 @@ describe('HourlyDropdown.vue', () => {
 
   it('updates rendered items when formattedDays changes', async () => {
     const formattedDaysRef = ref(['Monday', 'Tuesday']);
-    
+
     vi.mocked(useWeatherStore).mockReturnValue({
       formattedDays: formattedDaysRef,
     } as any);
@@ -254,7 +260,7 @@ describe('HourlyDropdown.vue', () => {
         plugins: [createPinia()],
       },
     });
-    
+
     expect(wrapper.find('.hourly-dropdown').exists()).toBe(true);
     expect(wrapper.find('.hourly-dropdown__list').exists()).toBe(true);
     expect(wrapper.find('.hourly-dropdown__item').exists()).toBe(true);

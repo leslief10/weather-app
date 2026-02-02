@@ -5,7 +5,8 @@ import CurrentWeatherMetricsSkeleton from './CurrentWeatherMetricsSkeleton.vue';
 vi.mock('@/components/ui/Card', () => ({
   CurrentCard: {
     name: 'CurrentCard',
-    template: '<div class="current-card" :data-label="label" :data-value="value" :data-unit="unit">{{ label }}: {{ value }}{{ unit }}</div>',
+    template:
+      '<div class="current-card" :data-label="label" :data-value="value" :data-unit="unit">{{ label }}: {{ value }}{{ unit }}</div>',
     props: ['label', 'value', 'unit'],
   },
 }));
@@ -14,7 +15,9 @@ describe('CurrentWeatherMetricsSkeleton.vue', () => {
   it('should render the skeleton container', () => {
     const wrapper = mount(CurrentWeatherMetricsSkeleton);
 
-    expect(wrapper.find('.current-weather-section__metrics-skeleton').exists()).toBe(true);
+    expect(
+      wrapper.find('.current-weather-section__metrics-skeleton').exists(),
+    ).toBe(true);
   });
 
   it('should render 4 skeleton cards', () => {
@@ -57,7 +60,7 @@ describe('CurrentWeatherMetricsSkeleton.vue', () => {
     const cards = wrapper.findAll('.current-card');
 
     const expectedLabels = ['Feels Like', 'Humidity', 'Wind', 'Precipitation'];
-    
+
     cards.forEach((card, index) => {
       expect(card.attributes('data-label')).toBe(expectedLabels[index]);
     });
@@ -75,7 +78,9 @@ describe('CurrentWeatherMetricsSkeleton.vue', () => {
 
   it('should have proper CSS class for styling', () => {
     const wrapper = mount(CurrentWeatherMetricsSkeleton);
-    const container = wrapper.find('.current-weather-section__metrics-skeleton');
+    const container = wrapper.find(
+      '.current-weather-section__metrics-skeleton',
+    );
 
     expect(container.exists()).toBe(true);
     expect(container.element.tagName).toBe('DIV');

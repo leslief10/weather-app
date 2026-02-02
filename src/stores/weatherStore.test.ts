@@ -36,7 +36,7 @@ describe('weatherStore - fetchWeather', () => {
       windSpeed: 5.2,
       windSpeedUnit: 'km/h',
       precipitation: 0,
-      precipitationUnit: 'mm'
+      precipitationUnit: 'mm',
     },
     hourly: {
       time: ['2024-01-01T00:00:00', '2024-01-01T01:00:00'],
@@ -129,7 +129,9 @@ describe('weatherStore - fetchWeather', () => {
   });
 
   it('should log error to console on failure', async () => {
-    const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+    const consoleErrorSpy = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {});
     const error = new Error('Test error');
     vi.mocked(getWeather).mockRejectedValue(error);
 
@@ -156,7 +158,11 @@ describe('weatherStore - fetchWeather', () => {
       store.weatherData = {
         ...mockWeatherData,
         hourly: {
-          time: ['2024-01-01T00:00:00', '2024-01-01T01:00:00', '2024-01-01T02:00:00'],
+          time: [
+            '2024-01-01T00:00:00',
+            '2024-01-01T01:00:00',
+            '2024-01-01T02:00:00',
+          ],
           temperature: [20.7, 21.3, 19.8],
           temperatureUnit: '°C',
           weatherCode: [0, 1, 2],
@@ -266,11 +272,19 @@ describe('weatherStore - fetchWeather', () => {
       };
 
       const result = store.formattedDays;
-      
+
       expect(result).toHaveLength(3);
-      
-      const validDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-      result.forEach(day => {
+
+      const validDays = [
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+        'Sunday',
+      ];
+      result.forEach((day) => {
         expect(validDays).toContain(day);
       });
     });

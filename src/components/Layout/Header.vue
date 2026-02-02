@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import type { Ref } from 'vue';
 import { IconButton } from '@/components/ui/Button';
 import HeaderDropdown from '@/components/HeaderDropdown/HeaderDropdown.vue';
 import { SVGIcon } from '@/components/ui/Icons';
 
-const isDropdownVisible: Ref<boolean> = ref(false);
+const isDropdownVisible = ref(false);
 
 const toggleDropdown = (): void => {
   isDropdownVisible.value = !isDropdownVisible.value;

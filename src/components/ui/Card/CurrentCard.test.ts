@@ -116,7 +116,9 @@ describe('CurrentCard.vue', () => {
         },
       });
 
-      expect(wrapper.find('.current-card__value-container').exists()).toBe(true);
+      expect(wrapper.find('.current-card__value-container').exists()).toBe(
+        true,
+      );
     });
   });
 
@@ -131,7 +133,9 @@ describe('CurrentCard.vue', () => {
       });
 
       const container = wrapper.find('.current-card__value-container');
-      expect(container.classes()).toContain('current-card__value-container--spacing');
+      expect(container.classes()).toContain(
+        'current-card__value-container--spacing',
+      );
     });
 
     it('should not apply current-card__value-container--spacing class when unit length < 2', () => {
@@ -144,7 +148,9 @@ describe('CurrentCard.vue', () => {
       });
 
       const container = wrapper.find('.current-card__value-container');
-      expect(container.classes()).not.toContain('current-card__value-container--spacing');
+      expect(container.classes()).not.toContain(
+        'current-card__value-container--spacing',
+      );
     });
 
     it('should not apply current-card__value-container--spacing class for single character unit', () => {
@@ -157,7 +163,9 @@ describe('CurrentCard.vue', () => {
       });
 
       const container = wrapper.find('.current-card__value-container');
-      expect(container.classes()).not.toContain('current-card__value-container--spacing');
+      expect(container.classes()).not.toContain(
+        'current-card__value-container--spacing',
+      );
     });
   });
 
@@ -197,7 +205,9 @@ describe('CurrentCard.vue', () => {
 
       expect(wrapper.find('.current-card__unit').text()).toBe('miles');
       const container = wrapper.find('.current-card__value-container');
-      expect(container.classes()).toContain('current-card__value-container--spacing');
+      expect(container.classes()).toContain(
+        'current-card__value-container--spacing',
+      );
     });
   });
 

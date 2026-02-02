@@ -7,7 +7,7 @@ import { DailyCard } from '@/components/ui/Card';
 import { DailyWeatherCardsSkeleton } from '@/components/DailyWeatherSection';
 
 vi.mock('@/stores/weatherStore', () => ({
-  useWeatherStore: vi.fn()
+  useWeatherStore: vi.fn(),
 }));
 
 import { useWeatherStore } from '@/stores/weatherStore';
@@ -28,8 +28,10 @@ describe('DailyWeatherSection.vue', () => {
         plugins: [createPinia()],
       },
     });
-    
-    expect(wrapper.find('.daily-weather-section__title').text()).toBe('Daily forecast');
+
+    expect(wrapper.find('.daily-weather-section__title').text()).toBe(
+      'Daily forecast',
+    );
   });
 
   it('displays skeleton when loading is true', () => {
@@ -44,7 +46,9 @@ describe('DailyWeatherSection.vue', () => {
       },
     });
 
-    expect(wrapper.findComponent(DailyWeatherCardsSkeleton).exists()).toBe(true);
+    expect(wrapper.findComponent(DailyWeatherCardsSkeleton).exists()).toBe(
+      true,
+    );
     expect(wrapper.find('.daily-weather-section__cards').exists()).toBe(false);
   });
 
@@ -60,7 +64,9 @@ describe('DailyWeatherSection.vue', () => {
       },
     });
 
-    expect(wrapper.findComponent(DailyWeatherCardsSkeleton).exists()).toBe(true);
+    expect(wrapper.findComponent(DailyWeatherCardsSkeleton).exists()).toBe(
+      true,
+    );
     expect(wrapper.find('.daily-weather-section__cards').exists()).toBe(false);
   });
 
@@ -76,7 +82,9 @@ describe('DailyWeatherSection.vue', () => {
       },
     });
 
-    expect(wrapper.findComponent(DailyWeatherCardsSkeleton).exists()).toBe(true);
+    expect(wrapper.findComponent(DailyWeatherCardsSkeleton).exists()).toBe(
+      true,
+    );
     expect(wrapper.find('.daily-weather-section__cards').exists()).toBe(false);
   });
 
@@ -96,7 +104,9 @@ describe('DailyWeatherSection.vue', () => {
       },
     });
 
-    expect(wrapper.findComponent(DailyWeatherCardsSkeleton).exists()).toBe(false);
+    expect(wrapper.findComponent(DailyWeatherCardsSkeleton).exists()).toBe(
+      false,
+    );
     expect(wrapper.find('.daily-weather-section__cards').exists()).toBe(true);
     expect(wrapper.findAllComponents(DailyCard)).toHaveLength(3);
   });
@@ -119,7 +129,7 @@ describe('DailyWeatherSection.vue', () => {
     });
 
     const cards = wrapper.findAllComponents(DailyCard);
-    
+
     expect(cards[0]?.props()).toEqual({
       date: '2024-01-01',
       maxTemp: 25,
@@ -166,7 +176,7 @@ describe('DailyWeatherSection.vue', () => {
         plugins: [createPinia()],
       },
     });
-    
+
     expect(wrapper.find('.section').exists()).toBe(true);
     expect(wrapper.find('.daily-weather-section').exists()).toBe(true);
     expect(wrapper.find('.daily-weather-section__title').exists()).toBe(true);

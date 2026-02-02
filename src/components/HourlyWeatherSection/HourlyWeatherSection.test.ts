@@ -5,10 +5,13 @@ import { ref } from 'vue';
 import HourlyWeatherSection from './HourlyWeatherSection.vue';
 import { IconButton } from '@/components/ui/Button';
 import { HourlyCard } from '@/components/ui/Card';
-import { HourlyDropdown, HourlyWeatherCardsSkeleton } from '@/components/HourlyWeatherSection';
+import {
+  HourlyDropdown,
+  HourlyWeatherCardsSkeleton,
+} from '@/components/HourlyWeatherSection';
 
 vi.mock('@/stores/weatherStore', () => ({
-  useWeatherStore: vi.fn()
+  useWeatherStore: vi.fn(),
 }));
 
 import { useWeatherStore } from '@/stores/weatherStore';
@@ -31,8 +34,10 @@ describe('HourlyWeatherSection.vue', () => {
         plugins: [createPinia()],
       },
     });
-    
-    expect(wrapper.find('.hourly-weather-section__title').text()).toBe('Hourly forecast');
+
+    expect(wrapper.find('.hourly-weather-section__title').text()).toBe(
+      'Hourly forecast',
+    );
   });
 
   it('displays skeleton when loading is true', () => {
@@ -49,7 +54,9 @@ describe('HourlyWeatherSection.vue', () => {
       },
     });
 
-    expect(wrapper.findComponent(HourlyWeatherCardsSkeleton).exists()).toBe(true);
+    expect(wrapper.findComponent(HourlyWeatherCardsSkeleton).exists()).toBe(
+      true,
+    );
     expect(wrapper.find('.hourly-weather-section__data').exists()).toBe(false);
   });
 
@@ -67,7 +74,9 @@ describe('HourlyWeatherSection.vue', () => {
       },
     });
 
-    expect(wrapper.findComponent(HourlyWeatherCardsSkeleton).exists()).toBe(true);
+    expect(wrapper.findComponent(HourlyWeatherCardsSkeleton).exists()).toBe(
+      true,
+    );
     expect(wrapper.find('.hourly-weather-section__data').exists()).toBe(false);
   });
 
@@ -85,7 +94,9 @@ describe('HourlyWeatherSection.vue', () => {
       },
     });
 
-    expect(wrapper.findComponent(HourlyWeatherCardsSkeleton).exists()).toBe(true);
+    expect(wrapper.findComponent(HourlyWeatherCardsSkeleton).exists()).toBe(
+      true,
+    );
     expect(wrapper.find('.hourly-weather-section__data').exists()).toBe(false);
   });
 
@@ -93,7 +104,7 @@ describe('HourlyWeatherSection.vue', () => {
     vi.mocked(useWeatherStore).mockReturnValue({
       weatherData: ref({
         current: { time: '2024-01-01T12:00:00' },
-        daily: { time: ['2024-01-01', '2024-01-02'] }
+        daily: { time: ['2024-01-01', '2024-01-02'] },
       }),
       hourlyData: ref([
         { hour: '2024-01-01T08:00:00', temperature: 15, weatherCode: 0 },
@@ -110,7 +121,9 @@ describe('HourlyWeatherSection.vue', () => {
       },
     });
 
-    expect(wrapper.findComponent(HourlyWeatherCardsSkeleton).exists()).toBe(false);
+    expect(wrapper.findComponent(HourlyWeatherCardsSkeleton).exists()).toBe(
+      false,
+    );
     expect(wrapper.find('.hourly-weather-section__data').exists()).toBe(true);
     expect(wrapper.findAllComponents(HourlyCard)).toHaveLength(3);
   });
@@ -119,7 +132,7 @@ describe('HourlyWeatherSection.vue', () => {
     vi.mocked(useWeatherStore).mockReturnValue({
       weatherData: ref({
         current: { time: '2024-01-01T12:00:00' },
-        daily: { time: ['2024-01-01'] }
+        daily: { time: ['2024-01-01'] },
       }),
       hourlyData: ref([
         { hour: '2024-01-01T08:00:00', temperature: 20, weatherCode: 3 },
@@ -136,7 +149,7 @@ describe('HourlyWeatherSection.vue', () => {
     });
 
     const cards = wrapper.findAllComponents(HourlyCard);
-    
+
     expect(cards[0]?.props()).toEqual({
       hour: '2024-01-01T08:00:00',
       temperature: 20,
@@ -152,12 +165,14 @@ describe('HourlyWeatherSection.vue', () => {
 
   it('initializes selectedDay from weatherData current time', () => {
     const currentTime = new Date('2024-01-01T12:00:00');
-    const expectedDay = currentTime.toLocaleDateString('en-US', { weekday: 'long' });
+    const expectedDay = currentTime.toLocaleDateString('en-US', {
+      weekday: 'long',
+    });
 
     vi.mocked(useWeatherStore).mockReturnValue({
       weatherData: ref({
         current: { time: '2024-01-01T12:00:00' },
-        daily: { time: ['2024-01-01'] }
+        daily: { time: ['2024-01-01'] },
       }),
       hourlyData: ref([]),
       formattedDays: ref([expectedDay]),
@@ -214,7 +229,7 @@ describe('HourlyWeatherSection.vue', () => {
     vi.mocked(useWeatherStore).mockReturnValue({
       weatherData: ref({
         current: { time: '2024-01-01T12:00:00' },
-        daily: { time: ['2024-01-01'] }
+        daily: { time: ['2024-01-01'] },
       }),
       hourlyData: ref([]),
       formattedDays: ref(['Monday']),
@@ -280,7 +295,7 @@ describe('HourlyWeatherSection.vue', () => {
     vi.mocked(useWeatherStore).mockReturnValue({
       weatherData: ref({
         current: { time: '2024-01-01T12:00:00' },
-        daily: { time: ['2024-01-01', '2024-01-02'] }
+        daily: { time: ['2024-01-01', '2024-01-02'] },
       }),
       hourlyData: ref([]),
       formattedDays: ref(['Monday', 'Tuesday']),
@@ -305,7 +320,7 @@ describe('HourlyWeatherSection.vue', () => {
     vi.mocked(useWeatherStore).mockReturnValue({
       weatherData: ref({
         current: { time: '2024-01-01T12:00:00' },
-        daily: { time: ['2024-01-01', '2024-01-02'] }
+        daily: { time: ['2024-01-01', '2024-01-02'] },
       }),
       hourlyData: ref([
         { hour: '2024-01-01T10:00:00', temperature: 15, weatherCode: 0 },
@@ -338,7 +353,7 @@ describe('HourlyWeatherSection.vue', () => {
     vi.mocked(useWeatherStore).mockReturnValue({
       weatherData: ref({
         current: { time: '2024-01-01T12:00:00' },
-        daily: { time: ['2024-01-01'] }
+        daily: { time: ['2024-01-01'] },
       }),
       hourlyData: ref([
         { hour: '2024-01-01T08:00:00', temperature: 15, weatherCode: 0 },
@@ -374,7 +389,7 @@ describe('HourlyWeatherSection.vue', () => {
         plugins: [createPinia()],
       },
     });
-    
+
     expect(wrapper.find('.section').exists()).toBe(true);
     expect(wrapper.find('.hourly-weather-section').exists()).toBe(true);
     expect(wrapper.find('.hourly-weather-section__header').exists()).toBe(true);
@@ -385,7 +400,7 @@ describe('HourlyWeatherSection.vue', () => {
     vi.mocked(useWeatherStore).mockReturnValue({
       weatherData: ref({
         current: { time: '2024-01-01T12:00:00' },
-        daily: { time: ['2024-01-01'] }
+        daily: { time: ['2024-01-01'] },
       }),
       hourlyData: ref([
         { hour: '2024-01-01T08:00:00', temperature: 15, weatherCode: 0 },
@@ -410,7 +425,7 @@ describe('HourlyWeatherSection.vue', () => {
     vi.mocked(useWeatherStore).mockReturnValue({
       weatherData: ref({
         current: { time: '2024-01-01T12:00:00' },
-        daily: { time: ['2024-01-01'] }
+        daily: { time: ['2024-01-01'] },
       }),
       hourlyData: ref([]),
       formattedDays: ref(['Monday']),
