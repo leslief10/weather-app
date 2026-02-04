@@ -1,10 +1,10 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { mount } from '@vue/test-utils';
 import { createPinia } from 'pinia';
-import { ref } from 'vue';
 import DailyWeatherSection from './DailyWeatherSection.vue';
 import { DailyCard } from '@/components/ui/Card';
 import { DailyWeatherCardsSkeleton } from '@/components/DailyWeatherSection';
+import { createMockWeatherStore } from '@/test-utils/mockWeatherStore';
 
 vi.mock('@/stores/weatherStore', () => ({
   useWeatherStore: vi.fn(),
@@ -18,10 +18,12 @@ describe('DailyWeatherSection.vue', () => {
   });
 
   it('renders the section title correctly', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      dailyData: ref(null),
-      loading: ref(false),
-    } as any);
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        dailyData: null,
+        loading: false,
+      }),
+    );
 
     const wrapper = mount(DailyWeatherSection, {
       global: {
@@ -35,10 +37,12 @@ describe('DailyWeatherSection.vue', () => {
   });
 
   it('displays skeleton when loading is true', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      dailyData: ref(null),
-      loading: ref(true),
-    } as any);
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        dailyData: null,
+        loading: true,
+      }),
+    );
 
     const wrapper = mount(DailyWeatherSection, {
       global: {
@@ -53,10 +57,12 @@ describe('DailyWeatherSection.vue', () => {
   });
 
   it('displays skeleton when dailyData is null', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      dailyData: ref(null),
-      loading: ref(false),
-    } as any);
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        dailyData: null,
+        loading: false,
+      }),
+    );
 
     const wrapper = mount(DailyWeatherSection, {
       global: {
@@ -71,10 +77,12 @@ describe('DailyWeatherSection.vue', () => {
   });
 
   it('displays skeleton when dailyData is undefined', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      dailyData: ref(undefined),
-      loading: ref(false),
-    } as any);
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        dailyData: undefined,
+        loading: false,
+      }),
+    );
 
     const wrapper = mount(DailyWeatherSection, {
       global: {
@@ -89,14 +97,16 @@ describe('DailyWeatherSection.vue', () => {
   });
 
   it('renders DailyCard components when data is available', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      dailyData: ref([
-        { date: '2024-01-01', maxTemp: 20, minTemp: 10, weatherCode: 0 },
-        { date: '2024-01-02', maxTemp: 22, minTemp: 12, weatherCode: 1 },
-        { date: '2024-01-03', maxTemp: 18, minTemp: 8, weatherCode: 2 },
-      ]),
-      loading: ref(false),
-    } as any);
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        dailyData: [
+          { date: '2024-01-01', maxTemp: 20, minTemp: 10, weatherCode: 0 },
+          { date: '2024-01-02', maxTemp: 22, minTemp: 12, weatherCode: 1 },
+          { date: '2024-01-03', maxTemp: 18, minTemp: 8, weatherCode: 2 },
+        ],
+        loading: false,
+      }),
+    );
 
     const wrapper = mount(DailyWeatherSection, {
       global: {
@@ -117,11 +127,12 @@ describe('DailyWeatherSection.vue', () => {
       { date: '2024-01-02', maxTemp: 28, minTemp: 18, weatherCode: 45 },
     ];
 
-    vi.mocked(useWeatherStore).mockReturnValue({
-      dailyData: ref(mockData),
-      loading: ref(false),
-    } as any);
-
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        dailyData: mockData,
+        loading: false,
+      }),
+    );
     const wrapper = mount(DailyWeatherSection, {
       global: {
         plugins: [createPinia()],
@@ -146,13 +157,15 @@ describe('DailyWeatherSection.vue', () => {
   });
 
   it('uses date as key for v-for rendering', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      dailyData: ref([
-        { date: '2024-01-01', maxTemp: 20, minTemp: 10, weatherCode: 0 },
-        { date: '2024-01-02', maxTemp: 22, minTemp: 12, weatherCode: 1 },
-      ]),
-      loading: ref(false),
-    } as any);
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        dailyData: [
+          { date: '2024-01-01', maxTemp: 20, minTemp: 10, weatherCode: 0 },
+          { date: '2024-01-02', maxTemp: 22, minTemp: 12, weatherCode: 1 },
+        ],
+        loading: false,
+      }),
+    );
 
     const wrapper = mount(DailyWeatherSection, {
       global: {
@@ -166,10 +179,12 @@ describe('DailyWeatherSection.vue', () => {
   });
 
   it('applies correct CSS classes', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      dailyData: ref(null),
-      loading: ref(false),
-    } as any);
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        dailyData: null,
+        loading: false,
+      }),
+    );
 
     const wrapper = mount(DailyWeatherSection, {
       global: {
@@ -183,10 +198,12 @@ describe('DailyWeatherSection.vue', () => {
   });
 
   it('renders empty cards container when dailyData is empty array', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      dailyData: ref([]),
-      loading: ref(false),
-    } as any);
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        dailyData: [],
+        loading: false,
+      }),
+    );
 
     const wrapper = mount(DailyWeatherSection, {
       global: {

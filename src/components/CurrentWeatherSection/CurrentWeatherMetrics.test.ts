@@ -1,8 +1,8 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { mount } from '@vue/test-utils';
 import { createPinia } from 'pinia';
-import { ref } from 'vue';
 import CurrentWeatherMetrics from './CurrentWeatherMetrics.vue';
+import { createMockWeatherStore } from '@/test-utils/mockWeatherStore';
 
 vi.mock('@/stores/weatherStore', () => ({
   useWeatherStore: vi.fn(),
@@ -32,10 +32,12 @@ describe('CurrentWeatherMetrics.vue', () => {
   });
 
   it('should render skeleton when loading is true', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      weatherData: ref(null),
-      loading: ref(true),
-    } as any);
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        weatherData: null,
+        loading: true,
+      }),
+    );
 
     const wrapper = mount(CurrentWeatherMetrics, {
       global: {
@@ -50,10 +52,12 @@ describe('CurrentWeatherMetrics.vue', () => {
   });
 
   it('should render skeleton when weatherData is null', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      weatherData: ref(null),
-      loading: ref(false),
-    } as any);
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        weatherData: null,
+        loading: false,
+      }),
+    );
 
     const wrapper = mount(CurrentWeatherMetrics, {
       global: {
@@ -68,19 +72,11 @@ describe('CurrentWeatherMetrics.vue', () => {
   });
 
   it('should render weather metrics when data is available', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      weatherData: ref({
-        current: {
-          apparentTemperature: 25.5,
-          relativeHumidity: 65,
-          windSpeed: 15.3,
-          windSpeedUnit: 'km/h',
-          precipitation: 0.5,
-          precipitationUnit: 'mm',
-        },
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        loading: false,
       }),
-      loading: ref(false),
-    } as any);
+    );
 
     const wrapper = mount(CurrentWeatherMetrics, {
       global: {
@@ -96,19 +92,11 @@ describe('CurrentWeatherMetrics.vue', () => {
   });
 
   it('should display correct card labels', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      weatherData: ref({
-        current: {
-          apparentTemperature: 25.5,
-          relativeHumidity: 65,
-          windSpeed: 15.3,
-          windSpeedUnit: 'km/h',
-          precipitation: 0.5,
-          precipitationUnit: 'mm',
-        },
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        loading: false,
       }),
-      loading: ref(false),
-    } as any);
+    );
 
     const wrapper = mount(CurrentWeatherMetrics, {
       global: {
@@ -124,19 +112,11 @@ describe('CurrentWeatherMetrics.vue', () => {
   });
 
   it('should format and round numeric values correctly', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      weatherData: ref({
-        current: {
-          apparentTemperature: 25.5,
-          relativeHumidity: 65,
-          windSpeed: 15.3,
-          windSpeedUnit: 'km/h',
-          precipitation: 0.5,
-          precipitationUnit: 'mm',
-        },
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        loading: false,
       }),
-      loading: ref(false),
-    } as any);
+    );
 
     const wrapper = mount(CurrentWeatherMetrics, {
       global: {
@@ -146,25 +126,27 @@ describe('CurrentWeatherMetrics.vue', () => {
     const cards = wrapper.findAll('.current-card');
 
     expect(cards[0]?.text()).toContain('26°');
-    expect(cards[1]?.text()).toContain('65%');
-    expect(cards[2]?.text()).toContain('15km/h');
-    expect(cards[3]?.text()).toContain('1mm');
+    expect(cards[1]?.text()).toContain('71%');
+    expect(cards[2]?.text()).toContain('5km/h');
+    expect(cards[3]?.text()).toContain('0mm');
   });
 
   it('should display "-" for undefined values', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      weatherData: ref({
-        current: {
-          apparentTemperature: undefined,
-          relativeHumidity: undefined,
-          windSpeed: undefined,
-          windSpeedUnit: 'km/h',
-          precipitation: undefined,
-          precipitationUnit: 'mm',
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        weatherData: {
+          current: {
+            apparentTemperature: undefined,
+            relativeHumidity: undefined,
+            windSpeed: undefined,
+            windSpeedUnit: 'km/h',
+            precipitation: undefined,
+            precipitationUnit: 'mm',
+          },
         },
+        loading: false,
       }),
-      loading: ref(false),
-    } as any);
+    );
 
     const wrapper = mount(CurrentWeatherMetrics, {
       global: {
@@ -180,19 +162,21 @@ describe('CurrentWeatherMetrics.vue', () => {
   });
 
   it('should display "-" for null values', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      weatherData: ref({
-        current: {
-          apparentTemperature: null,
-          relativeHumidity: null,
-          windSpeed: null,
-          windSpeedUnit: 'km/h',
-          precipitation: null,
-          precipitationUnit: 'mm',
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        weatherData: {
+          current: {
+            apparentTemperature: null,
+            relativeHumidity: null,
+            windSpeed: null,
+            windSpeedUnit: 'km/h',
+            precipitation: null,
+            precipitationUnit: 'mm',
+          },
         },
+        loading: false,
       }),
-      loading: ref(false),
-    } as any);
+    );
 
     const wrapper = mount(CurrentWeatherMetrics, {
       global: {
@@ -208,19 +192,21 @@ describe('CurrentWeatherMetrics.vue', () => {
   });
 
   it('should not display unit when value is undefined', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      weatherData: ref({
-        current: {
-          apparentTemperature: undefined,
-          relativeHumidity: 50,
-          windSpeed: undefined,
-          windSpeedUnit: 'km/h',
-          precipitation: undefined,
-          precipitationUnit: 'mm',
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        weatherData: {
+          current: {
+            apparentTemperature: undefined,
+            relativeHumidity: 50,
+            windSpeed: undefined,
+            windSpeedUnit: 'km/h',
+            precipitation: undefined,
+            precipitationUnit: 'mm',
+          },
         },
+        loading: false,
       }),
-      loading: ref(false),
-    } as any);
+    );
 
     const wrapper = mount(CurrentWeatherMetrics, {
       global: {
@@ -234,19 +220,21 @@ describe('CurrentWeatherMetrics.vue', () => {
   });
 
   it('should handle zero values correctly', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      weatherData: ref({
-        current: {
-          apparentTemperature: 0,
-          relativeHumidity: 0,
-          windSpeed: 0,
-          windSpeedUnit: 'km/h',
-          precipitation: 0,
-          precipitationUnit: 'mm',
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        weatherData: {
+          current: {
+            apparentTemperature: 0,
+            relativeHumidity: 0,
+            windSpeed: 0,
+            windSpeedUnit: 'km/h',
+            precipitation: 0,
+            precipitationUnit: 'mm',
+          },
         },
+        loading: false,
       }),
-      loading: ref(false),
-    } as any);
+    );
 
     const wrapper = mount(CurrentWeatherMetrics, {
       global: {

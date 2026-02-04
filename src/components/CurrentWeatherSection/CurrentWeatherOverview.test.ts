@@ -1,8 +1,8 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { mount } from '@vue/test-utils';
 import { createPinia } from 'pinia';
-import { ref } from 'vue';
 import CurrentWeatherOverview from './CurrentWeatherOverview.vue';
+import { createMockWeatherStore } from '@/test-utils/mockWeatherStore';
 
 vi.mock('@/stores/weatherStore', () => ({
   useWeatherStore: vi.fn(),
@@ -32,11 +32,13 @@ describe('CurrentWeatherOverview.vue', () => {
   });
 
   it('should render skeleton when loading is true', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      weatherData: ref(null),
-      loading: ref(true),
-      currentLocation: ref(null),
-    } as any);
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        weatherData: null,
+        loading: true,
+        currentLocation: null,
+      }),
+    );
 
     const wrapper = mount(CurrentWeatherOverview, {
       global: {
@@ -49,16 +51,12 @@ describe('CurrentWeatherOverview.vue', () => {
   });
 
   it('should render skeleton when weatherData is null', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      weatherData: ref(null),
-      loading: ref(false),
-      currentLocation: ref({
-        city: 'Toronto',
-        country: 'Canada',
-        latitude: 43.65,
-        longitude: -79.38,
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        weatherData: null,
+        loading: false,
       }),
-    } as any);
+    );
 
     const wrapper = mount(CurrentWeatherOverview, {
       global: {
@@ -71,23 +69,11 @@ describe('CurrentWeatherOverview.vue', () => {
   });
 
   it('should render current weather when data is available', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      weatherData: ref({
-        current: {
-          time: '2026-01-23T11:45',
-          temperature: 22.6,
-          temperatureUnit: '°C',
-          weatherCode: 3,
-        },
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        loading: false,
       }),
-      loading: ref(false),
-      currentLocation: ref({
-        city: 'Toronto',
-        country: 'Canada',
-        latitude: 43.65,
-        longitude: -79.38,
-      }),
-    } as any);
+    );
 
     const wrapper = mount(CurrentWeatherOverview, {
       global: {
@@ -100,23 +86,11 @@ describe('CurrentWeatherOverview.vue', () => {
   });
 
   it('should display formatted location', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      weatherData: ref({
-        current: {
-          time: '2026-01-23T11:45',
-          temperature: 22.6,
-          temperatureUnit: '°C',
-          weatherCode: 3,
-        },
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        loading: false,
       }),
-      loading: ref(false),
-      currentLocation: ref({
-        city: 'Toronto',
-        country: 'Canada',
-        latitude: 43.65,
-        longitude: -79.38,
-      }),
-    } as any);
+    );
 
     const wrapper = mount(CurrentWeatherOverview, {
       global: {
@@ -130,18 +104,12 @@ describe('CurrentWeatherOverview.vue', () => {
   });
 
   it('should display "N/A" when location is not available', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      weatherData: ref({
-        current: {
-          time: '2026-01-23T11:45',
-          temperature: 22.6,
-          temperatureUnit: '°C',
-          weatherCode: 3,
-        },
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        loading: false,
+        currentLocation: null,
       }),
-      loading: ref(false),
-      currentLocation: ref(null),
-    } as any);
+    );
 
     const wrapper = mount(CurrentWeatherOverview, {
       global: {
@@ -154,20 +122,11 @@ describe('CurrentWeatherOverview.vue', () => {
   });
 
   it('should display formatted date', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      weatherData: ref({
-        current: {
-          time: '2026-01-23T11:45',
-        },
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        loading: false,
       }),
-      loading: ref(false),
-      currentLocation: ref({
-        city: 'Toronto',
-        country: 'Canada',
-        latitude: 43.65,
-        longitude: -79.38,
-      }),
-    } as any);
+    );
 
     const wrapper = mount(CurrentWeatherOverview, {
       global: {
@@ -182,20 +141,16 @@ describe('CurrentWeatherOverview.vue', () => {
   });
 
   it('should display "N/A" when date is not available', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      weatherData: ref({
-        current: {
-          time: undefined,
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        weatherData: {
+          current: {
+            time: undefined,
+          },
         },
+        loading: false,
       }),
-      loading: ref(false),
-      currentLocation: ref({
-        city: 'Toronto',
-        country: 'Canada',
-        latitude: 43.65,
-        longitude: -79.38,
-      }),
-    } as any);
+    );
 
     const wrapper = mount(CurrentWeatherOverview, {
       global: {
@@ -208,20 +163,11 @@ describe('CurrentWeatherOverview.vue', () => {
   });
 
   it('should render time element with datetime attribute', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      weatherData: ref({
-        current: {
-          time: '2026-01-23T11:45',
-        },
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        loading: false,
       }),
-      loading: ref(false),
-      currentLocation: ref({
-        city: 'Toronto',
-        country: 'Canada',
-        latitude: 43.65,
-        longitude: -79.38,
-      }),
-    } as any);
+    );
 
     const wrapper = mount(CurrentWeatherOverview, {
       global: {
@@ -235,20 +181,11 @@ describe('CurrentWeatherOverview.vue', () => {
   });
 
   it('should display formatted temperature', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      weatherData: ref({
-        current: {
-          temperature: 22.6,
-        },
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        loading: false,
       }),
-      loading: ref(false),
-      currentLocation: ref({
-        city: 'Toronto',
-        country: 'Canada',
-        latitude: 43.65,
-        longitude: -79.38,
-      }),
-    } as any);
+    );
 
     const wrapper = mount(CurrentWeatherOverview, {
       global: {
@@ -262,20 +199,16 @@ describe('CurrentWeatherOverview.vue', () => {
   });
 
   it('should round temperature correctly', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      weatherData: ref({
-        current: {
-          temperature: -5.3,
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        weatherData: {
+          current: {
+            temperature: -5.3,
+          },
         },
+        loading: false,
       }),
-      loading: ref(false),
-      currentLocation: ref({
-        city: 'Toronto',
-        country: 'Canada',
-        latitude: 43.65,
-        longitude: -79.38,
-      }),
-    } as any);
+    );
 
     const wrapper = mount(CurrentWeatherOverview, {
       global: {
@@ -288,20 +221,16 @@ describe('CurrentWeatherOverview.vue', () => {
   });
 
   it('should display "N/A" when temperature is not available', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      weatherData: ref({
-        current: {
-          temperature: undefined,
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        weatherData: {
+          current: {
+            temperature: undefined,
+          },
         },
+        loading: false,
       }),
-      loading: ref(false),
-      currentLocation: ref({
-        city: 'Toronto',
-        country: 'Canada',
-        latitude: 43.65,
-        longitude: -79.38,
-      }),
-    } as any);
+    );
 
     const wrapper = mount(CurrentWeatherOverview, {
       global: {
@@ -314,20 +243,11 @@ describe('CurrentWeatherOverview.vue', () => {
   });
 
   it('should render WeatherIcon with correct props', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      weatherData: ref({
-        current: {
-          weatherCode: 3,
-        },
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        loading: false,
       }),
-      loading: ref(false),
-      currentLocation: ref({
-        city: 'Toronto',
-        country: 'Canada',
-        latitude: 43.65,
-        longitude: -79.38,
-      }),
-    } as any);
+    );
 
     const wrapper = mount(CurrentWeatherOverview, {
       global: {
@@ -342,20 +262,16 @@ describe('CurrentWeatherOverview.vue', () => {
   });
 
   it('should use weather code 0 as fallback when not available', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      weatherData: ref({
-        current: {
-          weatherCode: undefined,
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        weatherData: {
+          current: {
+            weatherCode: undefined,
+          },
         },
+        loading: false,
       }),
-      loading: ref(false),
-      currentLocation: ref({
-        city: 'Toronto',
-        country: 'Canada',
-        latitude: 43.65,
-        longitude: -79.38,
-      }),
-    } as any);
+    );
 
     const wrapper = mount(CurrentWeatherOverview, {
       global: {
@@ -368,23 +284,11 @@ describe('CurrentWeatherOverview.vue', () => {
   });
 
   it('should render location and details sections', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      weatherData: ref({
-        current: {
-          time: '2026-01-23T11:45',
-          temperature: 22.6,
-          temperatureUnit: '°C',
-          weatherCode: 3,
-        },
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        loading: false,
       }),
-      loading: ref(false),
-      currentLocation: ref({
-        city: 'Toronto',
-        country: 'Canada',
-        latitude: 43.65,
-        longitude: -79.38,
-      }),
-    } as any);
+    );
 
     const wrapper = mount(CurrentWeatherOverview, {
       global: {
@@ -397,20 +301,16 @@ describe('CurrentWeatherOverview.vue', () => {
   });
 
   it('should handle zero temperature correctly', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      weatherData: ref({
-        current: {
-          temperature: 0,
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        weatherData: {
+          current: {
+            temperature: 0,
+          },
         },
+        loading: false,
       }),
-      loading: ref(false),
-      currentLocation: ref({
-        city: 'Toronto',
-        country: 'Canada',
-        latitude: 43.65,
-        longitude: -79.38,
-      }),
-    } as any);
+    );
 
     const wrapper = mount(CurrentWeatherOverview, {
       global: {

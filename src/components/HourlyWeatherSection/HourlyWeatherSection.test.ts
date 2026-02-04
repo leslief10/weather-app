@@ -1,7 +1,6 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { mount } from '@vue/test-utils';
 import { createPinia } from 'pinia';
-import { ref } from 'vue';
 import HourlyWeatherSection from './HourlyWeatherSection.vue';
 import { IconButton } from '@/components/ui/Button';
 import { HourlyCard } from '@/components/ui/Card';
@@ -9,6 +8,7 @@ import {
   HourlyDropdown,
   HourlyWeatherCardsSkeleton,
 } from '@/components/HourlyWeatherSection';
+import { createMockWeatherStore } from '@/test-utils/mockWeatherStore';
 
 vi.mock('@/stores/weatherStore', () => ({
   useWeatherStore: vi.fn(),
@@ -22,12 +22,14 @@ describe('HourlyWeatherSection.vue', () => {
   });
 
   it('renders the section title correctly', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      weatherData: ref(null),
-      hourlyData: ref(null),
-      formattedDays: ref([]),
-      loading: ref(false),
-    } as any);
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        weatherData: null,
+        hourlyData: null,
+        formattedDays: [],
+        loading: false,
+      }),
+    );
 
     const wrapper = mount(HourlyWeatherSection, {
       global: {
@@ -41,12 +43,14 @@ describe('HourlyWeatherSection.vue', () => {
   });
 
   it('displays skeleton when loading is true', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      weatherData: ref(null),
-      hourlyData: ref(null),
-      formattedDays: ref([]),
-      loading: ref(true),
-    } as any);
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        weatherData: null,
+        hourlyData: null,
+        formattedDays: [],
+        loading: true,
+      }),
+    );
 
     const wrapper = mount(HourlyWeatherSection, {
       global: {
@@ -61,12 +65,18 @@ describe('HourlyWeatherSection.vue', () => {
   });
 
   it('displays skeleton when hourlyData is null', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      weatherData: ref({ current: { time: '2024-01-01T12:00:00' } }),
-      hourlyData: ref(null),
-      formattedDays: ref(['Monday']),
-      loading: ref(false),
-    } as any);
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        weatherData: {
+          current: {
+            time: '2024-01-01T12:00:00',
+          },
+        },
+        hourlyData: null,
+        formattedDays: ['Monday'],
+        loading: false,
+      }),
+    );
 
     const wrapper = mount(HourlyWeatherSection, {
       global: {
@@ -81,12 +91,18 @@ describe('HourlyWeatherSection.vue', () => {
   });
 
   it('displays skeleton when hourlyData is undefined', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      weatherData: ref({ current: { time: '2024-01-01T12:00:00' } }),
-      hourlyData: ref(undefined),
-      formattedDays: ref(['Monday']),
-      loading: ref(false),
-    } as any);
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        weatherData: {
+          current: {
+            time: '2024-01-01T12:00:00',
+          },
+        },
+        hourlyData: undefined,
+        formattedDays: ['Monday'],
+        loading: false,
+      }),
+    );
 
     const wrapper = mount(HourlyWeatherSection, {
       global: {
@@ -101,19 +117,23 @@ describe('HourlyWeatherSection.vue', () => {
   });
 
   it('renders HourlyCard components when data is available', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      weatherData: ref({
-        current: { time: '2024-01-01T12:00:00' },
-        daily: { time: ['2024-01-01', '2024-01-02'] },
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        weatherData: {
+          current: {
+            time: '2024-01-01T12:00:00',
+          },
+          daily: { time: ['2024-01-01', '2024-01-02'] },
+        },
+        hourlyData: [
+          { hour: '2024-01-01T08:00:00', temperature: 15, weatherCode: 0 },
+          { hour: '2024-01-01T09:00:00', temperature: 16, weatherCode: 1 },
+          { hour: '2024-01-01T10:00:00', temperature: 17, weatherCode: 2 },
+        ],
+        formattedDays: ['Monday', 'Tuesday'],
+        loading: false,
       }),
-      hourlyData: ref([
-        { hour: '2024-01-01T08:00:00', temperature: 15, weatherCode: 0 },
-        { hour: '2024-01-01T09:00:00', temperature: 16, weatherCode: 1 },
-        { hour: '2024-01-01T10:00:00', temperature: 17, weatherCode: 2 },
-      ]),
-      formattedDays: ref(['Monday', 'Tuesday']),
-      loading: ref(false),
-    } as any);
+    );
 
     const wrapper = mount(HourlyWeatherSection, {
       global: {
@@ -129,18 +149,22 @@ describe('HourlyWeatherSection.vue', () => {
   });
 
   it('passes correct props to HourlyCard components', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      weatherData: ref({
-        current: { time: '2024-01-01T12:00:00' },
-        daily: { time: ['2024-01-01'] },
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        weatherData: {
+          current: {
+            time: '2024-01-01T12:00:00',
+          },
+          daily: { time: ['2024-01-01'] },
+        },
+        hourlyData: [
+          { hour: '2024-01-01T08:00:00', temperature: 20, weatherCode: 3 },
+          { hour: '2024-01-01T09:00:00', temperature: 22, weatherCode: 45 },
+        ],
+        formattedDays: ['Monday'],
+        loading: false,
       }),
-      hourlyData: ref([
-        { hour: '2024-01-01T08:00:00', temperature: 20, weatherCode: 3 },
-        { hour: '2024-01-01T09:00:00', temperature: 22, weatherCode: 45 },
-      ]),
-      formattedDays: ref(['Monday']),
-      loading: ref(false),
-    } as any);
+    );
 
     const wrapper = mount(HourlyWeatherSection, {
       global: {
@@ -169,15 +193,19 @@ describe('HourlyWeatherSection.vue', () => {
       weekday: 'long',
     });
 
-    vi.mocked(useWeatherStore).mockReturnValue({
-      weatherData: ref({
-        current: { time: '2024-01-01T12:00:00' },
-        daily: { time: ['2024-01-01'] },
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        weatherData: {
+          current: {
+            time: '2024-01-01T12:00:00',
+          },
+          daily: { time: ['2024-01-01'] },
+        },
+        hourlyData: [],
+        formattedDays: [expectedDay],
+        loading: false,
       }),
-      hourlyData: ref([]),
-      formattedDays: ref([expectedDay]),
-      loading: ref(false),
-    } as any);
+    );
 
     const wrapper = mount(HourlyWeatherSection, {
       global: {
@@ -190,12 +218,14 @@ describe('HourlyWeatherSection.vue', () => {
   });
 
   it('sets selectedDay to "-" when loading', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      weatherData: ref(null),
-      hourlyData: ref(null),
-      formattedDays: ref([]),
-      loading: ref(true),
-    } as any);
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        weatherData: null,
+        hourlyData: null,
+        formattedDays: [],
+        loading: true,
+      }),
+    );
 
     const wrapper = mount(HourlyWeatherSection, {
       global: {
@@ -208,12 +238,14 @@ describe('HourlyWeatherSection.vue', () => {
   });
 
   it('sets selectedDay to "-" when weatherData is null', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      weatherData: ref(null),
-      hourlyData: ref([]),
-      formattedDays: ref([]),
-      loading: ref(false),
-    } as any);
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        weatherData: null,
+        hourlyData: [],
+        formattedDays: [],
+        loading: false,
+      }),
+    );
 
     const wrapper = mount(HourlyWeatherSection, {
       global: {
@@ -226,15 +258,17 @@ describe('HourlyWeatherSection.vue', () => {
   });
 
   it('toggles dropdown visibility when IconButton is clicked', async () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      weatherData: ref({
-        current: { time: '2024-01-01T12:00:00' },
-        daily: { time: ['2024-01-01'] },
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        weatherData: {
+          current: { time: '2024-01-01T12:00:00' },
+          daily: { time: ['2024-01-01'] },
+        },
+        hourlyData: [],
+        formattedDays: ['Monday'],
+        loading: false,
       }),
-      hourlyData: ref([]),
-      formattedDays: ref(['Monday']),
-      loading: ref(false),
-    } as any);
+    );
 
     const wrapper = mount(HourlyWeatherSection, {
       global: {
@@ -256,12 +290,14 @@ describe('HourlyWeatherSection.vue', () => {
   });
 
   it('disables IconButton when loading', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      weatherData: ref(null),
-      hourlyData: ref(null),
-      formattedDays: ref([]),
-      loading: ref(true),
-    } as any);
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        weatherData: null,
+        hourlyData: null,
+        formattedDays: [],
+        loading: true,
+      }),
+    );
 
     const wrapper = mount(HourlyWeatherSection, {
       global: {
@@ -274,12 +310,14 @@ describe('HourlyWeatherSection.vue', () => {
   });
 
   it('disables IconButton when weatherData is null', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      weatherData: ref(null),
-      hourlyData: ref([]),
-      formattedDays: ref([]),
-      loading: ref(false),
-    } as any);
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        weatherData: null,
+        hourlyData: [],
+        formattedDays: [],
+        loading: false,
+      }),
+    );
 
     const wrapper = mount(HourlyWeatherSection, {
       global: {
@@ -292,15 +330,17 @@ describe('HourlyWeatherSection.vue', () => {
   });
 
   it('handles day selection from dropdown', async () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      weatherData: ref({
-        current: { time: '2024-01-01T12:00:00' },
-        daily: { time: ['2024-01-01', '2024-01-02'] },
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        weatherData: {
+          current: { time: '2024-01-01T12:00:00' },
+          daily: { time: ['2024-01-01', '2024-01-02'] },
+        },
+        hourlyData: [],
+        formattedDays: ['Monday', 'Tuesday'],
+        loading: false,
       }),
-      hourlyData: ref([]),
-      formattedDays: ref(['Monday', 'Tuesday']),
-      loading: ref(false),
-    } as any);
+    );
 
     const wrapper = mount(HourlyWeatherSection, {
       global: {
@@ -317,20 +357,22 @@ describe('HourlyWeatherSection.vue', () => {
   });
 
   it('filters hourly data by selected day', async () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      weatherData: ref({
-        current: { time: '2024-01-01T12:00:00' },
-        daily: { time: ['2024-01-01', '2024-01-02'] },
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        weatherData: {
+          current: { time: '2024-01-01T12:00:00' },
+          daily: { time: ['2024-01-01', '2024-01-02'] },
+        },
+        hourlyData: [
+          { hour: '2024-01-01T10:00:00', temperature: 15, weatherCode: 0 },
+          { hour: '2024-01-01T11:00:00', temperature: 16, weatherCode: 1 },
+          { hour: '2024-01-02T08:00:00', temperature: 18, weatherCode: 2 },
+          { hour: '2024-01-02T09:00:00', temperature: 19, weatherCode: 3 },
+        ],
+        formattedDays: ['Monday', 'Tuesday'],
+        loading: false,
       }),
-      hourlyData: ref([
-        { hour: '2024-01-01T10:00:00', temperature: 15, weatherCode: 0 },
-        { hour: '2024-01-01T11:00:00', temperature: 16, weatherCode: 1 },
-        { hour: '2024-01-02T08:00:00', temperature: 18, weatherCode: 2 },
-        { hour: '2024-01-02T09:00:00', temperature: 19, weatherCode: 3 },
-      ]),
-      formattedDays: ref(['Monday', 'Tuesday']),
-      loading: ref(false),
-    } as any);
+    );
 
     const wrapper = mount(HourlyWeatherSection, {
       global: {
@@ -350,17 +392,19 @@ describe('HourlyWeatherSection.vue', () => {
   });
 
   it('returns empty array when dayIndex is not found', async () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      weatherData: ref({
-        current: { time: '2024-01-01T12:00:00' },
-        daily: { time: ['2024-01-01'] },
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        weatherData: {
+          current: { time: '2024-01-01T12:00:00' },
+          daily: { time: ['2024-01-01'] },
+        },
+        hourlyData: [
+          { hour: '2024-01-01T08:00:00', temperature: 15, weatherCode: 0 },
+        ],
+        formattedDays: ['Monday'],
+        loading: false,
       }),
-      hourlyData: ref([
-        { hour: '2024-01-01T08:00:00', temperature: 15, weatherCode: 0 },
-      ]),
-      formattedDays: ref(['Monday']),
-      loading: ref(false),
-    } as any);
+    );
 
     const wrapper = mount(HourlyWeatherSection, {
       global: {
@@ -377,12 +421,14 @@ describe('HourlyWeatherSection.vue', () => {
   });
 
   it('applies correct CSS classes', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      weatherData: ref(null),
-      hourlyData: ref(null),
-      formattedDays: ref([]),
-      loading: ref(false),
-    } as any);
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        weatherData: null,
+        hourlyData: null,
+        formattedDays: [],
+        loading: false,
+      }),
+    );
 
     const wrapper = mount(HourlyWeatherSection, {
       global: {
@@ -397,18 +443,20 @@ describe('HourlyWeatherSection.vue', () => {
   });
 
   it('uses hour as key for v-for rendering', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      weatherData: ref({
-        current: { time: '2024-01-01T12:00:00' },
-        daily: { time: ['2024-01-01'] },
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        weatherData: {
+          current: { time: '2024-01-01T12:00:00' },
+          daily: { time: ['2024-01-01'] },
+        },
+        hourlyData: [
+          { hour: '2024-01-01T08:00:00', temperature: 15, weatherCode: 0 },
+          { hour: '2024-01-01T09:00:00', temperature: 16, weatherCode: 1 },
+        ],
+        formattedDays: ['Monday'],
+        loading: false,
       }),
-      hourlyData: ref([
-        { hour: '2024-01-01T08:00:00', temperature: 15, weatherCode: 0 },
-        { hour: '2024-01-01T09:00:00', temperature: 16, weatherCode: 1 },
-      ]),
-      formattedDays: ref(['Monday']),
-      loading: ref(false),
-    } as any);
+    );
 
     const wrapper = mount(HourlyWeatherSection, {
       global: {
@@ -422,15 +470,17 @@ describe('HourlyWeatherSection.vue', () => {
   });
 
   it('renders empty data container when filteredHourlyData is empty', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      weatherData: ref({
-        current: { time: '2024-01-01T12:00:00' },
-        daily: { time: ['2024-01-01'] },
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        weatherData: {
+          current: { time: '2024-01-01T12:00:00' },
+          daily: { time: ['2024-01-01'] },
+        },
+        hourlyData: [],
+        formattedDays: ['Monday'],
+        loading: false,
       }),
-      hourlyData: ref([]),
-      formattedDays: ref(['Monday']),
-      loading: ref(false),
-    } as any);
+    );
 
     const wrapper = mount(HourlyWeatherSection, {
       global: {

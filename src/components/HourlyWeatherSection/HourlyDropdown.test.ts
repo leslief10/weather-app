@@ -1,9 +1,9 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { mount } from '@vue/test-utils';
 import { createPinia } from 'pinia';
-import { ref } from 'vue';
 import HourlyDropdown from './HourlyDropdown.vue';
 import { List, ListItem } from '@/components/ui/List';
+import { createMockWeatherStore } from '@/test-utils/mockWeatherStore';
 
 vi.mock('@/stores/weatherStore', () => ({
   useWeatherStore: vi.fn(),
@@ -17,9 +17,11 @@ describe('HourlyDropdown.vue', () => {
   });
 
   it('renders the dropdown container', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      formattedDays: ref([]),
-    } as any);
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        formattedDays: [],
+      }),
+    );
 
     const wrapper = mount(HourlyDropdown, {
       global: {
@@ -31,9 +33,11 @@ describe('HourlyDropdown.vue', () => {
   });
 
   it('renders List component', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      formattedDays: ref([]),
-    } as any);
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        formattedDays: [],
+      }),
+    );
 
     const wrapper = mount(HourlyDropdown, {
       global: {
@@ -45,9 +49,11 @@ describe('HourlyDropdown.vue', () => {
   });
 
   it('passes correct size prop to List component', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      formattedDays: ref([]),
-    } as any);
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        formattedDays: [],
+      }),
+    );
 
     const wrapper = mount(HourlyDropdown, {
       global: {
@@ -60,9 +66,11 @@ describe('HourlyDropdown.vue', () => {
   });
 
   it('renders no ListItem components when formattedDays is empty', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      formattedDays: ref([]),
-    } as any);
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        formattedDays: [],
+      }),
+    );
 
     const wrapper = mount(HourlyDropdown, {
       global: {
@@ -74,15 +82,11 @@ describe('HourlyDropdown.vue', () => {
   });
 
   it('renders ListItem for each day in formattedDays', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      formattedDays: ref([
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-      ]),
-    } as any);
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        formattedDays: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      }),
+    );
 
     const wrapper = mount(HourlyDropdown, {
       global: {
@@ -95,9 +99,11 @@ describe('HourlyDropdown.vue', () => {
 
   it('displays correct day names in ListItems', () => {
     const days = ['Monday', 'Tuesday', 'Wednesday'];
-    vi.mocked(useWeatherStore).mockReturnValue({
-      formattedDays: ref(days),
-    } as any);
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        formattedDays: days,
+      }),
+    );
 
     const wrapper = mount(HourlyDropdown, {
       global: {
@@ -113,9 +119,11 @@ describe('HourlyDropdown.vue', () => {
   });
 
   it('passes interactive prop to ListItem components', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      formattedDays: ref(['Monday', 'Tuesday']),
-    } as any);
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        formattedDays: ['Monday', 'Tuesday'],
+      }),
+    );
 
     const wrapper = mount(HourlyDropdown, {
       global: {
@@ -132,9 +140,11 @@ describe('HourlyDropdown.vue', () => {
 
   it('uses day as key for v-for rendering', () => {
     const days = ['Monday', 'Tuesday', 'Wednesday'];
-    vi.mocked(useWeatherStore).mockReturnValue({
-      formattedDays: ref(days),
-    } as any);
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        formattedDays: days,
+      }),
+    );
 
     const wrapper = mount(HourlyDropdown, {
       global: {
@@ -147,9 +157,11 @@ describe('HourlyDropdown.vue', () => {
   });
 
   it('emits selectDay event when ListItem is clicked', async () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      formattedDays: ref(['Monday', 'Tuesday', 'Wednesday']),
-    } as any);
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        formattedDays: ['Monday', 'Tuesday', 'Wednesday'],
+      }),
+    );
 
     const wrapper = mount(HourlyDropdown, {
       global: {
@@ -166,9 +178,11 @@ describe('HourlyDropdown.vue', () => {
 
   it('emits selectDay event with correct day name for each item', async () => {
     const days = ['Monday', 'Tuesday', 'Wednesday'];
-    vi.mocked(useWeatherStore).mockReturnValue({
-      formattedDays: ref(days),
-    } as any);
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        formattedDays: days,
+      }),
+    );
 
     const wrapper = mount(HourlyDropdown, {
       global: {
@@ -190,9 +204,11 @@ describe('HourlyDropdown.vue', () => {
   });
 
   it('emits multiple selectDay events when items are clicked multiple times', async () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      formattedDays: ref(['Monday', 'Tuesday']),
-    } as any);
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        formattedDays: ['Monday', 'Tuesday'],
+      }),
+    );
 
     const wrapper = mount(HourlyDropdown, {
       global: {
@@ -214,9 +230,11 @@ describe('HourlyDropdown.vue', () => {
   });
 
   it('handles empty formattedDays gracefully', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      formattedDays: ref([]),
-    } as any);
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        formattedDays: [],
+      }),
+    );
 
     const wrapper = mount(HourlyDropdown, {
       global: {
@@ -230,11 +248,11 @@ describe('HourlyDropdown.vue', () => {
   });
 
   it('updates rendered items when formattedDays changes', async () => {
-    const formattedDaysRef = ref(['Monday', 'Tuesday']);
-
-    vi.mocked(useWeatherStore).mockReturnValue({
-      formattedDays: formattedDaysRef,
-    } as any);
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        formattedDays: ['Monday', 'Tuesday'],
+      }),
+    );
 
     const wrapper = mount(HourlyDropdown, {
       global: {
@@ -244,16 +262,27 @@ describe('HourlyDropdown.vue', () => {
 
     expect(wrapper.findAllComponents(ListItem)).toHaveLength(2);
 
-    formattedDaysRef.value = ['Monday', 'Tuesday', 'Wednesday', 'Thursday'];
-    await wrapper.vm.$nextTick();
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        formattedDays: ['Monday', 'Tuesday', 'Wednesday', 'Thursday'],
+      }),
+    );
 
-    expect(wrapper.findAllComponents(ListItem)).toHaveLength(4);
+    const wrapper2 = mount(HourlyDropdown, {
+      global: {
+        plugins: [createPinia()],
+      },
+    });
+
+    expect(wrapper2.findAllComponents(ListItem)).toHaveLength(4);
   });
 
   it('applies correct CSS classes', () => {
-    vi.mocked(useWeatherStore).mockReturnValue({
-      formattedDays: ref(['Monday', 'Tuesday']),
-    } as any);
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        formattedDays: ['Monday', 'Tuesday'],
+      }),
+    );
 
     const wrapper = mount(HourlyDropdown, {
       global: {
