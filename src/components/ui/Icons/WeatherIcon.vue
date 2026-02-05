@@ -16,7 +16,7 @@ const iconName = computed(() => useWeatherIcon(props.weatherCode));
 
 const altLabel = computed(() => useWeatherIconAlt(props.weatherCode));
 
-const iconPath = computed(() => `/src/assets/img/${iconName.value}.webp`);
+const iconPath = computed(() => `/${iconName.value}.webp`);
 
 const sizeClass = computed(() => `weather-icon--${props.size}`);
 </script>

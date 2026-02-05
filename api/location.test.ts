@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import handler from './location';
+import handler from './location.ts';
 
 describe('Location API Handler', () => {
   let mockRequest: any;

@@ -18,7 +18,7 @@ const closeDropdown = (): void => {
 <template>
   <header class="header">
     <img
-      src="../../assets/img/logo.svg"
+      src="/logo.svg"
       alt=""
       class="header--logo"
     />
