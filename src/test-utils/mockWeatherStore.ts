@@ -66,7 +66,7 @@ export function createMockWeatherStore(
 }
 
 export function createPartialWeatherData(
-  overrides: DeepPartial<WeatherData>
+  overrides: DeepPartial<WeatherData>,
 ): WeatherData {
   const base = mockWeatherData as WeatherData;
   return {

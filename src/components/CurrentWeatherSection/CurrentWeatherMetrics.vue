@@ -16,6 +16,38 @@ const formatCardValue = (value: number | undefined): string | number => {
   return Math.round(value);
 };
 
+const temperatureUnit = (): string => {
+  if (weatherData?.value?.current.apparentTemperature != null) {
+    return '°';
+  }
+  return '';
+};
+
+const humidityUnit = (): string => {
+  if (weatherData?.value?.current.relativeHumidity != null) {
+    return '%';
+  }
+  return '';
+};
+
+const windSpeedUnit = (): string => {
+  if (weatherData?.value?.current.windSpeedUnit === 'km/h') {
+    return 'km/h';
+  } else if (weatherData?.value?.current.windSpeedUnit === 'mp/h') {
+    return 'mph';
+  }
+  return '';
+};
+
+const precipitationUnit = (): string => {
+  if (weatherData?.value?.current.precipitationUnit === 'mm') {
+    return 'mm';
+  } else if (weatherData?.value?.current.precipitationUnit === 'inch') {
+    return 'in';
+  }
+  return '';
+};
+
 const weatherCards = computed((): CurrentCardProps[] => {
   if (!weatherData?.value?.current) {
     return [];
@@ -25,22 +57,22 @@ const weatherCards = computed((): CurrentCardProps[] => {
     {
       label: 'Feels Like',
       value: formatCardValue(weatherData?.value?.current.apparentTemperature),
-      unit: weatherData?.value?.current.apparentTemperature != null ? '°' : '',
+      unit: temperatureUnit(),
     },
     {
       label: 'Humidity',
       value: formatCardValue(weatherData?.value?.current.relativeHumidity),
-      unit: weatherData?.value?.current.relativeHumidity != null ? '%' : '',
+      unit: humidityUnit(),
     },
     {
       label: 'Wind',
       value: formatCardValue(weatherData?.value?.current.windSpeed),
-      unit: weatherData?.value?.current.windSpeedUnit ?? '',
+      unit: windSpeedUnit(),
     },
     {
       label: 'Precipitation',
       value: formatCardValue(weatherData?.value?.current.precipitation),
-      unit: weatherData?.value?.current.precipitationUnit ?? '',
+      unit: precipitationUnit(),
     },
   ];
 });

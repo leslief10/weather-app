@@ -1,10 +1,16 @@
-import type { LocationData, WeatherData } from '@/types';
+import type { LocationData, WeatherData, WeatherOptions } from '@/types';
 
 export const getWeather = async (
   location: LocationData,
+  options: WeatherOptions = {},
 ): Promise<WeatherData> => {
   try {
     const { latitude, longitude } = location;
+    const {
+      temperatureUnit = 'celsius',
+      windSpeedUnit = 'kmh',
+      precipitationUnit = 'mm',
+    } = options;
 
     const url = new URL('https://api.open-meteo.com/v1/forecast');
 
@@ -20,6 +26,9 @@ export const getWeather = async (
     );
     url.searchParams.append('hourly', 'temperature_2m,weather_code');
     url.searchParams.append('timezone', 'auto');
+    url.searchParams.append('temperature_unit', temperatureUnit);
+    url.searchParams.append('wind_speed_unit', windSpeedUnit);
+    url.searchParams.append('precipitation_unit', precipitationUnit);
 
     const response = await fetch(url.toString());
 

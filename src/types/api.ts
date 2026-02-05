@@ -47,3 +47,13 @@ export interface WeatherData {
   daily: DailyWeather;
   hourly: HourlyWeather;
 }
+
+export type TemperatureUnit = 'celsius' | 'fahrenheit';
+export type WindSpeedUnit = 'kmh' | 'mph';
+export type PrecipitationUnit = 'mm' | 'inch';
+
+export interface WeatherOptions {
+  temperatureUnit?: 'celsius' | 'fahrenheit';
+  windSpeedUnit?: 'kmh' | 'mph' | 'ms' | 'kn';
+  precipitationUnit?: 'mm' | 'inch';
+}

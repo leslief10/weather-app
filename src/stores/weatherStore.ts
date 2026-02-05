@@ -1,6 +1,7 @@
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 import { defineStore } from 'pinia';
 import { getWeather } from '@/services/weatherService';
+import { useUnitsStore } from '@/stores/unitsStore';
 import type {
   DailyCardProps,
   HourlyCardProps,
@@ -13,6 +14,7 @@ export const useWeatherStore = defineStore('weather', () => {
   const weatherData = ref<WeatherData | null>(null);
   const loading = ref(false);
   const error = ref<string | null>(null);
+  const unitsStore = useUnitsStore();
 
   async function fetchWeather(location: LocationData) {
     loading.value = true;
@@ -20,7 +22,11 @@ export const useWeatherStore = defineStore('weather', () => {
 
     try {
       currentLocation.value = location;
-      weatherData.value = await getWeather(location);
+      weatherData.value = await getWeather(location, {
+        temperatureUnit: unitsStore.temperatureUnit,
+        windSpeedUnit: unitsStore.windSpeedUnit,
+        precipitationUnit: unitsStore.precipitationUnit,
+      });
     } catch (err) {
       error.value =
         err instanceof Error ? err.message : 'Failed to fetch weather data';
@@ -29,6 +35,19 @@ export const useWeatherStore = defineStore('weather', () => {
       loading.value = false;
     }
   }
+
+  watch(
+    [
+      () => unitsStore.temperatureUnit,
+      () => unitsStore.windSpeedUnit,
+      () => unitsStore.precipitationUnit,
+    ],
+    () => {
+      if (currentLocation.value) {
+        fetchWeather(currentLocation.value);
+      }
+    },
+  );
 
   const hourlyData = computed((): HourlyCardProps[] => {
     if (!weatherData.value?.hourly) return [];

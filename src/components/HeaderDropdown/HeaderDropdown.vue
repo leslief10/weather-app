@@ -1,7 +1,46 @@
 <script setup lang="ts">
+import { computed } from 'vue';
+import { storeToRefs } from 'pinia';
 import { Button } from '@/components/ui/Button';
 import { List, ListItem } from '@/components/ui/List';
 import { SVGIcon } from '@/components/ui/Icons';
+import { useUnitsStore } from '@/stores/unitsStore';
+
+const unitsStore = useUnitsStore();
+const { temperatureUnit, windSpeedUnit, precipitationUnit, isImperial } =
+  storeToRefs(unitsStore);
+
+const emit = defineEmits<{
+  close: [];
+}>();
+
+const handleUnitSwitch = (): void => {
+  if (isImperial.value) {
+    unitsStore.switchToMetric();
+  } else {
+    unitsStore.switchToImperial();
+  }
+  emit('close');
+};
+
+const selectTemperatureUnit = (unit: 'celsius' | 'fahrenheit'): void => {
+  temperatureUnit.value = unit;
+  emit('close');
+};
+
+const selectWindSpeedUnit = (unit: 'kmh' | 'mph'): void => {
+  windSpeedUnit.value = unit;
+  emit('close');
+};
+
+const selectPrecipitationUnit = (unit: 'mm' | 'inch'): void => {
+  precipitationUnit.value = unit;
+  emit('close');
+};
+
+const unitSwitchText = computed(() =>
+  isImperial.value ? 'Switch to Metric' : 'Switch to Imperial',
+);
 </script>
 
 <template>
@@ -10,7 +49,8 @@ import { SVGIcon } from '@/components/ui/Icons';
       variant="secondary"
       size="sm"
       class="dropdown--btn"
-      >Switch to Imperial</Button
+      @click="handleUnitSwitch"
+      >{{ unitSwitchText }}</Button
     >
     <div class="dropdown--units">
       <p class="dropdown--units-text">Temperature</p>
@@ -21,14 +61,23 @@ import { SVGIcon } from '@/components/ui/Icons';
         <ListItem
           interactive
           class="dropdown--units-list-item"
+          @click="selectTemperatureUnit('celsius')"
           >Celsius (°C)
-          <template #trailing><SVGIcon name="icon-checkmark" /></template>
+          <template #trailing
+            ><SVGIcon
+              v-if="temperatureUnit === 'celsius'"
+              name="icon-checkmark"
+          /></template>
         </ListItem>
         <ListItem
           interactive
           class="dropdown--units-list-item"
+          @click="selectTemperatureUnit('fahrenheit')"
           >Fahrenheit (°F)
-          <template #trailing><SVGIcon name="icon-checkmark" /></template
+          <template #trailing
+            ><SVGIcon
+              v-if="temperatureUnit === 'fahrenheit'"
+              name="icon-checkmark" /></template
         ></ListItem>
       </List>
     </div>
@@ -41,12 +90,22 @@ import { SVGIcon } from '@/components/ui/Icons';
         <ListItem
           interactive
           class="dropdown--units-list-item"
-          >km/h <template #trailing><SVGIcon name="icon-checkmark" /></template
+          @click="selectWindSpeedUnit('kmh')"
+          >km/h
+          <template #trailing
+            ><SVGIcon
+              v-if="windSpeedUnit === 'kmh'"
+              name="icon-checkmark" /></template
         ></ListItem>
         <ListItem
           interactive
           class="dropdown--units-list-item"
-          >mph <template #trailing><SVGIcon name="icon-checkmark" /></template
+          @click="selectWindSpeedUnit('mph')"
+          >mph
+          <template #trailing
+            ><SVGIcon
+              v-if="windSpeedUnit === 'mph'"
+              name="icon-checkmark" /></template
         ></ListItem>
       </List>
     </div>
@@ -59,14 +118,22 @@ import { SVGIcon } from '@/components/ui/Icons';
         <ListItem
           interactive
           class="dropdown--units-list-item"
+          @click="selectPrecipitationUnit('mm')"
           >Millimeters (mm)
-          <template #trailing><SVGIcon name="icon-checkmark" /></template
+          <template #trailing
+            ><SVGIcon
+              v-if="precipitationUnit === 'mm'"
+              name="icon-checkmark" /></template
         ></ListItem>
         <ListItem
           interactive
           class="dropdown--units-list-item"
+          @click="selectPrecipitationUnit('inch')"
           >Inches (in)
-          <template #trailing><SVGIcon name="icon-checkmark" /></template
+          <template #trailing
+            ><SVGIcon
+              v-if="precipitationUnit === 'inch'"
+              name="icon-checkmark" /></template
         ></ListItem>
       </List>
     </div>

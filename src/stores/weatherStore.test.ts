@@ -3,7 +3,10 @@ import { setActivePinia, createPinia } from 'pinia';
 import { useWeatherStore } from './weatherStore';
 import { getWeather } from '@/services/weatherService';
 import mockWeatherData from '@/mocks/data.json';
-import { defaultLocation, createPartialWeatherData } from '@/test-utils/mockWeatherStore';
+import {
+  defaultLocation,
+  createPartialWeatherData,
+} from '@/test-utils/mockWeatherStore';
 
 vi.mock('@/services/weatherService', () => ({
   getWeather: vi.fn(),
@@ -43,7 +46,11 @@ describe('weatherStore - fetchWeather', () => {
 
     await store.fetchWeather(defaultLocation);
 
-    expect(getWeather).toHaveBeenCalledWith(defaultLocation);
+    expect(getWeather).toHaveBeenCalledWith(defaultLocation, {
+      temperatureUnit: 'celsius',
+      windSpeedUnit: 'kmh',
+      precipitationUnit: 'mm',
+    });
     expect(getWeather).toHaveBeenCalledTimes(1);
   });
 

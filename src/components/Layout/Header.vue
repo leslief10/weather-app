@@ -9,6 +9,10 @@ const isDropdownVisible = ref(false);
 const toggleDropdown = (): void => {
   isDropdownVisible.value = !isDropdownVisible.value;
 };
+
+const closeDropdown = (): void => {
+  isDropdownVisible.value = false;
+};
 </script>
 
 <template>
@@ -27,7 +31,10 @@ const toggleDropdown = (): void => {
       Units
       <SVGIcon name="icon-dropdown" />
     </IconButton>
-    <HeaderDropdown v-show="isDropdownVisible" />
+    <HeaderDropdown
+      v-show="isDropdownVisible"
+      @close="closeDropdown"
+    />
   </header>
 </template>
 
