@@ -10,7 +10,7 @@ export default mergeConfig(
       environment: 'jsdom',
       include: ['**/*.test.ts', '**/*.spec.ts'],
       coverage: {
-        exclude: ['src/main.ts', '**/*.config.js', '**/*.config.ts'],
+        exclude: ['src/main.ts', '**/*.config.js', '**/*.config.ts', 'src/test-utils', 'src/assets', 'src/mocks'],
         provider: 'v8',
         reporter: ['text', 'json', 'html'],
       },

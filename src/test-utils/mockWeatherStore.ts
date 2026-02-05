@@ -10,9 +10,9 @@ import mockWeatherData from '@/mocks/data.json';
 
 type WeatherStoreReturn = ReturnType<typeof useWeatherStore>;
 
-type DeepPartial<T> = {
+export type DeepPartial<T> = {
   [P in keyof T]?: T[P] extends object
-    ? DeepPartial<T[P]>
+    ? DeepPartial<T[P]> | null
     : T[P] | undefined | null;
 };
 
@@ -26,7 +26,7 @@ export interface MockWeatherStoreOptions {
   formattedDays?: string[];
 }
 
-const defaultLocation: LocationData = {
+export const defaultLocation: LocationData = {
   city: 'Toronto',
   country: 'Canada',
   latitude: 43.65,
@@ -63,4 +63,14 @@ export function createMockWeatherStore(
     $onAction: vi.fn(() => () => {}),
     $dispose: vi.fn(),
   } as unknown as WeatherStoreReturn;
+}
+
+export function createPartialWeatherData(
+  overrides: DeepPartial<WeatherData>
+): WeatherData {
+  const base = mockWeatherData as WeatherData;
+  return {
+    ...base,
+    ...overrides,
+  } as WeatherData;
 }
