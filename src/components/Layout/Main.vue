@@ -1,26 +1,36 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { storeToRefs } from 'pinia';
 import { Search } from '@/components/Search';
 import { CurrentWeatherSection } from '@/components/CurrentWeatherSection';
 import { DailyWeatherSection } from '@/components/DailyWeatherSection';
 import { HourlyWeatherSection } from '@/components/HourlyWeatherSection';
+import ErrorMain from '@/components/ErrorMain/ErrorMain.vue';
+import { useWeatherStore } from '@/stores/weatherStore';
 
-const errorMessage = ref('');
+const weatherStore = useWeatherStore();
+const { error } = storeToRefs(weatherStore);
+
+const noResultsMessage = ref('');
 
 const handleMessage = (message: string) => {
-  errorMessage.value = message;
+  noResultsMessage.value = message;
 };
 </script>
 
 <template>
-  <main class="main">
+  <ErrorMain v-if="error" />
+  <main
+    v-else
+    class="main"
+  >
     <h1 class="main__title">How's the sky looking today?</h1>
     <Search @message="handleMessage" />
     <div
-      v-if="errorMessage"
+      v-if="noResultsMessage"
       class="main__error-message"
     >
-      {{ errorMessage }}
+      {{ noResultsMessage }}
     </div>
     <div
       v-else
@@ -34,23 +44,6 @@ const handleMessage = (message: string) => {
 </template>
 
 <style scoped>
-.main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 76rem;
-  padding: var(--spacing-3000) var(--spacing-1000);
-}
-
-.main__title {
-  max-width: 30rem;
-  font-family: var(--secondary-font);
-  font-size: 3.25rem;
-  line-height: 120%;
-  text-align: center;
-  color: var(--neutral-0);
-}
-
 .main__error-message {
   margin-top: var(--spacing-3000);
   font-size: 1.75rem;
@@ -64,24 +57,7 @@ const handleMessage = (message: string) => {
   width: 100%;
 }
 
-@media (min-width: 768px) {
-  .main {
-    padding: var(--spacing-3000) var(--spacing-1500);
-  }
-}
-
-@media (min-width: 1024px) {
-  .main__title {
-    max-width: none;
-  }
-}
-
 @media (min-width: 1280px) {
-  .main {
-    padding: var(--spacing-3000) 0;
-    margin: 0 auto;
-  }
-
   .main__sections-container {
     display: grid;
     grid-template-columns: repeat(6, 1fr);

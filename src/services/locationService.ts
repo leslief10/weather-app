@@ -14,7 +14,7 @@ export const getUserLocation = async (): Promise<LocationData> => {
 
     return response.json();
   } catch (error) {
-    console.error('Error:', error);
+    console.error('Error getting location:', error);
     throw error;
   }
 };
@@ -26,6 +26,10 @@ export const searchCities = async (query: string): Promise<LocationData[]> => {
   url.searchParams.append('language', 'en');
 
   const response = await fetch(url.toString());
+
+  if (!response.ok) {
+    throw new Error(`Error getting the cities' information`);
+  }
 
   const data: { results: OpenMeteoSearchResult[] } = await response.json();
 

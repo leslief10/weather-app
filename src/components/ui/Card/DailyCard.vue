@@ -43,7 +43,6 @@ const formatDay = computed((): string => {
 
 <style scoped>
 .daily-card {
-  flex: 1;
   width: 100%;
   max-width: 6.5rem;
   padding: var(--spacing-1000) var(--spacing-0625);
@@ -75,5 +74,11 @@ const formatDay = computed((): string => {
   font-size: var(--spacing-1000);
   text-align: center;
   color: var(--neutral-0);
+}
+
+@media (min-width: 768px) {
+  .daily-card {
+    flex: 1;
+  }
 }
 </style>

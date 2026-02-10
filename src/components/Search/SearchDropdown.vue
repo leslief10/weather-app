@@ -59,6 +59,7 @@ const emit = defineEmits<{
   border: 1px solid var(--neutral-700);
   border-radius: var(--spacing-0750);
   box-shadow: 0px 8px 16px 0px rgba(2, 1, 44, 0.32);
+  z-index: 1;
 }
 
 .search-dropdown__loading,

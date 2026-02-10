@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
+import { storeToRefs } from 'pinia';
 import { Button } from '@/components/ui/Button';
 import { SearchInput } from '@/components/ui/Input';
 import { SearchDropdown } from '@/components/Search';
@@ -8,6 +9,7 @@ import { useWeatherStore } from '@/stores/weatherStore';
 import type { LocationData } from '@/types';
 
 const weatherStore = useWeatherStore();
+const { error } = storeToRefs(weatherStore);
 
 const searchQuery = ref('');
 const searchResults = ref<LocationData[]>([]);
@@ -37,8 +39,9 @@ watch(searchQuery, (newQuery) => {
     try {
       const results = await searchCities(newQuery);
       searchResults.value = results;
-    } catch (error) {
-      console.error('Search error:', error);
+    } catch (e) {
+      error.value = 'Search error';
+      console.error('Search error:', e);
       searchResults.value = [];
     } finally {
       isLoading.value = false;
@@ -62,7 +65,6 @@ const handleSearchButton = async () => {
     const result = searchResults?.value[0];
 
     if (result) {
-      console.log('result', result);
       emit('message', '');
       await weatherStore.fetchWeather(result);
       showSearchDropdown.value = false;

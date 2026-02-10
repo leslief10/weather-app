@@ -28,14 +28,15 @@ defineProps<CurrentCardProps>();
 
 <style scoped>
 .current-card {
-  max-width: 10.2rem;
   width: 100%;
   padding: var(--spacing-1250);
 }
 
 .current-card__content {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
   gap: var(--spacing-1500);
 }
 
@@ -66,6 +67,12 @@ defineProps<CurrentCardProps>();
 @media (min-width: 768px) {
   .current-card {
     max-width: 100%;
+  }
+
+  .current-card__content {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
   }
 }
 </style>
