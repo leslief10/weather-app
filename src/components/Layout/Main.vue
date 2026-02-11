@@ -23,6 +23,7 @@ const handleMessage = (message: string) => {
   <main
     v-else
     class="main"
+    data-testid="main-content"
   >
     <h1 class="main__title">How's the sky looking today?</h1>
     <Search @message="handleMessage" />

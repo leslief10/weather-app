@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { setActivePinia, createPinia } from 'pinia';
 import { useWeatherStore } from './weatherStore';
+import { useUnitsStore } from './unitsStore';
 import { getWeather } from '@/services/weatherService';
 import mockWeatherData from '@/mocks/data.json';
 import {
@@ -14,10 +15,12 @@ vi.mock('@/services/weatherService', () => ({
 
 describe('weatherStore - fetchWeather', () => {
   let store: ReturnType<typeof useWeatherStore>;
+  let unitsStore: ReturnType<typeof useUnitsStore>;
 
   beforeEach(() => {
     setActivePinia(createPinia());
     store = useWeatherStore();
+    unitsStore = useUnitsStore();
     vi.clearAllMocks();
   });
 
@@ -209,6 +212,86 @@ describe('weatherStore - fetchWeather', () => {
       expect(store.dailyData).toEqual([
         { date: '2024-01-01', maxTemp: 0, minTemp: 0, weatherCode: 0 },
       ]);
+    });
+  });
+
+  it('should refetch weather when temperatureUnit changes', async () => {
+    vi.mocked(getWeather).mockResolvedValue(mockWeatherData);
+    
+    await store.fetchWeather(defaultLocation);
+    expect(getWeather).toHaveBeenCalledTimes(1);
+
+    unitsStore.temperatureUnit = 'fahrenheit';
+    await vi.waitFor(() => {
+      expect(getWeather).toHaveBeenCalledTimes(2);
+    });
+    
+    expect(getWeather).toHaveBeenLastCalledWith(defaultLocation, {
+      temperatureUnit: 'fahrenheit',
+      windSpeedUnit: 'kmh',
+      precipitationUnit: 'mm',
+    });
+  });
+
+  it('should refetch weather when windSpeedUnit changes', async () => {
+    vi.mocked(getWeather).mockResolvedValue(mockWeatherData);
+    
+    await store.fetchWeather(defaultLocation);
+    expect(getWeather).toHaveBeenCalledTimes(1);
+
+    unitsStore.windSpeedUnit = 'mph';
+    await vi.waitFor(() => {
+      expect(getWeather).toHaveBeenCalledTimes(2);
+    });
+    
+    expect(getWeather).toHaveBeenLastCalledWith(defaultLocation, {
+      temperatureUnit: 'celsius',
+      windSpeedUnit: 'mph',
+      precipitationUnit: 'mm',
+    });
+  });
+
+  it('should refetch weather when precipitationUnit changes', async () => {
+    vi.mocked(getWeather).mockResolvedValue(mockWeatherData);
+    
+    await store.fetchWeather(defaultLocation);
+    expect(getWeather).toHaveBeenCalledTimes(1);
+
+    unitsStore.precipitationUnit = 'inch';
+    await vi.waitFor(() => {
+      expect(getWeather).toHaveBeenCalledTimes(2);
+    });
+    
+    expect(getWeather).toHaveBeenLastCalledWith(defaultLocation, {
+      temperatureUnit: 'celsius',
+      windSpeedUnit: 'kmh',
+      precipitationUnit: 'inch',
+    });
+  });
+
+  it('should not refetch weather when units change but no location is set', async () => {
+    vi.mocked(getWeather).mockResolvedValue(mockWeatherData);
+
+    expect(store.currentLocation).toBeNull();
+
+    unitsStore.temperatureUnit = 'fahrenheit';
+    await vi.waitFor(() => {}, { timeout: 100 }).catch(() => {});
+
+    expect(getWeather).not.toHaveBeenCalled();
+  });
+
+  it('should refetch weather only once when multiple units change', async () => {
+    vi.mocked(getWeather).mockResolvedValue(mockWeatherData);
+    
+    await store.fetchWeather(defaultLocation);
+    const initialCallCount = vi.mocked(getWeather).mock.calls.length;
+    
+    unitsStore.temperatureUnit = 'fahrenheit';
+    unitsStore.windSpeedUnit = 'mph';
+    unitsStore.precipitationUnit = 'inch';
+    
+    await vi.waitFor(() => {
+      expect(getWeather).toHaveBeenCalledTimes(initialCallCount + 1);
     });
   });
 

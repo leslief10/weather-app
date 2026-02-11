@@ -8,7 +8,10 @@ const handleRetry = () => {
 </script>
 
 <template>
-  <main class="main">
+  <main
+    class="main"
+    data-testid="error-main"
+  >
     <img
       src="/icon-error.svg"
       alt="Error connecting to the server"

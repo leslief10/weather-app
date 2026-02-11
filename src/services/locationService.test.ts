@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest';
-import { getUserLocation } from './locationService';
+import { getUserLocation, searchCities } from './locationService';
 
 describe('locationService', () => {
   beforeEach(() => {
@@ -74,7 +74,7 @@ describe('locationService', () => {
       await getUserLocation();
     } catch (e) {}
 
-    expect(consoleSpy).toHaveBeenCalledWith('Error:', expect.any(Error));
+    expect(consoleSpy).toHaveBeenCalledWith('Error getting location:', expect.any(Error));
     consoleSpy.mockRestore();
   });
 
@@ -139,5 +139,151 @@ describe('locationService', () => {
       vi.unstubAllEnvs();
       vi.unstubAllGlobals();
     });
+  });
+});
+
+describe('searchCities', () => {
+  beforeEach(() => {
+    vi.stubGlobal('fetch', vi.fn());
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
+  it('should fetch cities from Open-Meteo API with correct URL', async () => {
+    const mockData = {
+      results: [
+        {
+          name: 'New York',
+          country: 'United States',
+          latitude: 40.7128,
+          longitude: -74.006,
+        },
+      ],
+    };
+
+    vi.mocked(fetch).mockResolvedValue({
+      ok: true,
+      json: async () => mockData,
+    } as Response);
+
+    await searchCities('New York');
+
+    expect(fetch).toHaveBeenCalledWith(
+      expect.stringContaining('https://geocoding-api.open-meteo.com/v1/search'),
+    );
+    expect(fetch).toHaveBeenCalledWith(
+      expect.stringContaining('name=New+York'),
+    );
+  });
+
+  it('should return parsed location data from search results', async () => {
+    const mockData = {
+      results: [
+        {
+          name: 'London',
+          country: 'United Kingdom',
+          latitude: 51.5074,
+          longitude: -0.1278,
+        },
+        {
+          name: 'Londonderry',
+          country: 'United Kingdom',
+          latitude: 55.0047,
+          longitude: -7.1625,
+        },
+      ],
+    };
+
+    vi.mocked(fetch).mockResolvedValue({
+      ok: true,
+      json: async () => mockData,
+    } as Response);
+
+    const result = await searchCities('London');
+
+    expect(result).toHaveLength(2);
+    expect(result[0]).toEqual({
+      city: 'London',
+      country: 'United Kingdom',
+      latitude: 51.5074,
+      longitude: -0.1278,
+    });
+  });
+
+  it('should include correct query parameters in API call', async () => {
+    const mockData = { results: [] };
+
+    vi.mocked(fetch).mockResolvedValue({
+      ok: true,
+      json: async () => mockData,
+    } as Response);
+
+    await searchCities('Paris');
+
+    const callUrl = vi.mocked(fetch).mock.calls[0]?.[0] as string ?? '';
+    expect(callUrl).toContain('count=6');
+    expect(callUrl).toContain('language=en');
+  });
+
+  it('should throw an error when response is not ok', async () => {
+    vi.mocked(fetch).mockResolvedValue({
+      ok: false,
+      status: 400,
+    } as Response);
+
+    await expect(searchCities('Invalid')).rejects.toThrow(
+      `Error getting the cities' information`,
+    );
+  });
+
+  it('should throw an error when fetch fails', async () => {
+    vi.mocked(fetch).mockRejectedValue(new Error('Network error'));
+
+    await expect(searchCities('Tokyo')).rejects.toThrow('Network error');
+  });
+
+  it('should handle empty search results', async () => {
+    const mockData = { results: [] };
+
+    vi.mocked(fetch).mockResolvedValue({
+      ok: true,
+      json: async () => mockData,
+    } as Response);
+
+    const result = await searchCities('XYZ123NonexistentCity');
+
+    expect(result).toEqual([]);
+  });
+
+  it('should handle results with multiple cities', async () => {
+    const mockData = {
+      results: [
+        {
+          name: 'Sydney',
+          country: 'Australia',
+          latitude: -33.8688,
+          longitude: 151.2093,
+        },
+        {
+          name: 'Sydney',
+          country: 'Canada',
+          latitude: 46.1645,
+          longitude: -60.1917,
+        },
+      ],
+    };
+
+    vi.mocked(fetch).mockResolvedValue({
+      ok: true,
+      json: async () => mockData,
+    } as Response);
+
+    const result = await searchCities('Sydney');
+
+    expect(result).toHaveLength(2);
+    expect(result[0]?.country).toBe('Australia');
+    expect(result[1]?.country).toBe('Canada');
   });
 });

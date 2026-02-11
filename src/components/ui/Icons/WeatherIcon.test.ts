@@ -47,7 +47,7 @@ describe('WeatherIcon', () => {
       });
 
       expect(wrapper.find('img').attributes('src')).toBe(
-        '/src/assets/img/icon-rain.webp',
+        '/icon-rain.webp',
       );
     });
   });
@@ -136,7 +136,7 @@ describe('WeatherIcon', () => {
       });
 
       expect(wrapper.find('img').attributes('src')).toBe(
-        '/src/assets/img/icon-partly-cloudy.webp',
+        '/icon-partly-cloudy.webp',
       );
       expect(wrapper.find('img').attributes('alt')).toBe('Partly cloudy');
     });
@@ -151,7 +151,7 @@ describe('WeatherIcon', () => {
       });
 
       expect(wrapper.find('img').attributes('src')).toBe(
-        '/src/assets/img/icon-rain.webp',
+        '/icon-rain.webp',
       );
       expect(wrapper.find('img').attributes('alt')).toBe('Slight rain');
     });
@@ -166,7 +166,7 @@ describe('WeatherIcon', () => {
       });
 
       expect(wrapper.find('img').attributes('src')).toBe(
-        '/src/assets/img/icon-snow.webp',
+        '/icon-snow.webp',
       );
       expect(wrapper.find('img').attributes('alt')).toBe('Slight snow fall');
     });
@@ -181,7 +181,7 @@ describe('WeatherIcon', () => {
       });
 
       expect(wrapper.find('img').attributes('src')).toBe(
-        '/src/assets/img/icon-storm.webp',
+        '/icon-storm.webp',
       );
       expect(wrapper.find('img').attributes('alt')).toBe('Thunderstorm');
     });
@@ -198,7 +198,7 @@ describe('WeatherIcon', () => {
       });
 
       expect(wrapper.find('img').attributes('src')).toBe(
-        '/src/assets/img/icon-sunny.webp',
+        '/icon-sunny.webp',
       );
 
       mockUseWeatherIcon.mockReturnValue('icon-rain');

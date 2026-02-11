@@ -248,4 +248,60 @@ describe('CurrentWeatherMetrics.vue', () => {
     expect(cards[2]?.text()).toBe('0km/h');
     expect(cards[3]?.text()).toBe('0mm');
   });
+
+  it('should handle imperial units correctly', () => {
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        weatherData: {
+          current: {
+            apparentTemperature: 37,
+            relativeHumidity: 52,
+            windSpeed: 16,
+            windSpeedUnit: 'mp/h',
+            precipitation: 0,
+            precipitationUnit: 'inch',
+          },
+        },
+        loading: false,
+      }),
+    );
+
+    const wrapper = mount(CurrentWeatherMetrics, {
+      global: {
+        plugins: [createPinia()],
+      },
+    });
+    const cards = wrapper.findAll('.current-card');
+
+    expect(cards[0]?.text()).toBe('37°');
+    expect(cards[1]?.text()).toBe('52%');
+    expect(cards[2]?.text()).toBe('16mph');
+    expect(cards[3]?.text()).toBe('0in');
+  });
+
+  it('should not display unit when the value of windSpeedUnit and precipitationUnit is not valid', () => {
+    vi.mocked(useWeatherStore).mockReturnValue(
+      createMockWeatherStore({
+        weatherData: {
+          current: {
+            windSpeed: 30,
+            windSpeedUnit: 'knots',
+            precipitation: 5,
+            precipitationUnit: 'rain',
+          },
+        },
+        loading: false,
+      }),
+    );
+
+    const wrapper = mount(CurrentWeatherMetrics, {
+      global: {
+        plugins: [createPinia()],
+      },
+    });
+    const cards = wrapper.findAll('.current-card');
+
+    expect(cards[2]?.text()).toBe('30');
+    expect(cards[3]?.text()).toBe('5');
+  });
 });

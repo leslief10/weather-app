@@ -21,6 +21,8 @@ export default mergeConfig(
         provider: 'v8',
         reporter: ['text', 'json', 'html'],
       },
+      testTimeout: 10000,
+      hookTimeout: 10000,
     },
   }),
 );
