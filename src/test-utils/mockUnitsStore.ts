@@ -1,6 +1,10 @@
 import { ref } from 'vue';
 import type { useUnitsStore } from '@/stores/unitsStore';
-import type { TemperatureUnit, WindSpeedUnit, PrecipitationUnit } from '@/types';
+import type {
+  TemperatureUnit,
+  WindSpeedUnit,
+  PrecipitationUnit,
+} from '@/types';
 
 type UnitsStoreReturn = ReturnType<typeof useUnitsStore>;
 
@@ -17,12 +21,12 @@ export function createMockUnitsStore(
   const temperatureUnit = options.temperatureUnit ?? 'celsius';
   const windSpeedUnit = options.windSpeedUnit ?? 'kmh';
   const precipitationUnit = options.precipitationUnit ?? 'mm';
-  
-  const isImperial = options.isImperial ?? (
-    temperatureUnit === 'fahrenheit' &&
-    windSpeedUnit === 'mph' &&
-    precipitationUnit === 'inch'
-  );
+
+  const isImperial =
+    options.isImperial ??
+    (temperatureUnit === 'fahrenheit' &&
+      windSpeedUnit === 'mph' &&
+      precipitationUnit === 'inch');
 
   return {
     temperatureUnit: ref(temperatureUnit),

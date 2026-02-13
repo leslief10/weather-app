@@ -21,6 +21,7 @@
     "src/**/*.ts",
     "src/**/*.vue",
     "src/**/*.test.ts",
-    "src/**/*.spec.ts"
-, "src/components/ui/Icons/WeatherIcon.vue"  ]
+    "src/**/*.spec.ts",
+    "src/components/ui/Icons/WeatherIcon.vue"
+  ]
 }

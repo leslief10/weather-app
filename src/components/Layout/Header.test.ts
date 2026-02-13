@@ -54,9 +54,9 @@ describe('Header.vue', () => {
   it('shows dropdown when IconButton is clicked', async () => {
     const wrapper = mount(Header);
     const button = wrapper.findComponent({ name: 'IconButton' });
-    
+
     await button.trigger('click');
-    
+
     const dropdown = wrapper.findComponent({ name: 'HeaderDropdown' });
     expect(dropdown.isVisible()).toBe(true);
   });
@@ -67,10 +67,10 @@ describe('Header.vue', () => {
     const dropdown = wrapper.findComponent({ name: 'HeaderDropdown' });
 
     expect(dropdown.attributes('style')).toContain('display: none');
-    
+
     await button.trigger('click');
     expect(dropdown.attributes('style')).not.toContain('display: none');
-    
+
     await button.trigger('click');
     expect(dropdown.attributes('style')).toContain('display: none');
   });
@@ -80,12 +80,12 @@ describe('Header.vue', () => {
     const button = wrapper.findComponent({ name: 'IconButton' });
 
     await button.trigger('click');
-    
+
     const dropdown = wrapper.findComponent({ name: 'HeaderDropdown' });
     expect(dropdown.attributes('style')).not.toContain('display: none');
 
     await dropdown.vm.$emit('close');
-    
+
     expect(dropdown.attributes('style')).toContain('display: none');
   });
 

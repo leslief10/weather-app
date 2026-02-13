@@ -11,7 +11,7 @@ describe('ErrorMain.vue', () => {
     reloadSpy = vi.fn();
     Object.defineProperty(window, 'location', {
       value: { reload: reloadSpy },
-      writable: true
+      writable: true,
     });
   });
 
@@ -22,8 +22,8 @@ describe('ErrorMain.vue', () => {
   it('renders the component correctly', () => {
     const wrapper = mount(ErrorMain, {
       global: {
-        components: { SVGIcon, IconButton }
-      }
+        components: { SVGIcon, IconButton },
+      },
     });
     expect(wrapper.find('main.main').exists()).toBe(true);
   });
@@ -31,8 +31,8 @@ describe('ErrorMain.vue', () => {
   it('displays the error icon with correct attributes', () => {
     const wrapper = mount(ErrorMain, {
       global: {
-        components: { SVGIcon, IconButton }
-      }
+        components: { SVGIcon, IconButton },
+      },
     });
     const img = wrapper.find('img.main__icon');
     expect(img.exists()).toBe(true);
@@ -43,8 +43,8 @@ describe('ErrorMain.vue', () => {
   it('displays the correct error title', () => {
     const wrapper = mount(ErrorMain, {
       global: {
-        components: { SVGIcon, IconButton }
-      }
+        components: { SVGIcon, IconButton },
+      },
     });
     expect(wrapper.find('h1.main__title').text()).toBe('Something went wrong');
   });
@@ -52,8 +52,8 @@ describe('ErrorMain.vue', () => {
   it('displays the correct error message', () => {
     const wrapper = mount(ErrorMain, {
       global: {
-        components: { SVGIcon, IconButton }
-      }
+        components: { SVGIcon, IconButton },
+      },
     });
     const text = wrapper.find('p.main__text').text();
     expect(text).toContain("We couldn't connect to the server");
@@ -63,8 +63,8 @@ describe('ErrorMain.vue', () => {
   it('renders the retry button with correct props', () => {
     const wrapper = mount(ErrorMain, {
       global: {
-        components: { SVGIcon, IconButton }
-      }
+        components: { SVGIcon, IconButton },
+      },
     });
     const button = wrapper.findComponent(IconButton);
     expect(button.exists()).toBe(true);
@@ -75,8 +75,8 @@ describe('ErrorMain.vue', () => {
   it('calls window.location.reload when retry button is clicked', async () => {
     const wrapper = mount(ErrorMain, {
       global: {
-        components: { SVGIcon, IconButton }
-      }
+        components: { SVGIcon, IconButton },
+      },
     });
     const button = wrapper.findComponent(IconButton);
     await button.trigger('click');
@@ -86,8 +86,8 @@ describe('ErrorMain.vue', () => {
   it('renders the SVG icon in the button', () => {
     const wrapper = mount(ErrorMain, {
       global: {
-        components: { SVGIcon, IconButton }
-      }
+        components: { SVGIcon, IconButton },
+      },
     });
     const icon = wrapper.findComponent(SVGIcon);
     expect(icon.exists()).toBe(true);
@@ -97,8 +97,8 @@ describe('ErrorMain.vue', () => {
   it('displays retry button text', () => {
     const wrapper = mount(ErrorMain, {
       global: {
-        components: { SVGIcon, IconButton }
-      }
+        components: { SVGIcon, IconButton },
+      },
     });
     expect(wrapper.text()).toContain('Retry');
   });

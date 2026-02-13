@@ -11,7 +11,7 @@ describe('SearchDropdown', () => {
       city: 'New York',
       country: 'USA',
       latitude: 40.7128,
-      longitude: -74.0060,
+      longitude: -74.006,
     },
     {
       city: 'London',
@@ -178,7 +178,7 @@ describe('SearchDropdown', () => {
       });
 
       const listItems = wrapper.findAllComponents(ListItem);
-      
+
       for (let i = 0; i < listItems.length; i++) {
         await listItems[i]?.trigger('click');
         expect(wrapper.emitted('select')?.[i]).toEqual([mockResults[i]]);

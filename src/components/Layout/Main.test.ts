@@ -37,7 +37,9 @@ describe('Main.vue', () => {
     vi.mocked(useWeatherStore).mockReturnValue(mockStore);
 
     const wrapper = mount(Main);
-    expect(wrapper.find('h1.main__title').text()).toBe("How's the sky looking today?");
+    expect(wrapper.find('h1.main__title').text()).toBe(
+      "How's the sky looking today?",
+    );
   });
 
   it('renders Search component', () => {
@@ -46,8 +48,8 @@ describe('Main.vue', () => {
 
     const wrapper = mount(Main, {
       global: {
-        stubs: { Search: true }
-      }
+        stubs: { Search: true },
+      },
     });
     expect(wrapper.findComponent({ name: 'Search' }).exists()).toBe(true);
   });
@@ -58,15 +60,19 @@ describe('Main.vue', () => {
 
     const wrapper = mount(Main, {
       global: {
-        stubs: { Search: true }
-      }
+        stubs: { Search: true },
+      },
     });
 
-    await wrapper.findComponent({ name: 'Search' }).vm.$emit('message', 'No results found');
+    await wrapper
+      .findComponent({ name: 'Search' })
+      .vm.$emit('message', 'No results found');
     await wrapper.vm.$nextTick();
-    
+
     expect(wrapper.find('.main__error-message').exists()).toBe(true);
-    expect(wrapper.find('.main__error-message').text()).toBe('No results found');
+    expect(wrapper.find('.main__error-message').text()).toBe(
+      'No results found',
+    );
   });
 
   it('displays weather sections when no error message', () => {
@@ -79,10 +85,10 @@ describe('Main.vue', () => {
           CurrentWeatherSection: true,
           DailyWeatherSection: true,
           HourlyWeatherSection: true,
-        }
-      }
+        },
+      },
     });
-    
+
     expect(wrapper.find('.main__sections-container').exists()).toBe(true);
   });
 
@@ -92,13 +98,15 @@ describe('Main.vue', () => {
 
     const wrapper = mount(Main, {
       global: {
-        stubs: { Search: true }
-      }
+        stubs: { Search: true },
+      },
     });
 
-    await wrapper.findComponent({ name: 'Search' }).vm.$emit('message', 'Error message');
+    await wrapper
+      .findComponent({ name: 'Search' })
+      .vm.$emit('message', 'Error message');
     await wrapper.vm.$nextTick();
-    
+
     expect(wrapper.find('.main__sections-container').exists()).toBe(false);
   });
 });

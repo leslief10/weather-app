@@ -74,7 +74,10 @@ describe('locationService', () => {
       await getUserLocation();
     } catch (e) {}
 
-    expect(consoleSpy).toHaveBeenCalledWith('Error getting location:', expect.any(Error));
+    expect(consoleSpy).toHaveBeenCalledWith(
+      'Error getting location:',
+      expect.any(Error),
+    );
     consoleSpy.mockRestore();
   });
 
@@ -222,7 +225,7 @@ describe('searchCities', () => {
 
     await searchCities('Paris');
 
-    const callUrl = vi.mocked(fetch).mock.calls[0]?.[0] as string ?? '';
+    const callUrl = (vi.mocked(fetch).mock.calls[0]?.[0] as string) ?? '';
     expect(callUrl).toContain('count=6');
     expect(callUrl).toContain('language=en');
   });

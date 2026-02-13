@@ -71,7 +71,9 @@ describe('HeaderDropdown.vue', () => {
     it('shows checkmark for celsius when selected', () => {
       const wrapper = mountComponent({ temperatureUnit: 'celsius' });
       const listItems = wrapper.findAllComponents(ListItem);
-      const celsiusItem = listItems.find(item => item.text().includes('Celsius'));
+      const celsiusItem = listItems.find((item) =>
+        item.text().includes('Celsius'),
+      );
       const checkmark = celsiusItem?.findComponent(SVGIcon);
       expect(checkmark?.exists()).toBe(true);
     });
@@ -79,7 +81,9 @@ describe('HeaderDropdown.vue', () => {
     it('shows checkmark for fahrenheit when selected', () => {
       const wrapper = mountComponent({ temperatureUnit: 'fahrenheit' });
       const listItems = wrapper.findAllComponents(ListItem);
-      const fahrenheitItem = listItems.find(item => item.text().includes('Fahrenheit'));
+      const fahrenheitItem = listItems.find((item) =>
+        item.text().includes('Fahrenheit'),
+      );
       const checkmark = fahrenheitItem?.findComponent(SVGIcon);
       expect(checkmark?.exists()).toBe(true);
     });
@@ -87,7 +91,7 @@ describe('HeaderDropdown.vue', () => {
     it('shows checkmark for kmh when selected', () => {
       const wrapper = mountComponent({ windSpeedUnit: 'kmh' });
       const listItems = wrapper.findAllComponents(ListItem);
-      const kmhItem = listItems.find(item => item.text() === 'km/h');
+      const kmhItem = listItems.find((item) => item.text() === 'km/h');
       const checkmark = kmhItem?.findComponent(SVGIcon);
       expect(checkmark?.exists()).toBe(true);
     });
@@ -95,7 +99,7 @@ describe('HeaderDropdown.vue', () => {
     it('shows checkmark for mph when selected', () => {
       const wrapper = mountComponent({ windSpeedUnit: 'mph' });
       const listItems = wrapper.findAllComponents(ListItem);
-      const mphItem = listItems.find(item => item.text() === 'mph');
+      const mphItem = listItems.find((item) => item.text() === 'mph');
       const checkmark = mphItem?.findComponent(SVGIcon);
       expect(checkmark?.exists()).toBe(true);
     });
@@ -103,7 +107,9 @@ describe('HeaderDropdown.vue', () => {
     it('shows checkmark for mm when selected', () => {
       const wrapper = mountComponent({ precipitationUnit: 'mm' });
       const listItems = wrapper.findAllComponents(ListItem);
-      const mmItem = listItems.find(item => item.text().includes('Millimeters'));
+      const mmItem = listItems.find((item) =>
+        item.text().includes('Millimeters'),
+      );
       const checkmark = mmItem?.findComponent(SVGIcon);
       expect(checkmark?.exists()).toBe(true);
     });
@@ -111,7 +117,7 @@ describe('HeaderDropdown.vue', () => {
     it('shows checkmark for inch when selected', () => {
       const wrapper = mountComponent({ precipitationUnit: 'inch' });
       const listItems = wrapper.findAllComponents(ListItem);
-      const inchItem = listItems.find(item => item.text().includes('Inches'));
+      const inchItem = listItems.find((item) => item.text().includes('Inches'));
       const checkmark = inchItem?.findComponent(SVGIcon);
       expect(checkmark?.exists()).toBe(true);
     });
@@ -161,7 +167,9 @@ describe('HeaderDropdown.vue', () => {
     it('emits close event after selecting celsius', async () => {
       const wrapper = mountComponent();
       const listItems = wrapper.findAllComponents(ListItem);
-      const celsiusItem = listItems.find(item => item.text().includes('Celsius'));
+      const celsiusItem = listItems.find((item) =>
+        item.text().includes('Celsius'),
+      );
 
       await celsiusItem?.trigger('click');
 
@@ -171,7 +179,9 @@ describe('HeaderDropdown.vue', () => {
     it('emits close event after selecting fahrenheit', async () => {
       const wrapper = mountComponent();
       const listItems = wrapper.findAllComponents(ListItem);
-      const fahrenheitItem = listItems.find(item => item.text().includes('Fahrenheit'));
+      const fahrenheitItem = listItems.find((item) =>
+        item.text().includes('Fahrenheit'),
+      );
 
       await fahrenheitItem?.trigger('click');
 
@@ -183,7 +193,7 @@ describe('HeaderDropdown.vue', () => {
     it('emits close event after selecting kmh', async () => {
       const wrapper = mountComponent();
       const listItems = wrapper.findAllComponents(ListItem);
-      const kmhItem = listItems.find(item => item.text() === 'km/h');
+      const kmhItem = listItems.find((item) => item.text() === 'km/h');
 
       await kmhItem?.trigger('click');
 
@@ -193,7 +203,7 @@ describe('HeaderDropdown.vue', () => {
     it('emits close event after selecting mph', async () => {
       const wrapper = mountComponent();
       const listItems = wrapper.findAllComponents(ListItem);
-      const mphItem = listItems.find(item => item.text() === 'mph');
+      const mphItem = listItems.find((item) => item.text() === 'mph');
 
       await mphItem?.trigger('click');
 
@@ -205,7 +215,9 @@ describe('HeaderDropdown.vue', () => {
     it('emits close event after selecting mm', async () => {
       const wrapper = mountComponent();
       const listItems = wrapper.findAllComponents(ListItem);
-      const mmItem = listItems.find(item => item.text().includes('Millimeters'));
+      const mmItem = listItems.find((item) =>
+        item.text().includes('Millimeters'),
+      );
 
       await mmItem?.trigger('click');
 
@@ -215,7 +227,7 @@ describe('HeaderDropdown.vue', () => {
     it('emits close event after selecting inch', async () => {
       const wrapper = mountComponent();
       const listItems = wrapper.findAllComponents(ListItem);
-      const inchItem = listItems.find(item => item.text().includes('Inches'));
+      const inchItem = listItems.find((item) => item.text().includes('Inches'));
 
       await inchItem?.trigger('click');
 

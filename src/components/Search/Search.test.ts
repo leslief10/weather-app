@@ -25,7 +25,7 @@ describe('Search.vue', () => {
       city: 'New York',
       country: 'USA',
       latitude: 40.7128,
-      longitude: -74.0060,
+      longitude: -74.006,
     },
     {
       city: 'London',
@@ -128,7 +128,7 @@ describe('Search.vue', () => {
 
       const searchInput = wrapper.findComponent(SearchInput);
       await searchInput.vm.$emit('update:modelValue', 'a');
-      
+
       vi.advanceTimersByTime(300);
       await flushPromises();
 
@@ -149,7 +149,7 @@ describe('Search.vue', () => {
 
       const searchInput = wrapper.findComponent(SearchInput);
       await searchInput.vm.$emit('update:modelValue', 'New York');
-      
+
       expect(vi.mocked(searchCities)).not.toHaveBeenCalled();
 
       vi.advanceTimersByTime(300);
@@ -162,7 +162,10 @@ describe('Search.vue', () => {
       const mockStore = createMockWeatherStore();
       vi.mocked(useWeatherStore).mockReturnValue(mockStore);
       vi.mocked(searchCities).mockImplementation(
-        () => new Promise((resolve) => setTimeout(() => resolve(mockLocations), 1000))
+        () =>
+          new Promise((resolve) =>
+            setTimeout(() => resolve(mockLocations), 1000),
+          ),
       );
 
       const wrapper = mount(Search, {
@@ -173,7 +176,7 @@ describe('Search.vue', () => {
 
       const searchInput = wrapper.findComponent(SearchInput);
       await searchInput.vm.$emit('update:modelValue', 'London');
-      
+
       vi.advanceTimersByTime(300);
       await flushPromises();
 
@@ -195,7 +198,7 @@ describe('Search.vue', () => {
 
       const searchInput = wrapper.findComponent(SearchInput);
       await searchInput.vm.$emit('update:modelValue', 'New');
-      
+
       vi.advanceTimersByTime(300);
       await flushPromises();
 
@@ -217,13 +220,13 @@ describe('Search.vue', () => {
       });
 
       const searchInput = wrapper.findComponent(SearchInput);
-      
+
       await searchInput.vm.$emit('update:modelValue', 'Ne');
       vi.advanceTimersByTime(100);
-      
+
       await searchInput.vm.$emit('update:modelValue', 'New');
       vi.advanceTimersByTime(100);
-      
+
       await searchInput.vm.$emit('update:modelValue', 'New Y');
       vi.advanceTimersByTime(300);
       await flushPromises();
@@ -232,32 +235,34 @@ describe('Search.vue', () => {
       expect(vi.mocked(searchCities)).toHaveBeenCalledWith('New Y');
     });
 
-it('handles search errors gracefully', async () => {
-  const mockStore = createMockWeatherStore({ error: null });
-  vi.mocked(useWeatherStore).mockReturnValue(mockStore);
-  
-  const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
-  vi.mocked(searchCities).mockRejectedValue(new Error('Network error'));
+    it('handles search errors gracefully', async () => {
+      const mockStore = createMockWeatherStore({ error: null });
+      vi.mocked(useWeatherStore).mockReturnValue(mockStore);
 
-  const wrapper = mount(Search, {
-    global: {
-      plugins: [createPinia()],
-    },
-  });
+      const consoleErrorSpy = vi
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
+      vi.mocked(searchCities).mockRejectedValue(new Error('Network error'));
 
-  const searchInput = wrapper.findComponent(SearchInput);
-  await searchInput.vm.$emit('update:modelValue', 'Tokyo');
-  
-  vi.advanceTimersByTime(300);
-  await flushPromises();
+      const wrapper = mount(Search, {
+        global: {
+          plugins: [createPinia()],
+        },
+      });
 
-  expect(consoleErrorSpy).toHaveBeenCalled();
+      const searchInput = wrapper.findComponent(SearchInput);
+      await searchInput.vm.$emit('update:modelValue', 'Tokyo');
 
-  const dropdown = wrapper.findComponent(SearchDropdown);
-  expect(dropdown.props('results')).toEqual([]);
+      vi.advanceTimersByTime(300);
+      await flushPromises();
 
-  consoleErrorSpy.mockRestore();
-});
+      expect(consoleErrorSpy).toHaveBeenCalled();
+
+      const dropdown = wrapper.findComponent(SearchDropdown);
+      expect(dropdown.props('results')).toEqual([]);
+
+      consoleErrorSpy.mockRestore();
+    });
 
     it('clears results when query becomes too short', async () => {
       const mockStore = createMockWeatherStore();
@@ -271,7 +276,7 @@ it('handles search errors gracefully', async () => {
       });
 
       const searchInput = wrapper.findComponent(SearchInput);
-      
+
       await searchInput.vm.$emit('update:modelValue', 'New York');
       vi.advanceTimersByTime(300);
       await flushPromises();
@@ -299,7 +304,7 @@ it('handles search errors gracefully', async () => {
 
       const searchInput = wrapper.findComponent(SearchInput);
       await searchInput.vm.$emit('update:modelValue', 'New York');
-      
+
       vi.advanceTimersByTime(300);
       await flushPromises();
 
@@ -323,7 +328,7 @@ it('handles search errors gracefully', async () => {
 
       const searchInput = wrapper.findComponent(SearchInput);
       await searchInput.vm.$emit('update:modelValue', 'London');
-      
+
       vi.advanceTimersByTime(300);
       await flushPromises();
 
@@ -347,7 +352,7 @@ it('handles search errors gracefully', async () => {
 
       const searchInput = wrapper.findComponent(SearchInput);
       await searchInput.vm.$emit('update:modelValue', 'Tokyo');
-      
+
       vi.advanceTimersByTime(300);
       await flushPromises();
 
@@ -371,7 +376,7 @@ it('handles search errors gracefully', async () => {
 
       const searchInput = wrapper.findComponent(SearchInput);
       await searchInput.vm.$emit('update:modelValue', 'Paris');
-      
+
       vi.advanceTimersByTime(300);
       await flushPromises();
 
@@ -386,10 +391,14 @@ it('handles search errors gracefully', async () => {
     it('handles errors during city selection', async () => {
       const mockStore = createMockWeatherStore();
       vi.mocked(useWeatherStore).mockReturnValue(mockStore);
-      
-      const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+
+      const consoleErrorSpy = vi
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
       vi.mocked(searchCities).mockResolvedValue(mockLocations);
-      vi.mocked(mockStore.fetchWeather).mockRejectedValue(new Error('Fetch error'));
+      vi.mocked(mockStore.fetchWeather).mockRejectedValue(
+        new Error('Fetch error'),
+      );
 
       const wrapper = mount(Search, {
         global: {
@@ -399,7 +408,7 @@ it('handles search errors gracefully', async () => {
 
       const searchInput = wrapper.findComponent(SearchInput);
       await searchInput.vm.$emit('update:modelValue', 'Berlin');
-      
+
       vi.advanceTimersByTime(300);
       await flushPromises();
 
@@ -417,7 +426,9 @@ it('handles search errors gracefully', async () => {
     it('disables search button when search returns no results', async () => {
       const mockStore = createMockWeatherStore();
       vi.mocked(useWeatherStore).mockReturnValue(mockStore);
-      vi.mocked(searchCities).mockResolvedValue(undefined as unknown as LocationData[]);
+      vi.mocked(searchCities).mockResolvedValue(
+        undefined as unknown as LocationData[],
+      );
 
       const wrapper = mount(Search, {
         global: {
@@ -430,7 +441,7 @@ it('handles search errors gracefully', async () => {
 
       const searchInput = wrapper.findComponent(SearchInput);
       await searchInput.vm.$emit('update:modelValue', 'NonExistentCity');
-      
+
       vi.advanceTimersByTime(300);
       await flushPromises();
 
@@ -450,7 +461,7 @@ it('handles search errors gracefully', async () => {
 
       const searchInput = wrapper.findComponent(SearchInput);
       await searchInput.vm.$emit('update:modelValue', 'Rome');
-      
+
       vi.advanceTimersByTime(300);
       await flushPromises();
 
@@ -474,7 +485,7 @@ it('handles search errors gracefully', async () => {
 
       const searchInput = wrapper.findComponent(SearchInput);
       await searchInput.vm.$emit('update:modelValue', 'Vienna');
-      
+
       vi.advanceTimersByTime(300);
       await flushPromises();
 
@@ -498,7 +509,7 @@ it('handles search errors gracefully', async () => {
 
       const searchInput = wrapper.findComponent(SearchInput);
       await searchInput.vm.$emit('update:modelValue', 'Oslo');
-      
+
       vi.advanceTimersByTime(300);
       await flushPromises();
 
@@ -522,7 +533,7 @@ it('handles search errors gracefully', async () => {
 
       const searchInput = wrapper.findComponent(SearchInput);
       await searchInput.vm.$emit('update:modelValue', 'Atlantis');
-      
+
       vi.advanceTimersByTime(300);
       await flushPromises();
 
@@ -530,7 +541,9 @@ it('handles search errors gracefully', async () => {
       await button.trigger('click');
       await flushPromises();
 
-      expect(wrapper.emitted('message')?.[0]).toEqual(['No search result found!']);
+      expect(wrapper.emitted('message')?.[0]).toEqual([
+        'No search result found!',
+      ]);
     });
 
     it('emits empty message on successful search button click', async () => {
@@ -546,7 +559,7 @@ it('handles search errors gracefully', async () => {
 
       const searchInput = wrapper.findComponent(SearchInput);
       await searchInput.vm.$emit('update:modelValue', 'Dublin');
-      
+
       vi.advanceTimersByTime(300);
       await flushPromises();
 
@@ -560,10 +573,14 @@ it('handles search errors gracefully', async () => {
     it('handles errors during search button click', async () => {
       const mockStore = createMockWeatherStore();
       vi.mocked(useWeatherStore).mockReturnValue(mockStore);
-      
-      const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+
+      const consoleErrorSpy = vi
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
       vi.mocked(searchCities).mockResolvedValue(mockLocations);
-      vi.mocked(mockStore.fetchWeather).mockRejectedValue(new Error('Button fetch error'));
+      vi.mocked(mockStore.fetchWeather).mockRejectedValue(
+        new Error('Button fetch error'),
+      );
 
       const wrapper = mount(Search, {
         global: {
@@ -573,7 +590,7 @@ it('handles search errors gracefully', async () => {
 
       const searchInput = wrapper.findComponent(SearchInput);
       await searchInput.vm.$emit('update:modelValue', 'Warsaw');
-      
+
       vi.advanceTimersByTime(300);
       await flushPromises();
 

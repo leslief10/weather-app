@@ -217,7 +217,7 @@ describe('weatherStore - fetchWeather', () => {
 
   it('should refetch weather when temperatureUnit changes', async () => {
     vi.mocked(getWeather).mockResolvedValue(mockWeatherData);
-    
+
     await store.fetchWeather(defaultLocation);
     expect(getWeather).toHaveBeenCalledTimes(1);
 
@@ -225,7 +225,7 @@ describe('weatherStore - fetchWeather', () => {
     await vi.waitFor(() => {
       expect(getWeather).toHaveBeenCalledTimes(2);
     });
-    
+
     expect(getWeather).toHaveBeenLastCalledWith(defaultLocation, {
       temperatureUnit: 'fahrenheit',
       windSpeedUnit: 'kmh',
@@ -235,7 +235,7 @@ describe('weatherStore - fetchWeather', () => {
 
   it('should refetch weather when windSpeedUnit changes', async () => {
     vi.mocked(getWeather).mockResolvedValue(mockWeatherData);
-    
+
     await store.fetchWeather(defaultLocation);
     expect(getWeather).toHaveBeenCalledTimes(1);
 
@@ -243,7 +243,7 @@ describe('weatherStore - fetchWeather', () => {
     await vi.waitFor(() => {
       expect(getWeather).toHaveBeenCalledTimes(2);
     });
-    
+
     expect(getWeather).toHaveBeenLastCalledWith(defaultLocation, {
       temperatureUnit: 'celsius',
       windSpeedUnit: 'mph',
@@ -253,7 +253,7 @@ describe('weatherStore - fetchWeather', () => {
 
   it('should refetch weather when precipitationUnit changes', async () => {
     vi.mocked(getWeather).mockResolvedValue(mockWeatherData);
-    
+
     await store.fetchWeather(defaultLocation);
     expect(getWeather).toHaveBeenCalledTimes(1);
 
@@ -261,7 +261,7 @@ describe('weatherStore - fetchWeather', () => {
     await vi.waitFor(() => {
       expect(getWeather).toHaveBeenCalledTimes(2);
     });
-    
+
     expect(getWeather).toHaveBeenLastCalledWith(defaultLocation, {
       temperatureUnit: 'celsius',
       windSpeedUnit: 'kmh',
@@ -282,14 +282,14 @@ describe('weatherStore - fetchWeather', () => {
 
   it('should refetch weather only once when multiple units change', async () => {
     vi.mocked(getWeather).mockResolvedValue(mockWeatherData);
-    
+
     await store.fetchWeather(defaultLocation);
     const initialCallCount = vi.mocked(getWeather).mock.calls.length;
-    
+
     unitsStore.temperatureUnit = 'fahrenheit';
     unitsStore.windSpeedUnit = 'mph';
     unitsStore.precipitationUnit = 'inch';
-    
+
     await vi.waitFor(() => {
       expect(getWeather).toHaveBeenCalledTimes(initialCallCount + 1);
     });
