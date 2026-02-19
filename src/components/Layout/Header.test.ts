@@ -35,7 +35,7 @@ describe('Header.vue', () => {
     const logo = wrapper.find('.header--logo');
     expect(logo.exists()).toBe(true);
     expect(logo.attributes('src')).toBe('/logo.svg');
-    expect(logo.attributes('alt')).toBe('');
+    expect(logo.attributes('alt')).toBe('Weather Now logo');
   });
 
   it('renders IconButton with correct content', () => {

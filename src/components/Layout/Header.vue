@@ -19,10 +19,12 @@ const closeDropdown = (): void => {
   <header class="header">
     <img
       src="/logo.svg"
-      alt=""
+      alt="Weather Now logo"
       class="header--logo"
     />
     <IconButton
+      aria-haspopup="true"
+      :aria-expanded="isDropdownVisible"
       variant="secondary"
       size="sm"
       @click="toggleDropdown"

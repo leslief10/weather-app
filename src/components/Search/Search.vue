@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref, watch, onBeforeUnmount } from 'vue';
 import { storeToRefs } from 'pinia';
 import { Button } from '@/components/ui/Button';
 import { SearchInput } from '@/components/ui/Input';
@@ -76,6 +76,12 @@ const handleSearchButton = async () => {
     console.error('Error searching city:', error);
   }
 };
+
+onBeforeUnmount(() => {
+  if (debounceTimeout) {
+    clearTimeout(debounceTimeout);
+  }
+});
 </script>
 
 <template>
@@ -83,6 +89,7 @@ const handleSearchButton = async () => {
     <div class="search-container">
       <SearchInput
         v-model="searchQuery"
+        aria-label="Search for a place"
         placeholder="Search for a place..."
         class="search-container__input"
       />

@@ -31,7 +31,7 @@ defineEmits<{
     class="icon-button"
     @click="$emit('click', $event)"
   >
-    <div class="icon-button__content">
+    <span class="icon-button__content">
       <SVGIcon
         v-if="iconLeft"
         :name="iconLeft"
@@ -43,7 +43,7 @@ defineEmits<{
         :name="iconRight"
         class="icon-button__icon icon-button__icon--right"
       />
-    </div>
+    </span>
   </Button>
 </template>
 

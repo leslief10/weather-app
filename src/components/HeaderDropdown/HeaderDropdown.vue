@@ -44,7 +44,10 @@ const unitSwitchText = computed(() =>
 </script>
 
 <template>
-  <div class="header-dropdown">
+  <div
+    class="header-dropdown"
+    role="menu"
+  >
     <Button
       variant="secondary"
       size="sm"

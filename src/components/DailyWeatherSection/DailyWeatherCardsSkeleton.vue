@@ -27,6 +27,7 @@ import { Card } from '@/components/ui/Card';
   max-width: 6.5rem;
   height: 10.3125rem;
   padding: var(--spacing-1000) var(--spacing-0625);
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 @media (min-width: 768px) {
@@ -36,6 +37,16 @@ import { Card } from '@/components/ui/Card';
 
   .skeleton-card {
     flex: 1;
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
   }
 }
 </style>

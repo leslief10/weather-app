@@ -26,5 +26,16 @@ import { Card } from '@/components/ui/Card';
   height: 3.75rem;
   padding: var(--spacing-0625) var(--spacing-1000) var(--spacing-0625)
     var(--spacing-0750);
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
 }
 </style>

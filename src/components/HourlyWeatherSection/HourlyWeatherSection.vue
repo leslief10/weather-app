@@ -69,7 +69,10 @@ const filteredHourlyData = computed(() => {
 </script>
 
 <template>
-  <section class="section hourly-weather-section">
+  <section
+    class="section hourly-weather-section"
+    tabindex="0"
+  >
     <div class="hourly-weather-section__header">
       <h2 class="hourly-weather-section__title">Hourly forecast</h2>
       <IconButton

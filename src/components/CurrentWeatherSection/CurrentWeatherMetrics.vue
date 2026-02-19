@@ -17,32 +17,36 @@ const formatCardValue = (value: number | undefined): string | number => {
 };
 
 const temperatureUnit = (): string => {
-  if (weatherData?.value?.current.apparentTemperature != null) {
+  const temp = weatherData?.value?.current.apparentTemperature;
+  if (temp !== null && temp !== undefined) {
     return '°';
   }
   return '';
 };
 
 const humidityUnit = (): string => {
-  if (weatherData?.value?.current.relativeHumidity != null) {
+  const humidity = weatherData?.value?.current.relativeHumidity;
+  if (humidity !== null && humidity !== undefined) {
     return '%';
   }
   return '';
 };
 
 const windSpeedUnit = (): string => {
-  if (weatherData?.value?.current.windSpeedUnit === 'km/h') {
+  const windSpeed = weatherData?.value?.current.windSpeedUnit;
+  if (windSpeed === 'km/h') {
     return 'km/h';
-  } else if (weatherData?.value?.current.windSpeedUnit === 'mp/h') {
+  } else if (windSpeed === 'mp/h') {
     return 'mph';
   }
   return '';
 };
 
 const precipitationUnit = (): string => {
-  if (weatherData?.value?.current.precipitationUnit === 'mm') {
+  const precipitation = weatherData?.value?.current.precipitationUnit;
+  if (precipitation === 'mm') {
     return 'mm';
-  } else if (weatherData?.value?.current.precipitationUnit === 'inch') {
+  } else if (precipitation === 'inch') {
     return 'in';
   }
   return '';
