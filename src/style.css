@@ -8,6 +8,7 @@ html {
   font-family: var(--main-font);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
+  scrollbar-color: var(--neutral-600) var(--neutral-900);
 
   --main-font: 'DM Sans', system-ui, sans-serif;
   --secondary-font: 'Bricolage Grotesque', system-ui, sans-serif;

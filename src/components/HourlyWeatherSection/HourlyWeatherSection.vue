@@ -113,7 +113,7 @@ const filteredHourlyData = computed(() => {
   margin-top: var(--spacing-2000);
   border-radius: var(--spacing-1250);
   background-color: var(--neutral-800);
-  overflow-y: scroll;
+  overflow-y: hidden;
 }
 
 .hourly-weather-section:focus-visible {
@@ -133,6 +133,12 @@ const filteredHourlyData = computed(() => {
   font-size: var(--spacing-1250);
   line-height: 120%;
   color: var(--neutral-0);
+}
+
+.hourly-weather-section__data {
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--neutral-600) var(--neutral-800);
 }
 
 .hourly-weather-section__card:not(:last-of-type) {
