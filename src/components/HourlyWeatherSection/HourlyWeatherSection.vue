@@ -139,6 +139,7 @@ const filteredHourlyData = computed(() => {
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: var(--neutral-600) var(--neutral-800);
+  padding-right: var(--spacing-0750);
 }
 
 .hourly-weather-section__card:not(:last-of-type) {
